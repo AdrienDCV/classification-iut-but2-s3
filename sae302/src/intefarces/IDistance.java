@@ -1,5 +1,7 @@
 package intefarces;
 
+import main.Pokemon;
+
 public interface IDistance {
-	public double distance(Object o1,Object o2);//remplacer Obect par Point
+	public double distance(Pokemon p1,Pokemon p2);//remplacer Obect par Point
 }

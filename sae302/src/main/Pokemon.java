@@ -2,7 +2,10 @@ package main;
 
 import com.opencsv.bean.CsvBindByName;
 
-public class Pokemon {
+import intefarces.IColumn;
+import intefarces.IPoint;
+
+public class Pokemon implements IPoint {
 	@CsvBindByName(column = "name")
 	private String name;
 	@CsvBindByName(column = "base_egg_steps")
@@ -80,6 +83,18 @@ public class Pokemon {
 
 	public void setLegendary(boolean isLegendary) {
 		this.isLegendary = isLegendary;
+	}
+
+	@Override
+	public Object getValue(IColumn col) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public double getNormalizedValue(IColumn xcol) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 	

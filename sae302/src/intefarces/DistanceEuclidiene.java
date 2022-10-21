@@ -1,5 +1,7 @@
 package intefarces;
 
-public class DistanceEuclidiene {
+import main.Pokemon;
+
+public class DistanceEuclidiene{
 
 }
