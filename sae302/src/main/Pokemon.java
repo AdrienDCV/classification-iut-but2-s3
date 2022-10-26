@@ -40,51 +40,21 @@ public class Pokemon implements IPoint {
 	public String getName() {
 		return name;
 	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public int getBaseEggSteps() {
 		return baseEggSteps;
 	}
-
-	public void setBaseEggSteps(int baseEggSteps) {
-		this.baseEggSteps = baseEggSteps;
-	}
-
 	public double getCaptureRate() {
 		return captureRate;
 	}
-
-	public void setCaptureRate(double captureRate) {
-		this.captureRate = captureRate;
-	}
-
 	public int getExperienceGrowth() {
 		return experienceGrowth;
 	}
-
-	public void setExperienceGrowth(int experienceGrowth) {
-		this.experienceGrowth = experienceGrowth;
-	}
-
 	public double getSpeed() {
 		return speed;
 	}
-
-	public void setSpeed(double speed) {
-		this.speed = speed;
-	}
-
 	public boolean isLegendary() {
 		return isLegendary;
 	}
-
-	public void setLegendary(boolean isLegendary) {
-		this.isLegendary = isLegendary;
-	}
-
 	@Override
 	public Object getValue(IColumn col) {
 		// TODO Auto-generated method stub

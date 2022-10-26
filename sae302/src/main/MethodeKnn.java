@@ -25,7 +25,7 @@ public class MethodeKnn {
 	
 	
 	public MethodeKnn(String fichier) throws IOException {
-		MethodeKnn.datas = ChargementDonnees.charger(fichier);
+		MethodeKnn.datas = ChargementDonneesPokemon.charger(fichier);
 		List<Double> listeMax = this.max(datas);
 		MethodeKnn.listeMin = this.min(datas);
 		MethodeKnn.baseEggSteps = (int) (listeMax.get(0) - listeMin.get(0));
