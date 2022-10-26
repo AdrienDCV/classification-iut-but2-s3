@@ -1,5 +1,6 @@
 package intefarces;
 
 public interface IDistance {
-	public double distance(Object o1,Object o2);//remplacer Obect par Point
+	public double distance(IPoint p1,IPoint p2);//remplacer Obect par Point
+
 }

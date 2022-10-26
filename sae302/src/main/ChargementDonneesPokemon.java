@@ -11,7 +11,7 @@ import java.util.List;
 import com.opencsv.bean.CsvToBeanBuilder;
 
 
-public class ChargementDonnees {
+public class ChargementDonneesPokemon {
 	public static List<Pokemon> charger(String fileName) {
         try {
         	return new CsvToBeanBuilder<Pokemon>(Files.newBufferedReader(Paths.get(fileName)))
