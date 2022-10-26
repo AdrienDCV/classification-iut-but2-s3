@@ -10,7 +10,11 @@ import org.junit.jupiter.api.Test;
 import com.opencsv.bean.CsvBindByName;
 
 class ChargementDonneesTest {
+<<<<<<< HEAD
 	List<Pokemon> l = ChargementDonnees.charger("./res/pokemon_train.csv");
+=======
+	List<Pokemon> l = ChargementDonneesPokemon.charger("./res/pokemon_train.csv");
+>>>>>>> main
 	
 	@Test
 	void testSwablu() {
@@ -45,7 +49,11 @@ class ChargementDonneesTest {
 	
 	@Test
 	void fichierInchargeable() {
+<<<<<<< HEAD
 		List<Pokemon> l2 = ChargementDonnees.charger("./fichier impossible");
+=======
+		List<Pokemon> l2 = ChargementDonneesPokemon.charger("./fichier impossible");
+>>>>>>> main
 		assertEquals(new ArrayList<Pokemon>(), l2);
 	}
 
