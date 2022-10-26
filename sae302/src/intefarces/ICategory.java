@@ -1,3 +1,8 @@
 package intefarces;
-public interface ICategory extends IDataset {
+
+import java.util.List;
+
+public interface ICategory {
+	
+	List<IPoint> addToCategory();
 }
