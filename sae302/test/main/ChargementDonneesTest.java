@@ -52,6 +52,8 @@ class ChargementDonneesTest {
 	
 	@Test
 	void fichierInchargeable() {
+		c  = new ChargementDonneesPokemon();
+		c.loadFromFile("./fichier impossible");
 		List<Pokemon> l2 = c.getPokemonList();
 		assertEquals(new ArrayList<Pokemon>(), l2);
 	}

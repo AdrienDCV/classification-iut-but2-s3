@@ -2,10 +2,10 @@ package main;
 
 
 import java.io.IOException;
+import java.io.StringReader;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -14,7 +14,6 @@ import com.opencsv.bean.CsvToBeanBuilder;
 
 import intefarces.ICategory;
 import intefarces.IColumn;
-import intefarces.IDataset;
 import intefarces.IMVCModel;
 import intefarces.IPoint;
 
@@ -39,8 +38,10 @@ public class ChargementDonneesPokemon implements IMVCModel {
 	
 	@Override
 	public void loadFromString(String data) {
-		// TODO Auto-generated method stub
-		
+		this.pokemonList = new CsvToBeanBuilder<Pokemon>(new StringReader(data))
+                .withSeparator(',')
+                .withType(Pokemon.class)
+                .build().parse();
 	}
 
 	@Override
@@ -50,19 +51,20 @@ public class ChargementDonneesPokemon implements IMVCModel {
 
 	@Override
 	public String getTitle() {
-		// TODO Auto-generated method stub
-		return null;
+		return "Pokemon DataSet";
 	}
 
 	@Override
 	public int getNbLines() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.pokemonList.size();
 	}
 
 	@Override
 	public void setLines(List<IPoint> lines) {
-		//TODO
+		this.pokemonList.clear();
+		for(IPoint point: lines) {
+			this.pokemonList.add((Pokemon) point);
+		}
 	}
 
 	@Override
