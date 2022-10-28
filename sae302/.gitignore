@@ -1,6 +1,6 @@
 /bin/
 /.metadata/
 /csv/s
-.classpath
-.project
+/.classpath
+/.project
 .vscode
