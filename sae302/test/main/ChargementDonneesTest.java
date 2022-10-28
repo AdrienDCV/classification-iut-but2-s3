@@ -5,13 +5,20 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.opencsv.bean.CsvBindByName;
 
 class ChargementDonneesTest {
-	List<Pokemon> l = ChargementDonneesPokemon.charger("./res/pokemon_train.csv");
-	
+	ChargementDonneesPokemon c;
+	List<Pokemon> l;
+	@BeforeEach
+	void setup() {
+		c  = new ChargementDonneesPokemon();
+		c.loadFromFile("./res/pokemon_train.csv");
+		l = c.getPokemonList();
+	}
 	@Test
 	void testSwablu() {
 		assertEquals("Swablu",l.get(0).getName());
@@ -45,7 +52,7 @@ class ChargementDonneesTest {
 	
 	@Test
 	void fichierInchargeable() {
-		List<Pokemon> l2 = ChargementDonneesPokemon.charger("./fichier impossible");
+		List<Pokemon> l2 = c.getPokemonList();
 		assertEquals(new ArrayList<Pokemon>(), l2);
 	}
 

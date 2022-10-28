@@ -3,7 +3,7 @@ package intefarces;
 import java.util.Collection;
 import java.util.List;
 
-public interface IMVCModel {
+public interface IMVCModel extends IDataset {
 /**
 * Charge les donnees du modele d'un fichier CSV.
 */
