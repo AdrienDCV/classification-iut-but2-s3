@@ -1,6 +1,5 @@
 package model;
 
-
 import java.util.List;
 
 import intefarces.IColumn;
@@ -20,10 +19,10 @@ public class Column implements IColumn{
 	private String name;
 	private DataSet dataSet;
 	private List<IPoint> pointsList;
-	private NumberValueNormalizer valueNormalizer;
+	private ValueNormalizer valueNormalizer;
 	
 	// constructor(s)
-	public Column(String name, DataSet dataSet, List<IPoint> pointsList, NumberValueNormalizer valueNormalizer) {
+	public Column(String name, DataSet dataSet, List<IPoint> pointsList, ValueNormalizer valueNormalizer) {
 		this.name = name;
 		this.dataSet = dataSet;
 		this.pointsList = pointsList;
@@ -33,7 +32,7 @@ public class Column implements IColumn{
 	// methods
 	@Override
 	public void setNormalizer(IValueNormalizer valueNormalizer) {
-		this.valueNormalizer = (NumberValueNormalizer) valueNormalizer;
+		this.valueNormalizer = (ValueNormalizer) valueNormalizer;
 	}
 
 	@Override
@@ -59,6 +58,10 @@ public class Column implements IColumn{
 	@Override
 	public boolean isNormalizable() {
 		return false;
+	}
+
+	public ValueNormalizer getNormalizer() { // pour effectuer tester
+		return this.valueNormalizer;
 	}
 
 }

@@ -1,9 +1,10 @@
 package model;
 
-public class NumberValueNormalizerNull extends ValueNormalizer {
 
-    public NumberValueNormalizerNull(String normalizerType) {
-        super(normalizerType);
+public class EnumValueNormalizer extends ValueNormalizer{
+
+    public EnumValueNormalizer() {
+        super("ENUM_NORMALIZER");
     }
 
     @Override

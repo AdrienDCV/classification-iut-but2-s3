@@ -32,7 +32,7 @@ public enum NormalizerTypes {
     }
 
     // methods
-    public Object getLabel() {
+    public String getLabel() {
         return this.label;
     }
 }

@@ -1,31 +1,24 @@
 package model;
 
-import intefarces.IValueNormalizer;
 
-public class NumberValueNormalizer implements IValueNormalizer{
+public class NumberValueNormalizer extends ValueNormalizer{
 
-	// class attributes
-	private NormalizerTypes normalizerType;
-
-	// constructor(s)
-	public NumberValueNormalizer(String normalizerType) {
-		this.normalizerType = NormalizerTypes.valueOf(normalizerType);
+	public NumberValueNormalizer() {
+		super("NUMBER_NORMALIZER");
 	}
-
-	// methods
-    public Object getValueNormalizer() {
-        return this.normalizerType.getLabel();
-    }
 
 	@Override
 	public double normalize(Object value) {
 		return 0;
 	}
 
-
 	@Override
 	public Object denormalize(double value) {
 		return null;
+	}
+
+    public String hello() {
+		return "Hello";
 	}
 
 }

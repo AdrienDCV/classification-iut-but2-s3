@@ -1,9 +1,9 @@
 package model;
 
-public class NumberValueNormalizerNull extends ValueNormalizer {
+public class StringValueNormalizer extends ValueNormalizer{
 
-    public NumberValueNormalizerNull(String normalizerType) {
-        super(normalizerType);
+    public StringValueNormalizer() {
+        super("STRING_NORMALIZER");
     }
 
     @Override
@@ -15,6 +15,5 @@ public class NumberValueNormalizerNull extends ValueNormalizer {
     public Object denormalize(double value) {
         return null;
     }
-
 
 }
