@@ -8,7 +8,9 @@ import org.junit.Test;
 
 import model.Column;
 import model.DataSet;
+import model.EnumValueNormalizer;
 import model.NumberValueNormalizer;
+import model.StringValueNormalizer;
 
 public class ColumnTest {
 	
@@ -22,6 +24,8 @@ public class ColumnTest {
     public void test_set_normalizer() {
         Column column1 = new Column("Column1", new DataSet(), new ArrayList<>(), null);
         assertEquals("NN", new NumberValueNormalizer("NUMBER_NORMALIZER").getValueNormalizer());
+        assertEquals("EN", new EnumValueNormalizer("ENUM_NORMALIZER").getValueNormalizer());
+        assertEquals("SN", new StringValueNormalizer("STRING_NORMALIZER").getValueNormalizer());
     }
 
 
