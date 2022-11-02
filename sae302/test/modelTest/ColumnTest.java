@@ -22,8 +22,9 @@ public class ColumnTest {
     @Test
     public void test_set_normalizer() {
         Column column1 = new Column("Column1", new DataSet(), new ArrayList<>(), null);
-        column1.setNormalizer(new NumberValueNormalizer("NUMBER_NORMALIZER"));
+        column1.setNormalizer(new NumberValueNormalizer());
         assertEquals("NN", column1.getNormalizer().getValueNormalizer());
+        
     }
 
 
