@@ -25,6 +25,18 @@
         "sae302/lib/commons-text-1.10.0-sources.jar",
         "sae302/lib/commons-text-1.10.0-tests.jar",
         "sae302/lib/commons-text-1.10.0-test-sources.jar",
-        "sae302/lib/opencsv-5.7.0.jar"
+        "sae302/lib/opencsv-5.7.0.jar",
+        "c:\\Program Files\\Java\\jdk-17\\lib\\jrt-fs.jar",
+        "c:\\Program Files\\Java\\jre1.8.0_351\\lib\\charsets.jar",
+        "c:\\Program Files\\Java\\jre1.8.0_351\\lib\\deploy.jar",
+        "c:\\Program Files\\Java\\jre1.8.0_351\\lib\\javaws.jar",
+        "c:\\Program Files\\Java\\jre1.8.0_351\\lib\\jce.jar",
+        "c:\\Program Files\\Java\\jre1.8.0_351\\lib\\jfr.jar",
+        "c:\\Program Files\\Java\\jre1.8.0_351\\lib\\jfxswt.jar",
+        "c:\\Program Files\\Java\\jre1.8.0_351\\lib\\jsse.jar",
+        "c:\\Program Files\\Java\\jre1.8.0_351\\lib\\management-agent.jar",
+        "c:\\Program Files\\Java\\jre1.8.0_351\\lib\\plugin.jar",
+        "c:\\Program Files\\Java\\jre1.8.0_351\\lib\\resources.jar",
+        "c:\\Program Files\\Java\\jre1.8.0_351\\lib\\rt.jar"
     ]
 }

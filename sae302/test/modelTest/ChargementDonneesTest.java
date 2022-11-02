@@ -1,4 +1,4 @@
-package main;
+package modelTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -9,6 +9,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.opencsv.bean.CsvBindByName;
+
+import main.ChargementDonneesPokemon;
+import main.Pokemon;
 
 class ChargementDonneesTest {
 	ChargementDonneesPokemon c;
