@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Collection;
 import java.util.List;
 
 import intefarces.IColumn;
@@ -13,7 +14,7 @@ import intefarces.IValueNormalizer;
  * @author adrien
  *
  */
-public class Column implements IColumn{
+public abstract class Column implements IColumn{
 	
 	// class attributes
 	private String name;
@@ -22,11 +23,10 @@ public class Column implements IColumn{
 	private ValueNormalizer valueNormalizer;
 	
 	// constructor(s)
-	public Column(String name, DataSet dataSet, List<IPoint> pointsList, ValueNormalizer valueNormalizer) {
+	public Column(String name, DataSet dataSet, List<IPoint> pointsList) {
 		this.name = name;
 		this.dataSet = dataSet;
 		this.pointsList = pointsList;
-		this.valueNormalizer = valueNormalizer;
 	}
 	
 	// methods
