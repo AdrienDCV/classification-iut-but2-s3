@@ -1,3 +1,4 @@
+package modelTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class NumberColumnTest {
     }
 
 
+    @Test
     public void test_get_minimum_value() {
         // name , attack , base_egg_steps , capture_rate , defense , experience_growth , hp , sp_attack , sp_defense , type1 ,  type2 , speed , is_legendary
         Pokemon pikachu = new Pokemon("Pikachu", 2560, 190, 1000000, 6.0, false);
@@ -26,8 +28,8 @@ public class NumberColumnTest {
         List<IPoint> pointsList = new ArrayList<>();
         pointsList.add(pikachu); pointsList.add(charizard); pointsList.add(dialga); 
 
-        NumberColumn numberColumn = new NumberColumn("nColumn", new DataSet(), pointsList);
-        assertEquals(3.0, numberColumn.getMaximumValue());
+        NumberColumn numberColumn = new NumberColumn("captureRate", new DataSet(), pointsList);
+        assertEquals(3.0, numberColumn.getMinimumValue());
     }
 
 }
