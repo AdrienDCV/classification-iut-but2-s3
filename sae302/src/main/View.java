@@ -1,12 +1,16 @@
 package main;
 
-import javafx.application.*;
-import javafx.scene.control.*;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class Main extends Application{
-    Button confirmer=new Button("confirmer");
+public class View extends Application{
+	Button confirmer=new Button("confirmer");
     Button parcourir=new Button("parcourir");
     Button sauvegarde=new Button("sauvegarder");
     ComboBox premiere_var=new ComboBox();
@@ -18,8 +22,8 @@ public class Main extends Application{
     
     public void start(Stage stage) throws Exception {
     	
-    	VBox vbox=new Vbox();
-    	vbox.getChildren().addAll(confirmer,parcourir,sauvegarder,premiere_var,deuxieme_var,champs_k);
+    	VBox vbox=new VBox();
+    	vbox.getChildren().addAll(confirmer,parcourir,sauvegarde,premiere_var,deuxieme_var,entrer_k);
     	Scene scene=new Scene(vbox,900,900);
     	stage.setTitle("test");
     	stage.setScene(scene);
@@ -30,5 +34,6 @@ public class Main extends Application{
     public static void main(String[] args) {
 		launch(args);
 	}
+
 
 }
