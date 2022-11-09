@@ -17,10 +17,10 @@ import intefarces.IValueNormalizer;
 public abstract class Column implements IColumn{
 	
 	// class attributes
-	private String name;
-	private DataSet dataSet;
-	private List<IPoint> pointsList;
-	private ValueNormalizer valueNormalizer;
+	protected String name;
+	protected DataSet dataSet;
+	protected List<IPoint> pointsList;
+	protected ValueNormalizer valueNormalizer;
 	
 	// constructor(s)
 	public Column(String name, DataSet dataSet, List<IPoint> pointsList) {

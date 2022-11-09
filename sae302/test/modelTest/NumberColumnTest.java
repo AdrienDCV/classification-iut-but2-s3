@@ -1,4 +1,5 @@
 package modelTest;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
@@ -28,8 +29,18 @@ public class NumberColumnTest {
         List<IPoint> pointsList = new ArrayList<>();
         pointsList.add(pikachu); pointsList.add(charizard); pointsList.add(dialga); 
 
-        NumberColumn numberColumn = new NumberColumn("captureRate", new DataSet(), pointsList);
-        assertEquals(3.0, numberColumn.getMinimumValue());
+        NumberColumn captureRate = new NumberColumn("captureRate", null, pointsList);
+        assertEquals(3.0, captureRate.getMinimumValue());
+        assertNotEquals(190, captureRate.getMinimumValue());
+
+        NumberColumn speed = new NumberColumn("speed", null, pointsList);
+        assertEquals(6.0, speed.getMinimumValue());
+        assertNotEquals(90.5, speed.getMinimumValue());
+
+        NumberColumn experienceGrowth = new NumberColumn("experienceGrowth", null, pointsList);
+        assertEquals(1000000.0, experienceGrowth.getMinimumValue());
+        assertNotEquals(1250000.0, experienceGrowth.getMinimumValue());
+        
     }
 
 }

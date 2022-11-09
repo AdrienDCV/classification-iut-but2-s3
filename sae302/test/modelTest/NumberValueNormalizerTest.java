@@ -26,4 +26,13 @@ public class NumberValueNormalizerTest {
         assertNotEquals(null, numberValueNormalizer.getValueNormalizer());
     }
 
+    @Test
+    public void test_number_value_normalizer_normalize() {
+        NumberColumn nColumn = new NumberColumn("nColumn", new DataSet(), new ArrayList<>());
+
+        NumberValueNormalizer numberValueNormalizer = new NumberValueNormalizer(nColumn);
+
+        assertEquals(1.0, numberValueNormalizer.normalize(25.0));
+    }
+
 }

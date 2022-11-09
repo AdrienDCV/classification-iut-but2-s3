@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import com.opencsv.bean.CsvBindByName;
 
 import main.ChargementDonneesPokemon;
-import main.Pokemon;
+import model.Pokemon;
 
 class ChargementDonneesTest {
 	ChargementDonneesPokemon c;
