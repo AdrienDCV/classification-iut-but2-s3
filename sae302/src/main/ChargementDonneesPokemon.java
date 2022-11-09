@@ -16,6 +16,7 @@ import intefarces.ICategory;
 import intefarces.IColumn;
 import intefarces.IMVCModel;
 import intefarces.IPoint;
+import model.Pokemon;
 
 
 public class ChargementDonneesPokemon implements IMVCModel {

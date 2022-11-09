@@ -7,6 +7,7 @@ import intefarces.ICategory;
 import intefarces.IPoint;
 import model.DataSet;
 
+
 public class LegendaryCategory  extends ChargementDonneesPokemon implements ICategory{
 	private List<IPoint> categoryElements;
 	private String categoryName;

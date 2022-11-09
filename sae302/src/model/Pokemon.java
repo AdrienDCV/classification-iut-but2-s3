@@ -1,4 +1,4 @@
-package main;
+package model;
 
 import com.opencsv.bean.CsvBindByName;
 
@@ -57,14 +57,18 @@ public class Pokemon implements IPoint {
 	}
 	@Override
 	public Object getValue(IColumn col) {
-		// TODO Auto-generated method stub
+        if (col.getName().equals("name")) return this.name;
+		if (col.getName().equals("baseEggStep")) return this.baseEggSteps;
+		if (col.getName().equals("captureRate")) return this.captureRate;
+		if (col.getName().equals("experienceGrowth")) return this.experienceGrowth;
+		if (col.getName().equals("speed")) return this.speed;
+		if (col.getName().equals("isLegendary")) return this.isLegendary;
 		return null;
 	}
 
 	@Override
 	public double getNormalizedValue(IColumn xcol) {
-		// TODO Auto-generated method stub
-		return 0;
+		return xcol.getNormalizedValue(this);
 	}
 	
 	

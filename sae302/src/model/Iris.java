@@ -1,4 +1,4 @@
-package main;
+package model;
 
 import intefarces.IColumn;
 import intefarces.IPoint;
