@@ -1,21 +1,36 @@
-package main;
+package modelTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.opencsv.bean.CsvBindByName;
 
+import main.ChargementDonneesPokemon;
+import model.Pokemon;
+
 class ChargementDonneesTest {
+<<<<<<< HEAD:sae302/test/main/ChargementDonneesTest.java
 <<<<<<< HEAD
 	List<Pokemon> l = ChargementDonnees.charger("./res/pokemon_train.csv");
 =======
 	List<Pokemon> l = ChargementDonneesPokemon.charger("./res/pokemon_train.csv");
 >>>>>>> main
 	
+=======
+	ChargementDonneesPokemon c;
+	List<Pokemon> l;
+	@BeforeEach
+	void setup() {
+		c  = new ChargementDonneesPokemon();
+		c.loadFromFile("./res/pokemon_train.csv");
+		l = c.getPokemonList();
+	}
+>>>>>>> main:sae302/test/modelTest/ChargementDonneesTest.java
 	@Test
 	void testSwablu() {
 		assertEquals("Swablu",l.get(0).getName());
@@ -49,11 +64,17 @@ class ChargementDonneesTest {
 	
 	@Test
 	void fichierInchargeable() {
+<<<<<<< HEAD:sae302/test/main/ChargementDonneesTest.java
 <<<<<<< HEAD
 		List<Pokemon> l2 = ChargementDonnees.charger("./fichier impossible");
 =======
 		List<Pokemon> l2 = ChargementDonneesPokemon.charger("./fichier impossible");
 >>>>>>> main
+=======
+		c  = new ChargementDonneesPokemon();
+		c.loadFromFile("./fichier impossible");
+		List<Pokemon> l2 = c.getPokemonList();
+>>>>>>> main:sae302/test/modelTest/ChargementDonneesTest.java
 		assertEquals(new ArrayList<Pokemon>(), l2);
 	}
 

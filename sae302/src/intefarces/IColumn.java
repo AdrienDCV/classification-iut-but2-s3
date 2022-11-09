@@ -3,7 +3,7 @@ public interface IColumn {
 /**
 * stocke le <i>normaliseur</i> en parametre dans la colonne.
 */
-public void setNormalizer(IValueNormalizer valueNormalizer);
+public void setNormalizer(IValueNormalizer normalizer);
 /**
 * Recupere la valeur de cette colonne dans la donnee en parametre,
 * puis normalise cette valeur )entre 0 et 1) et la retourne normalisee.
@@ -25,7 +25,7 @@ public String getName();
 /**
 * Retourne le DataSet auquel cette colonne appartient.
 */
-public IDataset getDataset();
+public IDataSet getDataset();
 /**
 * Indique si cette colonne est normalisable (a un <i>normaliseur</i>).
 */

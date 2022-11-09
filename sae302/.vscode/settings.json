@@ -1,0 +1,15 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "c:\\JavaFX\\javafx\\lib\\javafx.base.jar",
+        "c:\\JavaFX\\javafx\\lib\\javafx.controls.jar",
+        "c:\\JavaFX\\javafx\\lib\\javafx.fxml.jar",
+        "c:\\JavaFX\\javafx\\lib\\javafx.graphics.jar",
+        "c:\\JavaFX\\javafx\\lib\\javafx.media.jar",
+        "c:\\JavaFX\\javafx\\lib\\javafx.swing.jar",
+        "c:\\JavaFX\\javafx\\lib\\javafx.web.jar",
+        "c:\\JavaFX\\javafx\\lib\\javafx-swt.jar"
+    ],
+    "java.debug.settings.vmArgs": "--module-path c:\\JavaFX\\javafx\\lib --add-modules javafx.controls,javafx.fxml",
+    "java.dependency.packagePresentation": "hierarchical"
+}
