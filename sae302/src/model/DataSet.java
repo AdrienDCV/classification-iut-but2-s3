@@ -133,5 +133,10 @@ public class DataSet implements IMVCModel {
 		return normalizableColumns;
 	}
 
+	public List<IPoint> getPointsList() {
+		return pointsList;
+	}
 
+
+	
 }
