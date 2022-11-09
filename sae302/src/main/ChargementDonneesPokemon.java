@@ -18,16 +18,10 @@ import intefarces.IMVCModel;
 import intefarces.IPoint;
 import model.Pokemon;
 
-<<<<<<< HEAD:sae302/src/main/ChargementDonnees.java
-public class ChargementDonnees {
-	public static List<Pokemon> charger(String fileName) {
-=======
-
 public class ChargementDonneesPokemon implements IMVCModel {
 	List<Pokemon> pokemonList;
 	
 	public void loadFromFile(String fileName) {
->>>>>>> main:sae302/src/main/ChargementDonneesPokemon.java
         try {
         	this.pokemonList = new CsvToBeanBuilder<Pokemon>(Files.newBufferedReader(Paths.get(fileName)))
                     .withSeparator(',')
