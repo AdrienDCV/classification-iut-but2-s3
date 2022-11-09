@@ -15,6 +15,9 @@ public class Scatter extends Application {
 	//NumberAxis(double lowerBound, double upperBound, double tickUnit)
 	//Create a non-auto-ranging NumberAxis with the given upper bound, lower bound and tick unit
 	
+	
+	
+	
 
 	@Override
 	public void start(Stage stage) throws Exception {
@@ -23,11 +26,11 @@ public class Scatter extends Application {
 		NumberAxis y = new NumberAxis();
 		y.setLabel("Axe des Y");
 		
-		ScatterChart<String, Double> scatterChart = new ScatterChart(x,y);
+		ScatterChart<Double, Double> scatterChart = new ScatterChart(x,y);
 		
-		XYChart.Series series1 = new XYChart.Series();
+		XYChart.Series<Double, Double> series1 = new XYChart.Series<Double, Double>();
 		series1.setName("x");
-		XYChart.Series series2 = new XYChart.Series();
+		XYChart.Series<Double, Double> series2 = new XYChart.Series<Double, Double>();
 		series2.setName("y");
 		
 		for(int i = 0; i < 10; i++) {
@@ -37,12 +40,13 @@ public class Scatter extends Application {
 		}
 		
 		for(int i = 0; i < 10; i++) {
-			int rand1 = (int)(Math.random() * 101);
-			int rand2 = (int)(Math.random() * 101);
-			series2.getData().add(rand1,rand2);
+			double rand1 = (Math.random() * 101);
+			double rand2 = (Math.random() * 101);
+			series2.getData().add(new XYChart.Data<Double, Double>(rand1, rand2));
 		}
 
-	        scatterChart.getData().addAll(series1,series2);
+	        scatterChart.getData().add(series1);
+	        scatterChart.getData().add(series2);
 	        
 	        Group root = new Group();  
 	        root.getChildren().add(scatterChart);  
