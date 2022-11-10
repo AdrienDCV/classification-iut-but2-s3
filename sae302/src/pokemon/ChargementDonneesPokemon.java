@@ -17,7 +17,6 @@ import intefarces.IColumn;
 import intefarces.IMVCModel;
 import intefarces.IPoint;
 
-
 public class ChargementDonneesPokemon implements IMVCModel {
 	List<Pokemon> pokemonList;
 	
