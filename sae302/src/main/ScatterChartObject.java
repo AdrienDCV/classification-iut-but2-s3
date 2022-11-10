@@ -1,44 +1,45 @@
 package main;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import intefarces.IPoint;
+import intefarces.IColumn;
+import javafx.scene.Group;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
 
 public class ScatterChartObject {
-	NumberAxis x;
-	NumberAxis y;
 	ScatterChart<Double, Double> scatterChart;
-	XYChart.Series<Double, Double> series1;
-	XYChart.Series<Double, Double> series2;
-	List<IPoint> firstList;
-	List<IPoint> secondList;
+	List<IColumn> firstList;
+	List<IColumn> secondList;
 	
-	public ScatterChartObject(List<IPoint> firstList, List<IPoint> secondList) {
-		x = new NumberAxis();
-		y = new NumberAxis();
+	public ScatterChartObject(List<IColumn> firstList, List<IColumn> secondList) {
+		NumberAxis x = new NumberAxis();
+		x.setLabel("Axe des X");
+		NumberAxis y = new NumberAxis();
+		y.setLabel("Axe des Y");
+		
 		scatterChart = new ScatterChart(x, y);
-		series1 = new XYChart.Series<Double, Double>();
-		series2 = new XYChart.Series<Double, Double>();
+		XYChart.Series<Double, Double> series1 = new XYChart.Series<Double, Double>();
+		XYChart.Series<Double, Double> series2 = new XYChart.Series<Double, Double>();
 		series1.setName("x");
 		series2.setName("y");
-		this.firstList.addAll(firstList);
-		this.secondList.addAll(secondList);
+		for(int i = 0; i < firstList.size(); i++) {
+			series2.getData().add(new XYChart.Data<Double, Double>(secondList.get(i).getX(), secondList.get(i).getY());
+		}
+		for(int i = 0; i < secondList.size(); i++) {
+			series2.getData().add(new XYChart.Data<Double, Double>(secondList.get(i).getX(), secondList.get(i).getY());
+		}
+		
+		scatterChart.getData().add(series1);
+        scatterChart.getData().add(series2);
 	}
-	
-//	
-//	for(int i = 0; i < 10; i++) {
-//		double rand1 = (Math.random() * 101);
-//		double rand2 = (Math.random() * 101);
-//		series1.getData().add(new XYChart.Data<Double, Double>(rand1, rand2));
-//	}
-//	
-//	for(int i = 0; i < 10; i++) {
-//		double rand1 = (Math.random() * 101);
-//		double rand2 = (Math.random() * 101);
-//		series2.getData().add(new XYChart.Data<Double, Double>(rand1, rand2));
-//	}
+
+	public ScatterChart<Double, Double> getScatterChart() {
+		return scatterChart;
+	}
+
+	public void setScatterChart(ScatterChart<Double, Double> scatterChart) {
+		this.scatterChart = scatterChart;
+	}
 }
