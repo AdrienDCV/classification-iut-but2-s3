@@ -51,8 +51,8 @@ public abstract class Column implements IColumn{
 	}
 
 	@Override
-	public IDataSet getDataset() {
-		return (IDataSet) this.dataSet;
+	public DataSet getDataset() {
+		return this.dataSet;
 	}
 
 	@Override
