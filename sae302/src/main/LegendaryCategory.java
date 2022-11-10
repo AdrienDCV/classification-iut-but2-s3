@@ -5,7 +5,6 @@ import java.util.List;
 
 import intefarces.ICategory;
 import intefarces.IPoint;
-import model.DataSet;
 
 
 public class LegendaryCategory  extends ChargementDonneesPokemon implements ICategory{
