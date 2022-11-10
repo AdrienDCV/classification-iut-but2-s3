@@ -8,10 +8,12 @@ import intefarces.IPoint;
 public class Classification {
 	
 	List<Column> column;
+	List<Criteria> criteria;
 	
 	
-	public Classification(List<Column> column) {
+	public Classification(List<Column> column, List<Criteria> criteria) {
 		this.column = column;
+		this.criteria = criteria;
 	}
 
 	public double euclidianDistance(double d1,double d2) {
@@ -30,6 +32,8 @@ public class Classification {
 				this.column.get(i).getName();
 			}
 		}*/
+		
+		
 		return null;
 	}
 }

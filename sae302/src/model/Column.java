@@ -64,4 +64,9 @@ public abstract class Column implements IColumn{
 		return this.valueNormalizer;
 	}
 
+	public List<IPoint> getPointsList() {
+		return pointsList;
+	}
+	
+
 }
