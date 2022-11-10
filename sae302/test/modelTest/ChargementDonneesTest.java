@@ -10,8 +10,8 @@ import org.junit.jupiter.api.Test;
 
 import com.opencsv.bean.CsvBindByName;
 
-import main.ChargementDonneesPokemon;
-import model.Pokemon;
+import pokemon.ChargementDonneesPokemon;
+import pokemon.Pokemon;
 
 class ChargementDonneesTest {
 	ChargementDonneesPokemon c;

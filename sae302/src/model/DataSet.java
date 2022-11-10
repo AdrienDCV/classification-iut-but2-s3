@@ -20,7 +20,7 @@ import intefarces.IPoint;
 /**
  * 
  * @author adrien.dacostaveiga
- *
+ * 
  */
 public class DataSet implements IMVCModel {
 
@@ -133,5 +133,10 @@ public class DataSet implements IMVCModel {
 		return normalizableColumns;
 	}
 
+	public List<IPoint> getPointsList() {
+		return pointsList;
+	}
 
+
+	
 }

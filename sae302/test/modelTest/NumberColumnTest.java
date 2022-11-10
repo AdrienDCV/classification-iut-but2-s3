@@ -10,7 +10,7 @@ import org.junit.Test;
 import intefarces.IPoint;
 import model.DataSet;
 import model.NumberColumn;
-import model.Pokemon;
+import pokemon.Pokemon;
 
 public class NumberColumnTest {
     
