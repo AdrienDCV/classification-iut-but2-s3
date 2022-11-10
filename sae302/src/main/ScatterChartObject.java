@@ -25,10 +25,10 @@ public class ScatterChartObject {
 		series1.setName("x");
 		series2.setName("y");
 		for(int i = 0; i < firstList.size(); i++) {
-			series2.getData().add(new XYChart.Data<Double, Double>(secondList.get(i).getX(), secondList.get(i).getY());
+			//series2.getData().add(new XYChart.Data<Double, Double>(secondList.get(i).getX(), secondList.get(i).getY());
 		}
 		for(int i = 0; i < secondList.size(); i++) {
-			series2.getData().add(new XYChart.Data<Double, Double>(secondList.get(i).getX(), secondList.get(i).getY());
+			//series2.getData().add(new XYChart.Data<Double, Double>(secondList.get(i).getX(), secondList.get(i).getY());
 		}
 		
 		scatterChart.getData().add(series1);
