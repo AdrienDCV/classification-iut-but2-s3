@@ -17,7 +17,7 @@ public class Main extends Application {
     	VBox vboxLeft = new VBox();
     	VBox vboxRight = new VBox();
     	Button button = new Button("Charger Donnée");
-    	Scatter sc = new Scatter();
+    	//ScatterChartObject sc = new ScatterChartObject();
     	vboxLeft.getChildren().add(button);
     	
     	Group root = new Group();

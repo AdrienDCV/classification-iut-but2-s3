@@ -51,8 +51,8 @@ public abstract class Column implements IColumn{
 	}
 
 	@Override
-	public IDataSet getDataset() {
-		return (IDataSet) this.dataSet;
+	public DataSet getDataset() {
+		return this.dataSet;
 	}
 
 	@Override
@@ -63,5 +63,10 @@ public abstract class Column implements IColumn{
 	public ValueNormalizer getNormalizer() { // pour effectuer tester
 		return this.valueNormalizer;
 	}
+
+	public List<IPoint> getPointsList() {
+		return pointsList;
+	}
+	
 
 }

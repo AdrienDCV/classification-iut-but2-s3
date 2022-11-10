@@ -8,7 +8,14 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFX">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/javaFX"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/openCSV"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/opencsv"/>
+	<classpathentry kind="lib" path="/home/infoetu/adrien.degand.etu/2ème année/sae302/equipe-I2/sae302/lib/junit-platform-console-standalone-1.9.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
