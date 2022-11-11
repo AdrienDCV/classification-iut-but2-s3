@@ -3,7 +3,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="test"/>
 	<classpathentry excluding="src/|test/" kind="src" path=""/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
@@ -16,6 +16,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/javaFX"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/openCSV"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/opencsv"/>
-	<classpathentry kind="lib" path="/home/infoetu/adrien.degand.etu/2ème année/sae302/equipe-I2/sae302/lib/junit-platform-console-standalone-1.9.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/adrie/Desktop/Java S3/equipe-I2/sae302/lib/junit-platform-console-standalone-1.9.1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/OpenCSV"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
