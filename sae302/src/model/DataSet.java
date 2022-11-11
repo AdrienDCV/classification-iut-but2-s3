@@ -19,7 +19,6 @@ import intefarces.ICategory;
 import intefarces.IColumn;
 import intefarces.IMVCModel;
 import intefarces.IPoint;
-import pokemon.DataSet;
 import pokemon.Pokemon;
 
 /**
