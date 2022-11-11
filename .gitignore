@@ -1,6 +1,6 @@
-/bin/
+./sae302/bin/
 /.metadata/
-/csv/
-/.classpath
-/.project
+./sae302/res/*.csv
+./sae302/.classpath
+./sae302/.project
 ./.vscode

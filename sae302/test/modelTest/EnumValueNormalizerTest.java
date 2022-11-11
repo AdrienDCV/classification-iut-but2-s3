@@ -10,7 +10,6 @@ public class EnumValueNormalizerTest {
     
     @Test
     public void test_enum_value_normalizer_constrcutor() {
-        assertEquals("EN", new EnumValueNormalizer().getValueNormalizer());
     }
     
 }
