@@ -6,7 +6,7 @@ import intefarces.IColumn;
 public class NumberValueNormalizer extends ValueNormalizer{
 
 	// attributes
-
+	/* no attributes */
 
 	// constructor(s)
 	public NumberValueNormalizer(NumberColumn normalizerTarget) {
