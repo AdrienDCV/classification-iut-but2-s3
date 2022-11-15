@@ -7,11 +7,7 @@ package model;
 * <ul>
 * <li>NUMBER_NORMALIZER: Normalise une valeur numerique (entiere ou
 * reelle)</li>
-* <li>BOOLEAN_NORMALIZER: Normalise une valeur booleenne (typiquement
-* <i>false</i>=0 et <i>true</i>=1</li>
-* <li>POKEMON_TYPE_NORMALIZER: Normalise une valeur parmis les types
-* de Pokemon possible. Chaque type recoit une valeur unique entre 0
-* et 1</li>
+* <li>ENUM_NORMALIZER : Normalise une valeur ordinale en une valeur comprise entre 0 et 1</li>
 * <li>etc. Chaque type enumere cree pour un DataSet doit avoir une
 * constante associee et un <i>normaliseur</i></li>
 * </ul>
@@ -21,8 +17,7 @@ public enum NormalizerTypes {
     // class attributes
     NUMBER_NORMALIZER("NN"),
     ENUM_NORMALIZER("EN"),
-    BOOLEAN_NORMALIZER("BN"),
-    STRING_NORMALIZER("SN");
+    BOOLEAN_NORMALIZER("BN");
 
     private String label;
 

@@ -2,26 +2,28 @@ package model;
 
 import intefarces.IColumn;
 
+
 public class NumberValueNormalizer extends ValueNormalizer{
 
 	// attributes
-	private NumberColumn normalizerTarget;
+	/* no attributes */
 
 	// constructor(s)
 	public NumberValueNormalizer(NumberColumn normalizerTarget) {
-		super("NUMBER_NORMALIZER");
-		this.normalizerTarget = normalizerTarget;
+		super("NUMBER_NORMALIZER", normalizerTarget);
 	}
 
 	// methods
 	@Override
 	public double normalize(Object value) {
-		return ((double) value - normalizerTarget.getMinimumValue()) / (normalizerTarget.getAmplitudeValueColumn());
+		NumberColumn column = ((NumberColumn) this.normalizerTarget);
+		return ((double) value - column.getMinimumValue()) / (column.getAmplitudeValueColumn());
 	}
 
 	@Override
 	public Object denormalize(double value) {
-		return value + normalizerTarget.getMinimumValue() * normalizerTarget.getAmplitudeValueColumn();
+		NumberColumn column = ((NumberColumn) this.normalizerTarget);
+		return value + column.getMinimumValue() * column.getAmplitudeValueColumn();
 	}
 
 }

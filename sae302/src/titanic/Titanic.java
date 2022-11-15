@@ -113,14 +113,25 @@ public class Titanic implements IPoint {
 
 	@Override
 	public Object getValue(IColumn col) {
-		// TODO Auto-generated method stub
+		if (col.getName().equals("PassengerId")) return this.passengerID;
+		if (col.getName().equals("Survived")) return this.survived;
+		if (col.getName().equals("Pclass")) return this.pClass;
+		if (col.getName().equals("Name")) return this.name;
+		if (col.getName().equals("Sex")) return this.sex;
+		if (col.getName().equals("Age")) return this.age;
+		if (col.getName().equals("SibSp")) return this.sibSp;
+		if (col.getName().equals("Parch")) return this.parch;
+		if (col.getName().equals("Ticket")) return this.ticket;
+		if (col.getName().equals("Fare")) return this.fare;
+		if (col.getName().equals("Cabin")) return this.cabin;
+		if (col.getName().equals("Embarked")) return this.embarked;
+		System.out.println(col.getName());
 		return null;
 	}
 
 	@Override
 	public double getNormalizedValue(IColumn xcol) {
-		// TODO Auto-generated method stub
-		return 0;
+		return xcol.getNormalizedValue(this);
 	}
 	
 	

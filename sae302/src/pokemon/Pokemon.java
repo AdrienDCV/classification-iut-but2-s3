@@ -1,4 +1,4 @@
-package model;
+package pokemon;
 
 import com.opencsv.bean.CsvBindByName;
 
