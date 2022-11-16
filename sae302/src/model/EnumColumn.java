@@ -8,6 +8,7 @@ public class EnumColumn extends Column{
 
     public EnumColumn(String name, DataSet dataSet, List<IPoint> pointsList) {
         super(name, dataSet, pointsList);
+        this.setNormalizer(new EnumValueNormalizer(this));
     }
 
 }

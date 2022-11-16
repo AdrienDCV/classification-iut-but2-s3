@@ -1,6 +1,7 @@
-/bin/
+bin/
+*.class
 /.metadata/
-/csv/
-/.classpath
-/.project
-./.vscode
+*.csv
+.classpath
+.project
+.vscode/

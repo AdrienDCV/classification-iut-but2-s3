@@ -1,11 +1,16 @@
 package pokemon;
 
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringReader;
+import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -16,6 +21,9 @@ import intefarces.ICategory;
 import intefarces.IColumn;
 import intefarces.IMVCModel;
 import intefarces.IPoint;
+import model.Column;
+import model.EnumColumn;
+import model.NumberColumn;
 
 public class ChargementDonneesPokemon implements IMVCModel {
 	List<Pokemon> pokemonList;
@@ -26,6 +34,7 @@ public class ChargementDonneesPokemon implements IMVCModel {
                     .withSeparator(',')
                     .withType(Pokemon.class)
                     .build().parse();
+        	
         } catch (InvalidPathException e) {
         	System.out.println("Le fichier n'existe pas");
         } catch(IllegalStateException e) {
@@ -34,6 +43,7 @@ public class ChargementDonneesPokemon implements IMVCModel {
         	System.out.println("Ioexception");
         }
     }
+	
 	
 	@Override
 	public void loadFromString(String data) {
@@ -118,6 +128,12 @@ public class ChargementDonneesPokemon implements IMVCModel {
 	}
 	
 	
-
+	public static void main(String[] args) {
+		ChargementDonneesPokemon c;
+		List<Pokemon> l;
+		c  = new ChargementDonneesPokemon();
+		c.loadFromFile("C:\\Users\\adrie\\Desktop\\Java S3\\equipe-I2\\sae302\\res\\pokemon_train.csv");
+		l = c.getPokemonList();
+	}
 	
 }

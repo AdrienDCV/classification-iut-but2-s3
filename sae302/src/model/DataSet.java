@@ -1,7 +1,10 @@
 package model;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringReader;
+import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Paths;
@@ -16,6 +19,7 @@ import intefarces.ICategory;
 import intefarces.IColumn;
 import intefarces.IMVCModel;
 import intefarces.IPoint;
+import pokemon.Pokemon;
 
 /**
  * 
@@ -80,6 +84,32 @@ public class DataSet implements IMVCModel {
                     .withSeparator(',')
                     .withType(IPoint.class)
                     .build().parse();
+        	// Création colonnes
+        	
+        	//nom des cols
+        	BufferedReader columnReader = new BufferedReader(new FileReader(datafile));
+        	String[] columnName = columnReader.readLine().split(",");
+        	
+        	//type de la classe pokemon
+        	IPoint p = this.pointsList.get(0);
+        	Field[] field = p.getClass().getDeclaredFields();
+        	List<String> columnType = new ArrayList<String>();
+        	for(int i = 0; i < field.length; i ++) {
+        		String[] type = field[i].toString().split(" ");
+        		columnType.add(type[1]);
+        	}
+        	System.out.println(columnType);
+        	
+        	//init des col
+        	for(int j = 0; j < columnType.size(); j++) {
+        		if(columnType.get(j).equals("java.lang.String"));
+        		else if(columnType.get(j).equals("int") || columnType.get(j).equals("double")) {
+        			this.columnsList.add(new NumberColumn(columnName[j], this, this.pointsList));
+        		} else {
+        			this.columnsList.add(new EnumColumn(columnName[j], this, this.pointsList));
+        		}
+        	}
+        	
         } catch (InvalidPathException e) {
         	System.out.println("Le fichier n'existe pas");
         } catch(IllegalStateException e) {
