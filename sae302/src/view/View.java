@@ -1,6 +1,10 @@
-package main;
+package view;
+
+import java.io.File;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -11,6 +15,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import model.DataSet;
 
 public class View extends Application{
 	Button confirmer=new Button("confirmer");
@@ -22,6 +27,10 @@ public class View extends Application{
     FileChooser fichier_csv=new FileChooser();
 	HBox hbox_variables=new HBox();
 	Canvas canvas=new Canvas();//changer en scaterChart
+	DataSet data=new DataSet();
+	Stage stage=new Stage();
+	
+	
 	
 	
     
@@ -29,6 +38,7 @@ public class View extends Application{
     	
     	
     	
+    	this.comboBox();
     	HBox var1=new HBox();
     	HBox var2=new HBox();
     	
@@ -37,13 +47,36 @@ public class View extends Application{
     	
     	entrer_k.setPromptText("entrer k");
     	entrer_k.setMaxWidth(100);
+    	
     	hbox_variables.setSpacing(10);
     	
     	
     	hbox_variables.getChildren().addAll(var1,var2);
     	
+    	parcourir.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(final ActionEvent e) {
+                File file = fichier_csv.showOpenDialog(stage);
+                System.out.println(file.toString());
+                if (file != null) {
+                	data.loadFromFile(file.toString());
+                }
+            }
+    	});
+    	
+    	this.confirmer.setOnAction(new EventHandler<ActionEvent>() {
+    		public void handle(final ActionEvent e) {
+    			Object variableX=premiere_var.getValue();
+    			Object variableY=deuxieme_var.getValue();
+    			int k=Integer.parseInt(entrer_k.getText());
+    			
+    			if(variableX!=variableY) {
+    				
+    			}
+    		}
+    	});
+    	
     	VBox vbox=new VBox();
-    	vbox.setPadding(new Insets(10,10,10,10));
+    	vbox.setPadding(new Insets(100,10,100,10));
     	vbox.setSpacing(10);
     	vbox.setStyle("-fx-background-color: #101010;");
     	vbox.getChildren().addAll(parcourir,hbox_variables,entrer_k,confirmer);
@@ -53,12 +86,25 @@ public class View extends Application{
     	
     }
     
+    protected void comboBox() {
+    	
+    	this.premiere_var.getItems().add("base egg steps");
+    	this.premiere_var.getItems().add("capture rate");
+    	this.premiere_var.getItems().add("experience growth");
+    	this.premiere_var.getItems().add("speed");
+    	
+    	this.deuxieme_var.getItems().add("base egg steps");
+    	this.deuxieme_var.getItems().add("capture rate");
+    	this.deuxieme_var.getItems().add("experience growth");
+    	this.deuxieme_var.getItems().add("speed");
+    
+    }
     
     public void start(Stage stage) throws Exception {
     	   	
     	HBox hbox=new HBox();
-    	hbox.getChildren().addAll(this.vBox(), new Scatter().getScatterChart());
-    	Scene scene=new Scene(hbox,900,900);
+    	hbox.getChildren().addAll(this.vBox(), canvas);
+    	Scene scene=new Scene(hbox,1000,350);
     	stage.setTitle("test");
     	stage.setScene(scene);
     	stage.show();
