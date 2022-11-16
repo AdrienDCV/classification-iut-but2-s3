@@ -15,6 +15,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import main.MenuBarClass;
+import main.ScatterTest;
 import model.DataSet;
 
 public class View extends Application{
@@ -33,8 +35,6 @@ public class View extends Application{
 	Stage stage=new Stage();
 	
 	
-	
-	
     
     protected VBox vBox() {
     	
@@ -44,8 +44,11 @@ public class View extends Application{
     	HBox var1=new HBox();
     	HBox var2=new HBox();
     	
+    	
+    	
     	var1.getChildren().add(premiere_var);
     	var2.getChildren().add(deuxieme_var);
+    	
     	
     	entrer_k.setPromptText("entrer k");
     	entrer_k.setMaxWidth(100);
@@ -54,6 +57,7 @@ public class View extends Application{
     	
     	
     	hbox_variables.getChildren().addAll(var1,var2);
+    	
     	
     	parcourir.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(final ActionEvent e) {
@@ -103,10 +107,18 @@ public class View extends Application{
     }
     
     public void start(Stage stage) throws Exception {
+    	
     	   	
     	HBox hbox=new HBox();
-    	hbox.getChildren().addAll(this.vBox(), canvas);
-    	Scene scene=new Scene(hbox,1000,350);
+    	ScatterTest scatter = new ScatterTest();
+    	hbox.getChildren().addAll(this.vBox(), scatter.getScatterChart());
+    	
+    	MenuBarClass menuBarClass = new MenuBarClass();
+    	VBox verticalPosition = new VBox();
+    	verticalPosition.getChildren().addAll(menuBarClass.getMenuBar(), hbox);
+    	menuBarClass.saveScatterChart(scatter);
+    	
+    	Scene scene=new Scene(verticalPosition,1000,350);
     	stage.setTitle("test");
     	stage.setScene(scene);
     	stage.show();
