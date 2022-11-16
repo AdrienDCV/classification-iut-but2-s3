@@ -98,7 +98,6 @@ public class DataSet implements IMVCModel {
         		String[] type = field[i].toString().split(" ");
         		columnType.add(type[1]);
         	}
-        	System.out.println(columnType);
         	
         	//init des col
         	for(int j = 0; j < columnType.size(); j++) {
