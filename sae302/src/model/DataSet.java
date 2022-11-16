@@ -72,7 +72,6 @@ public abstract class DataSet implements IMVCModel {
 		this.pointsList.addAll(elements);
 	}
 
-	@Override
 	public Iterator<IPoint> iterator() {
 		return this.pointsList.iterator();
 	}

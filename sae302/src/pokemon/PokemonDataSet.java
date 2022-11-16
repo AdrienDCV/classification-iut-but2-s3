@@ -25,7 +25,7 @@ import com.opencsv.bean.CsvToBeanBuilder;
 public class PokemonDataSet implements IMVCModel {
 	
 	private String title;
-	private List<IPoint> pointsList;
+	private List<Pokemon> pointsList;
 	private List<IColumn> columnsList;
 	private List<ICategory> categoriesList;
 	
@@ -72,7 +72,6 @@ public class PokemonDataSet implements IMVCModel {
 
 	@Override
 	public Iterator<IPoint> iterator() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -102,9 +101,13 @@ public class PokemonDataSet implements IMVCModel {
         	for(int j = 0; j < columnType.size(); j++) {
         		if(columnType.get(j).equals("java.lang.String"));
         		else if(columnType.get(j).equals("int") || columnType.get(j).equals("double")) {
-        			this.columnsList.add(new NumberColumn(columnName[j], this, this.pointsList));
+        			List<IPoint> points = new ArrayList<>();
+        			points.addAll(this.pointsList);
+        			this.columnsList.add(new NumberColumn(columnName[j], this, points));
         		} else {
-        			this.columnsList.add(new EnumColumn(columnName[j], this, this.pointsList));
+        			List<IPoint> points = new ArrayList<>();
+        			points.addAll(this.pointsList);
+        			this.columnsList.add(new EnumColumn(columnName[j], this, points));
         		}
         	}
         	
@@ -162,5 +165,10 @@ public class PokemonDataSet implements IMVCModel {
 		}
 		return normalizableColumns;
 	}
+
+	public List<Pokemon> getPointsList() {
+		return pointsList;
+	}
+	
 
 }
