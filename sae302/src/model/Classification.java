@@ -27,14 +27,14 @@ public class Classification {
 	}
 
 	public double euclidianDistance(IPoint p1,IPoint p2) {
-		return Math.sqrt(Math.pow((double) p1.getValue(colX) - (double) p2.getValue(colX), 2) + 
-						 Math.pow((double) p1.getValue(colY) - (double) p2.getValue(colY), 2));
+		return Math.sqrt(Math.pow((double) colX.getNormalizedValue(p1) - (double) colX.getNormalizedValue(p2), 2) + 
+						 Math.pow((double) colY.getNormalizedValue(p1) - (double) colX.getNormalizedValue(p2), 2));
 		
 	}
 	
 	public double manhatanDistance(IPoint p1,IPoint p2) {
-		return Math.abs((double) p1.getValue(colX) - (double) p2.getValue(colX)) + 
-			   Math.abs((double) p1.getValue(colY) - (double) p2.getValue(colY));
+		return Math.abs((double) colX.getNormalizedValue(p1) - (double) colX.getNormalizedValue(p2)) + 
+			   Math.abs((double) colY.getNormalizedValue(p1) - (double) colY.getNormalizedValue(p2));
 	}
 	
 	public List<IPoint> knnCalcul(int k, IPoint p) {
