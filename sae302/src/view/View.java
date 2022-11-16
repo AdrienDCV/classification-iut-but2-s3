@@ -18,6 +18,8 @@ import javafx.stage.Stage;
 import model.DataSet;
 
 public class View extends Application{
+	
+	// class attributes
 	Button confirmer=new Button("confirmer");
     Button parcourir=new Button("parcourir");
     //Button sauvegarde=new Button("sauvegarder");
