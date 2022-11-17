@@ -22,6 +22,9 @@ public class ScatterChartObject {
 
 	
 //	Column xCol, Column yCol
+	
+	
+	// voir pour rajouter les options "k, colonneCatégorieX, colonneCatégorieY 
 	public ScatterChartObject() {
 		NumberAxis x = new NumberAxis();
 		x.setLabel("Axe des X");
@@ -58,22 +61,22 @@ public class ScatterChartObject {
 		this.scatterChart = scatterChart;
 	}
 	
-	public void saveScatterChart() {
-		String path;
-		if(new File(System.getProperty("user.home") + "/Bureau").exists()) {
-			path = System.getProperty("user.home") + "/Bureau/image.png";
-		} else {
-			path = System.getProperty("user.home") + "/Desktop/image.png";
-		}
-		File file = new File(path);
-		WritableImage image = this.scatterChart.snapshot(new SnapshotParameters(), null);
-		try {
-		  ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
-		} catch (IOException e) {
-			System.err.println(e.getMessage());
-			e.getStackTrace();
-		}
-		
-	}
+//	public void saveScatterChart() {
+//		String path;
+//		if(new File(System.getProperty("user.home") + "/Bureau").exists()) {
+//			path = System.getProperty("user.home") + "/Bureau/image.png";
+//		} else {
+//			path = System.getProperty("user.home") + "/Desktop/image.png";
+//		}
+//		File file = new File(path);
+//		WritableImage image = this.scatterChart.snapshot(new SnapshotParameters(), null);
+//		try {
+//		  ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
+//		} catch (IOException e) {
+//			System.err.println(e.getMessage());
+//			e.getStackTrace();
+//		}
+//		
+//	}
 	
 }
