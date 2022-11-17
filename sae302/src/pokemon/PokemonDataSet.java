@@ -1,4 +1,4 @@
-package model;
+package pokemon;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -13,40 +13,34 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import com.opencsv.bean.CsvToBeanBuilder;
-
 import intefarces.ICategory;
 import intefarces.IColumn;
 import intefarces.IMVCModel;
 import intefarces.IPoint;
-import pokemon.Pokemon;
+import model.BooleanColumn;
+import model.EnumColumn;
+import model.NumberColumn;
 
-/**
- * 
- * @author adrien.dacostaveiga
- * 
- */
-public abstract class DataSet implements IMVCModel {
+import com.opencsv.bean.CsvToBeanBuilder;
 
-	// class attributes
+public class PokemonDataSet implements IMVCModel {
+	
 	private String title;
-	private List<IPoint> pointsList;
+	private List<Pokemon> pointsList;
 	private List<IColumn> columnsList;
 	private List<ICategory> categoriesList;
-
-	// constructor(s)
-	public DataSet(String title, List<IColumn> columnsList) {
+	
+	public PokemonDataSet(String title) {
 		this.title = title;
-		this.columnsList = columnsList;
+		this.columnsList = new ArrayList<>();
 		this.pointsList = new ArrayList<>();
 		this.categoriesList = new ArrayList<>();
 	}
 
-	public DataSet() {
-		this("", new ArrayList<>());
+	public PokemonDataSet() {
+		this("");
 	}
 
-	// methods
 	@Override
 	public String getTitle() {
 		return this.title;
@@ -59,30 +53,35 @@ public abstract class DataSet implements IMVCModel {
 
 	@Override
 	public void setLines(List<IPoint> lines) {
-		this.pointsList = lines;
+		this.pointsList.clear();
+		for(int i = 0; i < lines.size(); i ++) {
+			this.pointsList.add((Pokemon) lines.get(i));
+		}
 	}
 
 	@Override
 	public void addLine(IPoint element) {
-		this.pointsList.add(element);		
+		this.pointsList.add((Pokemon) element);
 	}
 
 	@Override
-	public void addAllLine(List<IPoint> elements) {
-		this.pointsList.addAll(elements);
+	public void addAllLine(List<IPoint> element) {
+		for(int i = 0; i < element.size(); i ++) {
+			this.pointsList.add((Pokemon) element.get(i));
+		}
 	}
 
+	@Override
 	public Iterator<IPoint> iterator() {
-		return this.pointsList.iterator();
+		return null;
 	}
 
 	@Override
-	public abstract void loadFromFile(String datafile);
-	/*{
+	public void loadFromFile(String datafile) {
 		try {
-        	this.pointsList = new CsvToBeanBuilder<IPoint>(Files.newBufferedReader(Paths.get(datafile)))
+        	this.pointsList = new CsvToBeanBuilder<Pokemon>(Files.newBufferedReader(Paths.get(datafile)))
                     .withSeparator(',')
-                    .withType(IPoint.class)
+                    .withType(Pokemon.class)
                     .build().parse();
         	// Création colonnes
         	
@@ -98,14 +97,22 @@ public abstract class DataSet implements IMVCModel {
         		String[] type = field[i].toString().split(" ");
         		columnType.add(type[1]);
         	}
-        	
         	//init des col
+  
         	for(int j = 0; j < columnType.size(); j++) {
         		if(columnType.get(j).equals("java.lang.String"));
         		else if(columnType.get(j).equals("int") || columnType.get(j).equals("double")) {
-        			this.columnsList.add(new NumberColumn(columnName[j], this, this.pointsList));
+        			List<IPoint> points = new ArrayList<>();
+        			points.addAll(this.pointsList);
+        			this.columnsList.add(new NumberColumn(columnName[j], this, points));
+        		} else if (columnType.get(j).equals("boolean")){
+        			List<IPoint> points = new ArrayList<>();
+        			points.addAll(this.pointsList);
+        			this.columnsList.add(new BooleanColumn(columnName[j], this, points));
         		} else {
-        			this.columnsList.add(new EnumColumn(columnName[j], this, this.pointsList));
+        			List<IPoint> points = new ArrayList<>();
+        			points.addAll(this.pointsList);
+        			this.columnsList.add(new EnumColumn(columnName[j], this, points));
         		}
         	}
         	
@@ -115,26 +122,27 @@ public abstract class DataSet implements IMVCModel {
         	System.out.println("Java n'a pas pu executer la requête");
         } catch(IOException e) {
         	System.out.println("Ioexception");
-        }	
-	}*/
+        }
+	}
 
 	@Override
-	public abstract void loadFromString(String data) ;
-	/*{
-		this.pointsList = new CsvToBeanBuilder<IPoint>(new StringReader(data))
+	public void loadFromString(String data) {
+		this.pointsList = new CsvToBeanBuilder<Pokemon>(new StringReader(data))
                 .withSeparator(',')
-                .withType(IPoint.class)
+                .withType(Pokemon.class)
                 .build().parse();
-	}*/
+	}
 
 	@Override
 	public IColumn defaultXCol() {
-		return this.columnsList.get(1);
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public IColumn defaultYCol() {
-		return this.columnsList.get(2);
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
@@ -163,10 +171,13 @@ public abstract class DataSet implements IMVCModel {
 		return normalizableColumns;
 	}
 
-	public List<IPoint> getPointsList() {
+	public List<Pokemon> getPointsList() {
 		return pointsList;
 	}
 
-
+	public List<IColumn> getColumnsList() {
+		return columnsList;
+	}
 	
+
 }

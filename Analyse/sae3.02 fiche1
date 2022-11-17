@@ -1,0 +1,23 @@
+Systeme: programmes de classification
+Acteur:Utilisateur
+CU: afficher les données sous formes de nuage de point
+prérequis: avoir entrées des données
+guaranties avec succés: l'affichage d'un nuage de point
+guarantie minimum:/
+scénario nominal:
+1)l'utilisateur choisit d'afficher un lot de données
+2)le systeme demande quel lot de données il veut affiché
+3)l'utisateur choisit le lot de données
+4)le programmes affiche les données sous forme de nuage de points
+
+___________________
+
+Systeme:programme de classement
+acteur:utilisateur
+CU: visualiser les donées d'un point
+prérequis:des données ont été entrées
+guarantie avec succés: affichage des données d'un point
+guarantie minimale: /
+scénario nominal:
+1)l'utilisateur choisit un point dont il veut afficher les données
+2)le systeme affiche les données du point choisit

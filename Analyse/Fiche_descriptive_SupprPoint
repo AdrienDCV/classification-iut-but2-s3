@@ -1,0 +1,22 @@
+Cas d'utilisation : Supprimer un point
+Acteur/actrice principal(e) : Utilisateur/utilisatrice
+Acteur(s)/actrice(s) sedoncaire(s) : X
+Préconditions : Avoir chargé un fichier de données CSV, avoir réalisé une classification
+Garantie en cas de succès : Le point ciblé est supprimer du graphique (schéma / nuage de points)
+Garantie minimale : Rien ne se passe.
+
+Scénario nominal : 
+    
+    1 - L'utilisateur/utilisatrice sélectionne un points sur le graphique.
+    2 - Le système affiche une fenêtre descriptive du points avec la fonctionnalité "supprimer point".
+    3 - L'utilisateur/utilisatrice sélectionne la fonctionnalité "supprimer point".
+    4 - Le système demande validation auprès de l'utilisateur/utilisatrice.
+    5 - L'utilisateur/utilisatrive valide en sélectionnant la fonctionnalité "valider et supprimer"
+    6 - Le système supprime le point et avertit l'utlisateur/utilisatrice de la suppression du point.
+    
+    
+Scénario(s) alternatif(s) :
+    
+    A) Le point ciblé n'existe pas
+       - 2(A) Le système avertit l'utilisateur/utilisatrice que le point sélectionné n'existe pas
+       - 3(A) retour à l'étape 1 du scénario nominal
