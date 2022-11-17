@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import main.MenuBarClass;
 import main.ScatterTest;
 import model.DataSet;
+import pokemon.PokemonDataSet;
 
 public class View extends Application{
 	
@@ -31,7 +32,7 @@ public class View extends Application{
     FileChooser fichier_csv=new FileChooser();
 	HBox hbox_variables=new HBox();
 	Canvas canvas=new Canvas();//changer en scaterChart
-	DataSet data=new DataSet();
+	PokemonDataSet dataset = new PokemonDataSet("Pokemon");
 	Stage stage=new Stage();
 	
 	
@@ -64,8 +65,9 @@ public class View extends Application{
                 File file = fichier_csv.showOpenDialog(stage);
                 System.out.println(file.toString());
                 if (file != null) {
-                	data.loadFromFile(file.toString());
+                	dataset.loadFromFile(file.toString());
                 }
+                
             }
     	});
     	

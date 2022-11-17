@@ -23,8 +23,8 @@ public class NumberColumn extends Column{
     private void setMinimumValue() {
         minimumValue = Double.MAX_VALUE;
         for (IPoint point : this.pointsList) {
-            if ((Double) point.getValue(this) < minimumValue) {
-                minimumValue = (Double) point.getValue(this);
+            if (Double.parseDouble(point.getValue(this).toString()) < minimumValue) {
+                minimumValue = Double.parseDouble(point.getValue(this).toString());
             }
         }
     }
@@ -37,8 +37,8 @@ public class NumberColumn extends Column{
     private double maximumValue() {
         double max = 0.0;
         for (IPoint point : this.pointsList) {
-            if ((double) point.getValue(this) > max) {
-                max = (double) point.getValue(this);
+            if (Double.parseDouble(point.getValue(this).toString()) > max) {
+                max = (double) Double.parseDouble(point.getValue(this).toString());
             }
         }
         return max;

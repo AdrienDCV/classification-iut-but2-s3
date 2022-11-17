@@ -17,6 +17,7 @@ import intefarces.ICategory;
 import intefarces.IColumn;
 import intefarces.IMVCModel;
 import intefarces.IPoint;
+import model.BooleanColumn;
 import model.EnumColumn;
 import model.NumberColumn;
 
@@ -29,15 +30,15 @@ public class PokemonDataSet implements IMVCModel {
 	private List<IColumn> columnsList;
 	private List<ICategory> categoriesList;
 	
-	public PokemonDataSet(String title, List<IColumn> columnsList) {
+	public PokemonDataSet(String title) {
 		this.title = title;
-		this.columnsList = columnsList;
+		this.columnsList = new ArrayList<>();
 		this.pointsList = new ArrayList<>();
 		this.categoriesList = new ArrayList<>();
 	}
 
 	public PokemonDataSet() {
-		this("", new ArrayList<>());
+		this("");
 	}
 
 	@Override
@@ -96,14 +97,18 @@ public class PokemonDataSet implements IMVCModel {
         		String[] type = field[i].toString().split(" ");
         		columnType.add(type[1]);
         	}
-        	
         	//init des col
+  
         	for(int j = 0; j < columnType.size(); j++) {
         		if(columnType.get(j).equals("java.lang.String"));
         		else if(columnType.get(j).equals("int") || columnType.get(j).equals("double")) {
         			List<IPoint> points = new ArrayList<>();
         			points.addAll(this.pointsList);
         			this.columnsList.add(new NumberColumn(columnName[j], this, points));
+        		} else if (columnType.get(j).equals("boolean")){
+        			List<IPoint> points = new ArrayList<>();
+        			points.addAll(this.pointsList);
+        			this.columnsList.add(new BooleanColumn(columnName[j], this, points));
         		} else {
         			List<IPoint> points = new ArrayList<>();
         			points.addAll(this.pointsList);
@@ -168,6 +173,10 @@ public class PokemonDataSet implements IMVCModel {
 
 	public List<Pokemon> getPointsList() {
 		return pointsList;
+	}
+
+	public List<IColumn> getColumnsList() {
+		return columnsList;
 	}
 	
 

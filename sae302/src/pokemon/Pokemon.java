@@ -5,7 +5,7 @@ import com.opencsv.bean.CsvBindByName;
 import intefarces.IColumn;
 import intefarces.IPoint;
 
-public class Pokemon implements IPoint {
+public class Pokemon extends IPoint {
 	@CsvBindByName(column = "name")
 	private String name;
 	@CsvBindByName(column = "attack")
