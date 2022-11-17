@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import intefarces.IPoint;
+import titanic.Embarked;
+import titanic.Sex;
+import titanic.Titanic;
 
 public class EnumValueNormalizer extends ValueNormalizer{
 
@@ -17,12 +20,12 @@ public class EnumValueNormalizer extends ValueNormalizer{
 
     @Override
     public double normalize(Object value) {
-        return this.elemsTypes.indexOf(value) / this.elemsTypes.size();
+        return this.elemsTypes.indexOf(value) % this.elemsTypes.size();
     }
 
     @Override
     public Object denormalize(double value) {
-        return this.elemsTypes.indexOf(value) * this.elemsTypes.size();
+        return value * this.elemsTypes.size();
     }
 
     public void fillElemsTypes() {
@@ -33,6 +36,10 @@ public class EnumValueNormalizer extends ValueNormalizer{
                 this.elemsTypes.add(elemTypes);
             }
         }
+    }
+
+    public Object getNormalizerTarget() { // méthodes uniquement utilisée pour des tests
+        return this.normalizerTarget;
     }
 
 }

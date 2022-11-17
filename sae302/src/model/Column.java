@@ -38,7 +38,7 @@ public abstract class Column implements IColumn{
 
 	@Override
 	public double getNormalizedValue(IPoint point) {
-		return this.valueNormalizer.normalize(point.getValue(this));
+		return this.valueNormalizer.normalize(point.getValue(this).toString());
 	}
 
 	@Override
