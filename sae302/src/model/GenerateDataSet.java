@@ -8,21 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.lang.reflect.Field;
 
-import pokemon.ChargementDonneesPokemon;
 import pokemon.Pokemon;
 import titanic.Titanic;
 
 public class GenerateDataSet {
 	
 	public DataSet generateDataSet(String fileName) {
-    		
-        	
+	
 		List<String> pokemonField = this.getPokemonFieldName();
         System.out.println(pokemonField);
-        	
-        	
-    	
-    	
     	return null;
 	}
 	
