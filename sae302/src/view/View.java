@@ -32,7 +32,7 @@ public class View extends Application{
     FileChooser fichier_csv=new FileChooser();
 	HBox hbox_variables=new HBox();
 	Canvas canvas=new Canvas();//changer en scaterChart
-	PokemonDataSet dataset = new PokemonDataSet("Pokemon");
+	PokemonDataSet dataset = new PokemonDataSet("Ratio");
 	Stage stage=new Stage();
 	
 	

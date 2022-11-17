@@ -18,73 +18,30 @@ import intefarces.IColumn;
 import intefarces.IMVCModel;
 import intefarces.IPoint;
 import model.BooleanColumn;
+import model.DataSet;
 import model.EnumColumn;
 import model.NumberColumn;
 
 import com.opencsv.bean.CsvToBeanBuilder;
 
-public class PokemonDataSet implements IMVCModel {
-	
-	private String title;
-	private List<Pokemon> pointsList;
-	private List<IColumn> columnsList;
-	private List<ICategory> categoriesList;
+public class PokemonDataSet extends DataSet {
 	
 	public PokemonDataSet(String title) {
-		this.title = title;
-		this.columnsList = new ArrayList<>();
-		this.pointsList = new ArrayList<>();
-		this.categoriesList = new ArrayList<>();
+		super(title);
 	}
 
 	public PokemonDataSet() {
 		this("");
 	}
-
-	@Override
-	public String getTitle() {
-		return this.title;
-	}
-
-	@Override
-	public int getNbLines() {
-		return this.pointsList.size();
-	}
-
-	@Override
-	public void setLines(List<IPoint> lines) {
-		this.pointsList.clear();
-		for(int i = 0; i < lines.size(); i ++) {
-			this.pointsList.add((Pokemon) lines.get(i));
-		}
-	}
-
-	@Override
-	public void addLine(IPoint element) {
-		this.pointsList.add((Pokemon) element);
-	}
-
-	@Override
-	public void addAllLine(List<IPoint> element) {
-		for(int i = 0; i < element.size(); i ++) {
-			this.pointsList.add((Pokemon) element.get(i));
-		}
-	}
-
-	@Override
-	public Iterator<IPoint> iterator() {
-		return null;
-	}
-
 	@Override
 	public void loadFromFile(String datafile) {
 		try {
-        	this.pointsList = new CsvToBeanBuilder<Pokemon>(Files.newBufferedReader(Paths.get(datafile)))
+        	List<Pokemon> pokemonList = new CsvToBeanBuilder<Pokemon>(Files.newBufferedReader(Paths.get(datafile)))
                     .withSeparator(',')
                     .withType(Pokemon.class)
                     .build().parse();
-        	// Création colonnes
-        	
+        	// Ajout des pokemon dans IPoint
+        	this.pointsList.addAll(pokemonList);
         	//nom des cols
         	BufferedReader columnReader = new BufferedReader(new FileReader(datafile));
         	String[] columnName = columnReader.readLine().split(",");
@@ -127,57 +84,23 @@ public class PokemonDataSet implements IMVCModel {
 
 	@Override
 	public void loadFromString(String data) {
-		this.pointsList = new CsvToBeanBuilder<Pokemon>(new StringReader(data))
+		List<Pokemon> pokemonList = new CsvToBeanBuilder<Pokemon>(new StringReader(data))
                 .withSeparator(',')
                 .withType(Pokemon.class)
                 .build().parse();
+		this.pointsList.addAll(pokemonList);
 	}
 
 	@Override
 	public IColumn defaultXCol() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getColumnsList().get(0);
 	}
 
 	@Override
 	public IColumn defaultYCol() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getColumnsList().get(1);
 	}
 
-	@Override
-	public void addCategory(ICategory classe) {
-		this.categoriesList.add(classe);
-	}
-
-	@Override
-	public Collection<ICategory> allCategories() {
-		return this.categoriesList;
-	}
-
-	@Override
-	public int nbColumns() {
-		return this.columnsList.size();
-	}
-
-	@Override
-	public List<IColumn> getNormalizableColumns() {
-		List <IColumn> normalizableColumns = new ArrayList<>();
-		for (IColumn column : this.columnsList) {
-			if (column.isNormalizable()) {
-				normalizableColumns.add(column);
-			}
-		}
-		return normalizableColumns;
-	}
-
-	public List<Pokemon> getPointsList() {
-		return pointsList;
-	}
-
-	public List<IColumn> getColumnsList() {
-		return columnsList;
-	}
 	
 
 }

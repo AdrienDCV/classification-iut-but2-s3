@@ -20,7 +20,7 @@ public class NotLegendaryCategory  implements ICategory {
 	public List<IPoint> addToCategory(IMVCModel dataset) {
 		PokemonDataSet p = (PokemonDataSet) dataset;
 		for(int i = 0; i < p.getPointsList().size(); i ++) {
-			if(!p.getPointsList().get(i).isLegendary()) {
+			if(!((Pokemon) p.getPointsList().get(i)).isLegendary()) {
 				this.categoryElements.add(p.getPointsList().get(i));
 			}
 		}
