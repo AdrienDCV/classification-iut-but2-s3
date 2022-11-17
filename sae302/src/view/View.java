@@ -35,7 +35,7 @@ public class View extends Application{
 	HBox hboxVariables=new HBox();
 	Canvas canvas=new Canvas();//changer en scaterChart
 	PokemonDataSet dataset = new PokemonDataSet("Pokemon");
-	Stage stage=new Stage();
+	Stage realStage = new Stage();
 	
 	
     
@@ -47,7 +47,7 @@ public class View extends Application{
     	
     	parcourir.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(final ActionEvent e) {
-                File file = fichierCsv.showOpenDialog(stage);
+                File file = fichierCsv.showOpenDialog(realStage);
                 System.out.println(file.toString());
                 if (file != null) {
                 	dataset.loadFromFile(file.toString());
@@ -102,9 +102,9 @@ public class View extends Application{
     	//menuBarClass.saveScatterChart(scatter);
     	
     	Scene scene=new Scene(verticalPosition,1000,350);
-    	stage.setTitle("test");
-    	stage.setScene(scene);
-    	stage.show();
+    	this.realStage.setTitle("test");
+    	this.realStage.setScene(scene);
+    	this.realStage.show();
     	
     }
     
@@ -112,5 +112,7 @@ public class View extends Application{
 		launch(args);
 	}
 
-
+	public Stage getRealStage() {
+		return realStage;
+	}
 }
