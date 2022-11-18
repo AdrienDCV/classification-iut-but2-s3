@@ -33,7 +33,6 @@ public class EnumValueNormalizer extends ValueNormalizer{
     public Object getNormalizerTarget() { // méthodes uniquement utilisée pour des tests
         return this.normalizerTarget;
     }
-    
     public void fillElemsTypes() {
     	this.elemsTypes = new ArrayList<>();
     	 for (int i=0; i < this.enumType.getEnumConstants().length; i++) {
@@ -45,5 +44,6 @@ public class EnumValueNormalizer extends ValueNormalizer{
     public void getEnumType() {
     	this.enumType = (Class<Enum>) this.normalizerTarget.getPointsList().get(0).getValue(this.normalizerTarget).getClass();
     }
-
 }
+
+
