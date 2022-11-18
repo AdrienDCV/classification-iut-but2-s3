@@ -18,6 +18,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import main.MenuBarClass;
+import main.ScatterTest;
 //import main.ScatterTest;
 import pokemon.PokemonDataSet;
 
@@ -28,11 +29,12 @@ public class View extends Stage{
     //Button sauvegarde=new Button("sauvegarder");
     static ComboBox<String> criteriaX, criteriaY;
     //TextField entrerK=new TextField();
+
     static FileChooser fichierCsv;
 	static HBox hboxVariables;
 	static Canvas canvas;//changer en scaterChart
 	static PokemonDataSet dataSet;
-
+	ScatterTest scatterChart = new ScatterTest();
 	public View() {
 		initWidget();
 		
@@ -44,6 +46,10 @@ public class View extends Stage{
     	verticalPosition.getChildren().addAll(menuBarClass.getMenuBar(), hbox);
     	//menuBarClass.saveScatterChart(scatter);
     	
+    	menuBarClass.loadFile();
+    	menuBarClass.exitApplication();
+    	menuBarClass.saveScatterChart(this.scatterChart);
+    	
     	Scene scene=new Scene(verticalPosition,1000,350);
     	this.setTitle("test");
     	this.setScene(scene);
@@ -51,6 +57,10 @@ public class View extends Stage{
 		
 		this.show();
 	}
+
+
+	
+
 	
 	private static void initWidget() {
 		initButton();
@@ -81,10 +91,18 @@ public class View extends Stage{
     	Stage stage = this;
     	parcourir.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(final ActionEvent e) {
+/*<<<<<<< HEAD
                 File file = fichierCsv.showOpenDialog(stage);
            
                 dataSet.loadFromFile(file.toString());
                 comboBox();  
+=======*/
+                File file = fichierCsv.showOpenDialog(stage);
+                System.out.println(file.toString());
+                if (file != null) {
+                	dataSet.loadFromFile(file.toString());
+                	comboBox();
+                }
                 
             }
     	});
@@ -126,6 +144,12 @@ public class View extends Stage{
     	}
     }
  
+    
+
+	public Stage getRealStage() {
+		return this;
+	}
+    
     
 
 

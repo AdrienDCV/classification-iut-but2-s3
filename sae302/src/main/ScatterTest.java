@@ -1,5 +1,11 @@
 package main;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
@@ -33,12 +39,22 @@ public class ScatterTest {
 		
 		for (int i=0; i < 10; i++) {
 			double xCurrentPoint = Math.random()*101 ;  
-			 double yCurrentPoint = Math.random()*101 ; 
-			 series2.getData().add(new XYChart.Data<Double,Double>(xCurrentPoint, yCurrentPoint));
+			double yCurrentPoint = Math.random()*101 ; 
+			series2.getData().add(new XYChart.Data<Double,Double>(xCurrentPoint, yCurrentPoint));
 		 }
 		
 		scatterChart.getData().add(series1);
         scatterChart.getData().add(series2);
+        
+        for(XYChart.Data<Double,Double> data : series1.getData()) {
+            data.getNode().setOnMouseClicked(e -> {
+            	System.out.println();
+            });
+        }
+        
+        
+        
+        
 	}
 
 	public ScatterChart<Double, Double> getScatterChart() {
