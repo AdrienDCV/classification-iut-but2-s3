@@ -12,4 +12,9 @@ public class EnumColumn extends Column{
         this.setNormalizer(new EnumValueNormalizer(this));
     }
 
+	@Override
+	public boolean isNormalizable() {
+		return true;
+	}
+
 }

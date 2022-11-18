@@ -11,5 +11,10 @@ public class BooleanColumn extends Column {
         super(name, dataSet, pointsList);
         this.setNormalizer(new BooleanValueNormalizer(this));
     }
+
+	@Override
+	public boolean isNormalizable() {
+		return true;
+	}
     
 }
