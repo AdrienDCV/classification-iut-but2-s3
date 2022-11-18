@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import intefarces.ICategory;
+import intefarces.IMVCModel;
 import intefarces.IPoint;
 
 
-public class LegendaryCategory  extends ChargementDonneesPokemon implements ICategory{
+public class LegendaryCategory  extends PokemonDataSet implements ICategory{
 	private List<IPoint> categoryElements;
 	private String categoryName;
 	
@@ -17,10 +18,11 @@ public class LegendaryCategory  extends ChargementDonneesPokemon implements ICat
 	}
 	
 	@Override
-	public List<IPoint> addToCategory() {
-		for(int i = 0; i < this.getPokemonList().size(); i ++) {
-			if(this.getPokemonList().get(i).isLegendary()) {
-				this.categoryElements.add(this.getPokemonList().get(i));
+	public List<IPoint> addToCategory(IMVCModel dataSet) {
+		PokemonDataSet p = (PokemonDataSet) dataSet;
+		for(int i = 0; i < p.getPointsList().size(); i ++) {
+			if(!((Pokemon)p.getPointsList().get(i)).isLegendary()) {
+				this.categoryElements.add(p.getPointsList().get(i));
 			}
 		}
 		return this.categoryElements;
@@ -33,6 +35,7 @@ public class LegendaryCategory  extends ChargementDonneesPokemon implements ICat
 	public String getCategoryName() {
 		return categoryName;
 	}
+
 	
 	
 }
