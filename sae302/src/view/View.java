@@ -19,7 +19,6 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import main.MenuBarClass;
 //import main.ScatterTest;
-import model.DataSet;
 import pokemon.PokemonDataSet;
 
 public class View extends Application{
@@ -28,8 +27,8 @@ public class View extends Application{
 	Button confirmer=new Button("confirmer");
     Button parcourir=new Button("parcourir");
     //Button sauvegarde=new Button("sauvegarder");
-    ComboBox premiereVar=new ComboBox();
-    ComboBox deuxiemeVar=new ComboBox();
+    protected ComboBox<String> premiereVar=new ComboBox<>();
+    ComboBox<String> deuxiemeVar=new ComboBox<>();
     //TextField entrerK=new TextField();
     FileChooser fichierCsv=new FileChooser();
 	HBox hboxVariables=new HBox();
@@ -48,11 +47,9 @@ public class View extends Application{
     	parcourir.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(final ActionEvent e) {
                 File file = fichierCsv.showOpenDialog(stage);
-                System.out.println(file.toString());
-                if (file != null) {
-                	dataset.loadFromFile(file.toString());
-                	comboBox();
-                }
+           
+                dataset.loadFromFile(file.toString());
+                comboBox();  
                 
             }
     	});
@@ -63,7 +60,7 @@ public class View extends Application{
     			Object variableY=deuxiemeVar.getValue();
     			//int k=Integer.parseInt(entrerK.getText());
     			
-    			if(variableX!=variableY) {
+    			if(!variableX.equals(variableY)) {
     				
     			}
     		}
