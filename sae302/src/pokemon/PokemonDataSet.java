@@ -47,8 +47,9 @@ public class PokemonDataSet extends DataSet {
         	String[] columnName = columnReader.readLine().split(",");
         	
         	//type de la classe pokemon
-        	IPoint p = this.pointsList.get(0);
+        	Pokemon p = pokemonList.get(0);
         	Field[] field = p.getClass().getDeclaredFields();
+        	
         	List<String> columnType = new ArrayList<String>();
         	for(int i = 0; i < field.length; i ++) {
         		String[] type = field[i].toString().split(" ");

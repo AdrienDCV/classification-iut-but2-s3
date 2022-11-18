@@ -10,11 +10,12 @@ import titanic.Titanic;
 
 public class EnumValueNormalizer extends ValueNormalizer{
 
-    private List<String> elemsTypes;
+    private Class<Enum> enumType;
+    private List<Object> elemsTypes;
 
     public EnumValueNormalizer(EnumColumn normalizerTarget) {
         super("ENUM_NORMALIZER", normalizerTarget);
-        this.elemsTypes  = new ArrayList<>();
+        this.getEnumType();
         this.fillElemsTypes();
     }
 
@@ -25,23 +26,24 @@ public class EnumValueNormalizer extends ValueNormalizer{
 
     @Override
     public Object denormalize(double value) {
-        if (value == 0) return this.elemsTypes.get(0);
-        return this.elemsTypes.get((int) (value * this.elemsTypes.size()) / this.elemsTypes.size()+1);
-    }
-
-    public void fillElemsTypes() {
-        EnumColumn column = (EnumColumn) this.normalizerTarget;
-        for (IPoint point : column.pointsList) {
-            String elemTypes = point.getValue(column).toString();
-            if (!this.elemsTypes.contains(elemTypes) && elemTypes != null) {
-                this.elemsTypes.add(elemTypes);
-            }
-        }
-        System.out.println(this.elemsTypes);
+    	if (value == 0) return this.elemsTypes.get(0);
+        return this.elemsTypes.get((int) value * this.elemsTypes.size() / this.elemsTypes.size()+1);
     }
 
     public Object getNormalizerTarget() { // méthodes uniquement utilisée pour des tests
         return this.normalizerTarget;
     }
-
+    public void fillElemsTypes() {
+    	this.elemsTypes = new ArrayList<>();
+    	 for (int i=0; i < this.enumType.getEnumConstants().length; i++) {
+         	elemsTypes.add(this.enumType.getEnumConstants()[i]);
+         }
+    	
+    }
+    
+    public void getEnumType() {
+    	this.enumType = (Class<Enum>) this.normalizerTarget.getPointsList().get(0).getValue(this.normalizerTarget).getClass();
+    }
 }
+
+

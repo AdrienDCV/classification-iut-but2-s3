@@ -57,9 +57,7 @@ public abstract class Column implements IColumn{
 	}
 
 	@Override
-	public boolean isNormalizable() {
-		return false;
-	}
+	public abstract boolean isNormalizable();
 
 	public ValueNormalizer getNormalizer() { // pour effectuer tester
 		return this.valueNormalizer;
