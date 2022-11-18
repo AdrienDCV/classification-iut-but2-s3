@@ -1,17 +1,9 @@
 package main;
 
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
 import intefarces.IPoint;
-import javafx.embed.swing.SwingFXUtils;
-import javafx.scene.SnapshotParameters;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.image.WritableImage;
 import model.Column;
 
 
@@ -60,23 +52,5 @@ public class ScatterChartObject {
 	public void setScatterChart(ScatterChart<Double, Double> scatterChart) {
 		this.scatterChart = scatterChart;
 	}
-	
-//	public void saveScatterChart() {
-//		String path;
-//		if(new File(System.getProperty("user.home") + "/Bureau").exists()) {
-//			path = System.getProperty("user.home") + "/Bureau/image.png";
-//		} else {
-//			path = System.getProperty("user.home") + "/Desktop/image.png";
-//		}
-//		File file = new File(path);
-//		WritableImage image = this.scatterChart.snapshot(new SnapshotParameters(), null);
-//		try {
-//		  ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
-//		} catch (IOException e) {
-//			System.err.println(e.getMessage());
-//			e.getStackTrace();
-//		}
-//		
-//	}
 	
 }

@@ -18,6 +18,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import main.MenuBarClass;
+import main.ScatterTest;
 //import main.ScatterTest;
 import model.DataSet;
 import pokemon.PokemonDataSet;
@@ -35,7 +36,10 @@ public class View extends Application{
 	HBox hboxVariables=new HBox();
 	Canvas canvas=new Canvas();//changer en scaterChart
 	PokemonDataSet dataset = new PokemonDataSet("Pokemon");
-	Stage stage=new Stage();
+	Stage realStage = new Stage();
+
+	//A enlever et remplacer
+	ScatterTest scatterChart = new ScatterTest();
 	
 	
     
@@ -47,7 +51,7 @@ public class View extends Application{
     	
     	parcourir.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(final ActionEvent e) {
-                File file = fichierCsv.showOpenDialog(stage);
+                File file = fichierCsv.showOpenDialog(realStage);
                 System.out.println(file.toString());
                 if (file != null) {
                 	dataset.loadFromFile(file.toString());
@@ -94,23 +98,31 @@ public class View extends Application{
     	
     	   	
     	HBox hbox=new HBox();
-    	hbox.getChildren().addAll(this.vBox(), canvas);
+    	hbox.getChildren().addAll(this.vBox(), this.scatterChart.getScatterChart());
     	
     	MenuBarClass menuBarClass = new MenuBarClass();
     	VBox verticalPosition = new VBox();
     	verticalPosition.getChildren().addAll(menuBarClass.getMenuBar(), hbox);
-    	//menuBarClass.saveScatterChart(scatter);
+    	menuBarClass.loadFile();
+    	menuBarClass.exitApplication();
+    	menuBarClass.saveScatterChart(this.scatterChart);
     	
     	Scene scene=new Scene(verticalPosition,1000,350);
-    	stage.setTitle("test");
-    	stage.setScene(scene);
-    	stage.show();
+    	realStage.setTitle("test");
+    	realStage.setScene(scene);
+    	realStage.show();
     	
     }
     
     public static void main(String[] args) {
 		launch(args);
 	}
+
+	public Stage getRealStage() {
+		return this.realStage;
+	}
+    
+    
 
 
 }
