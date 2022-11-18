@@ -52,4 +52,9 @@ public class NumberColumn extends Column{
         return NumberColumn.amplitude;
     }
 
+	@Override
+	public boolean isNormalizable() {
+		return true;
+	}
+
 }

@@ -47,16 +47,23 @@ public class EnumValueNormalizerTest {
 
     @Test
     public void test_enum_value_normalizer_normalize() {
-        assertEquals(0, columnEmbarked.getNormalizedValue(pointsList.get(0)));
-        assertEquals(0.5, columnEmbarked.getNormalizedValue(pointsList.get(1)));
-        assertEquals(1, columnEmbarked.getNormalizedValue(pointsList.get(2)));
-        
-        assertEquals(0, columnSex.getNormalizedValue(pointsList.get(0)));
-        assertEquals(1, columnSex.getNormalizedValue(pointsList.get(1)));
+    	 assertEquals(0, columnEmbarked.getNormalizedValue(pointsList.get(0)));
+         assertEquals(0.5, columnEmbarked.getNormalizedValue(pointsList.get(1)));
+         assertEquals(1, columnEmbarked.getNormalizedValue(pointsList.get(2)));
+         
+         assertEquals(0, columnSex.getNormalizedValue(pointsList.get(0)));
+         assertEquals(1, columnSex.getNormalizedValue(pointsList.get(1)));
+    }
+
+    @Test
+    public void test_enum_value_normalizer_denormalize() {
+        assertEquals(Embarked.S, columnEmbarked.getDenormalizedValue(0));
+        assertEquals(Embarked.Q, columnEmbarked.getDenormalizedValue(0.5));
+        assertEquals(Embarked.C, columnEmbarked.getDenormalizedValue(1));
+
+        assertEquals(Sex.M, columnSex.getDenormalizedValue(0));
+        assertEquals(Sex.F, columnSex.getDenormalizedValue(0.5));
     }
     
-    public void test_enum_value_normalizer_denormalize() {
-    	assertEquals(Embarked.S, );
-    }
     
 }
