@@ -16,8 +16,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import main.MenuBarClass;
-//import main.ScatterTest;
+import main.ScatterTest;
 import model.DataSet;
+import pokemon.PokemonDataSet;
 
 public class View extends Application{
 	
@@ -25,39 +26,56 @@ public class View extends Application{
 	Button confirmer=new Button("confirmer");
     Button parcourir=new Button("parcourir");
     //Button sauvegarde=new Button("sauvegarder");
-    ComboBox premiereVar=new ComboBox();
-    ComboBox deuxiemeVar=new ComboBox();
-    TextField entrerK=new TextField();
-    FileChooser fichierCsv=new FileChooser();
-	HBox hboxVariables=new HBox();
+    ComboBox premiere_var=new ComboBox();
+    ComboBox deuxieme_var=new ComboBox();
+    TextField entrer_k=new TextField();
+    FileChooser fichier_csv=new FileChooser();
+	HBox hbox_variables=new HBox();
 	Canvas canvas=new Canvas();//changer en scaterChart
-	DataSet data=new DataSet();
+	PokemonDataSet dataset = new PokemonDataSet("Ratio");
 	Stage stage=new Stage();
 	
 	
     
     protected VBox vBox() {
     	
-    	this.comboBox();
     	
-    	entrerK.setPromptText("entrer k");
-    	entrerK.setMaxWidth(100);
+    	
+    	this.comboBox();
+    	HBox var1=new HBox();
+    	HBox var2=new HBox();
+    	
+    	
+    	
+    	var1.getChildren().add(premiere_var);
+    	var2.getChildren().add(deuxieme_var);
+    	
+    	
+    	entrer_k.setPromptText("entrer k");
+    	entrer_k.setMaxWidth(100);
+    	
+    	hbox_variables.setSpacing(10);
+    	
+    	
+    	hbox_variables.getChildren().addAll(var1,var2);
+    	
     	
     	parcourir.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(final ActionEvent e) {
-                File file = fichierCsv.showOpenDialog(stage);
+                File file = fichier_csv.showOpenDialog(stage);
                 System.out.println(file.toString());
                 if (file != null) {
-                	data.loadFromFile(file.toString());
+                	dataset.loadFromFile(file.toString());
                 }
+                
             }
     	});
     	
     	this.confirmer.setOnAction(new EventHandler<ActionEvent>() {
     		public void handle(final ActionEvent e) {
-    			Object variableX=premiereVar.getValue();
-    			Object variableY=deuxiemeVar.getValue();
-    			int k=Integer.parseInt(entrerK.getText());
+    			Object variableX=premiere_var.getValue();
+    			Object variableY=deuxieme_var.getValue();
+    			int k=Integer.parseInt(entrer_k.getText());
     			
     			if(variableX!=variableY) {
     				
@@ -66,10 +84,10 @@ public class View extends Application{
     	});
     	
     	VBox vbox=new VBox();
-    	vbox.setPadding(new Insets(80,10,100,10));
+    	vbox.setPadding(new Insets(100,10,100,10));
     	vbox.setSpacing(10);
     	vbox.setStyle("-fx-background-color: #101010;");
-    	vbox.getChildren().addAll(parcourir,premiereVar,deuxiemeVar,entrerK,confirmer);
+    	vbox.getChildren().addAll(parcourir,hbox_variables,entrer_k,confirmer);
     	
     	
     	return vbox;
@@ -78,15 +96,15 @@ public class View extends Application{
     
     protected void comboBox() {
     	
-    	this.premiereVar.getItems().add("base egg steps");
-    	this.premiereVar.getItems().add("capture rate");
-    	this.premiereVar.getItems().add("experience growth");
-    	this.premiereVar.getItems().add("speed");
+    	this.premiere_var.getItems().add("base egg steps");
+    	this.premiere_var.getItems().add("capture rate");
+    	this.premiere_var.getItems().add("experience growth");
+    	this.premiere_var.getItems().add("speed");
     	
-    	this.deuxiemeVar.getItems().add("base egg steps");
-    	this.deuxiemeVar.getItems().add("capture rate");
-    	this.deuxiemeVar.getItems().add("experience growth");
-    	this.deuxiemeVar.getItems().add("speed");
+    	this.deuxieme_var.getItems().add("base egg steps");
+    	this.deuxieme_var.getItems().add("capture rate");
+    	this.deuxieme_var.getItems().add("experience growth");
+    	this.deuxieme_var.getItems().add("speed");
     
     }
     
@@ -94,12 +112,13 @@ public class View extends Application{
     	
     	   	
     	HBox hbox=new HBox();
-    	hbox.getChildren().addAll(this.vBox(), canvas);
+    	ScatterTest scatter = new ScatterTest();
+    	hbox.getChildren().addAll(this.vBox(), scatter.getScatterChart());
     	
     	MenuBarClass menuBarClass = new MenuBarClass();
     	VBox verticalPosition = new VBox();
     	verticalPosition.getChildren().addAll(menuBarClass.getMenuBar(), hbox);
-    	//menuBarClass.saveScatterChart(scatter);
+    	menuBarClass.saveScatterChart(scatter);
     	
     	Scene scene=new Scene(verticalPosition,1000,350);
     	stage.setTitle("test");

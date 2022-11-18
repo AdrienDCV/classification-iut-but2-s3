@@ -26,24 +26,24 @@ import pokemon.Pokemon;
  * @author adrien.dacostaveiga
  * 
  */
-public class DataSet implements IMVCModel {
+public abstract class DataSet implements IMVCModel {
 
 	// class attributes
-	private String title;
-	private List<IPoint> pointsList;
-	private List<IColumn> columnsList;
-	private List<ICategory> categoriesList;
+	protected String title;
+	protected List<IPoint> pointsList;
+	protected List<IColumn> columnsList;
+	protected List<ICategory> categoriesList;
 
 	// constructor(s)
-	public DataSet(String title, List<IColumn> columnsList) {
+	public DataSet(String title) {
 		this.title = title;
-		this.columnsList = columnsList;
+		this.columnsList = new ArrayList<>();
 		this.pointsList = new ArrayList<>();
 		this.categoriesList = new ArrayList<>();
 	}
 
 	public DataSet() {
-		this("", new ArrayList<>());
+		this("");
 	}
 
 	// methods
@@ -72,20 +72,19 @@ public class DataSet implements IMVCModel {
 		this.pointsList.addAll(elements);
 	}
 
-	@Override
 	public Iterator<IPoint> iterator() {
 		return this.pointsList.iterator();
 	}
 
 	@Override
-	public void loadFromFile(String datafile) {
+	public abstract  void loadFromFile(String datafile);
+	/*{
 		try {
         	this.pointsList = new CsvToBeanBuilder<IPoint>(Files.newBufferedReader(Paths.get(datafile)))
                     .withSeparator(',')
                     .withType(IPoint.class)
                     .build().parse();
-        	// Création colonnes
-        	
+
         	//nom des cols
         	BufferedReader columnReader = new BufferedReader(new FileReader(datafile));
         	String[] columnName = columnReader.readLine().split(",");
@@ -98,7 +97,6 @@ public class DataSet implements IMVCModel {
         		String[] type = field[i].toString().split(" ");
         		columnType.add(type[1]);
         	}
-        	System.out.println(columnType);
         	
         	//init des col
         	for(int j = 0; j < columnType.size(); j++) {
@@ -117,25 +115,28 @@ public class DataSet implements IMVCModel {
         } catch(IOException e) {
         	System.out.println("Ioexception");
         }	
-	}
+	}*/
 
 	@Override
-	public void loadFromString(String data) {
+	public abstract void loadFromString(String data); 
+	/*{
 		this.pointsList = new CsvToBeanBuilder<IPoint>(new StringReader(data))
                 .withSeparator(',')
                 .withType(IPoint.class)
                 .build().parse();
-	}
+	}*/
 
 	@Override
-	public IColumn defaultXCol() {
+	public abstract IColumn defaultXCol();
+	/*{
 		return this.columnsList.get(1);
-	}
+	}*/
 
 	@Override
-	public IColumn defaultYCol() {
+	public abstract IColumn defaultYCol();
+	/*{
 		return this.columnsList.get(2);
-	}
+	}*/
 
 	@Override
 	public void addCategory(ICategory classe) {
@@ -166,6 +167,11 @@ public class DataSet implements IMVCModel {
 	public List<IPoint> getPointsList() {
 		return pointsList;
 	}
+
+	public List<IColumn> getColumnsList() {
+		return columnsList;
+	}
+	
 
 
 	

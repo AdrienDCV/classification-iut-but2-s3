@@ -134,5 +134,4 @@ public class Titanic implements IPoint {
 		return xcol.getNormalizedValue(this);
 	}
 	
-	
 }

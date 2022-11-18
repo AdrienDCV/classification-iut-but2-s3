@@ -44,7 +44,7 @@ public class MenuBarClass {
 		});
 	}	
 	
-	public void saveScatterChart(Scatter scatterChart) {
+	public void saveScatterChart(ScatterTest scatterChart) {
 		this.saveItem.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				String path;

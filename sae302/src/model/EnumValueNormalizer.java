@@ -20,12 +20,13 @@ public class EnumValueNormalizer extends ValueNormalizer{
 
     @Override
     public double normalize(Object value) {
-        return this.elemsTypes.indexOf(value) % this.elemsTypes.size();
+        return (double) this.elemsTypes.indexOf(value) / (double) (this.elemsTypes.size()-1);
     }
 
     @Override
     public Object denormalize(double value) {
-        return value * this.elemsTypes.size();
+        if (value == 0) return this.elemsTypes.get(0);
+        return this.elemsTypes.get((int) (value * this.elemsTypes.size()) / this.elemsTypes.size()+1);
     }
 
     public void fillElemsTypes() {
@@ -36,6 +37,7 @@ public class EnumValueNormalizer extends ValueNormalizer{
                 this.elemsTypes.add(elemTypes);
             }
         }
+        System.out.println(this.elemsTypes);
     }
 
     public Object getNormalizerTarget() { // méthodes uniquement utilisée pour des tests
