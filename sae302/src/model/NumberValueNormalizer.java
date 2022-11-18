@@ -17,9 +17,7 @@ public class NumberValueNormalizer extends ValueNormalizer{
 	@Override
 	public double normalize(Object value) {
 		NumberColumn column = ((NumberColumn) this.normalizerTarget);
-		System.out.println(Double.parseDouble(value.toString()));
-		column.setAmplitudeValueClomun();
-		return (Double.parseDouble(value.toString()) - column.getMinimumValue()) / (column.getAmplitudeValueColumn());
+		return ((double) value - column.getMinimumValue()) / (column.getAmplitudeValueColumn());
 	}
 
 	@Override

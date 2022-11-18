@@ -26,7 +26,7 @@ import pokemon.Pokemon;
  * @author adrien.dacostaveiga
  * 
  */
-public abstract class DataSet implements IMVCModel {
+public class DataSet implements IMVCModel {
 
 	// class attributes
 	private String title;
@@ -72,13 +72,13 @@ public abstract class DataSet implements IMVCModel {
 		this.pointsList.addAll(elements);
 	}
 
+	@Override
 	public Iterator<IPoint> iterator() {
 		return this.pointsList.iterator();
 	}
 
 	@Override
-	public abstract void loadFromFile(String datafile);
-	/*{
+	public void loadFromFile(String datafile) {
 		try {
         	this.pointsList = new CsvToBeanBuilder<IPoint>(Files.newBufferedReader(Paths.get(datafile)))
                     .withSeparator(',')
@@ -98,6 +98,7 @@ public abstract class DataSet implements IMVCModel {
         		String[] type = field[i].toString().split(" ");
         		columnType.add(type[1]);
         	}
+        	System.out.println(columnType);
         	
         	//init des col
         	for(int j = 0; j < columnType.size(); j++) {
@@ -116,16 +117,15 @@ public abstract class DataSet implements IMVCModel {
         } catch(IOException e) {
         	System.out.println("Ioexception");
         }	
-	}*/
+	}
 
 	@Override
-	public abstract void loadFromString(String data) ;
-	/*{
+	public void loadFromString(String data) {
 		this.pointsList = new CsvToBeanBuilder<IPoint>(new StringReader(data))
                 .withSeparator(',')
                 .withType(IPoint.class)
                 .build().parse();
-	}*/
+	}
 
 	@Override
 	public IColumn defaultXCol() {

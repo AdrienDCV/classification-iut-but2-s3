@@ -5,7 +5,6 @@ import java.util.List;
 
 import intefarces.IColumn;
 import intefarces.IDataSet;
-import intefarces.IMVCModel;
 import intefarces.IPoint;
 import intefarces.IValueNormalizer;
 
@@ -19,12 +18,12 @@ public abstract class Column implements IColumn{
 	
 	// class attributes
 	protected String name;
-	protected IMVCModel dataSet;
+	protected DataSet dataSet;
 	protected List<IPoint> pointsList;
 	protected ValueNormalizer valueNormalizer;
 	
 	// constructor(s)
-	public Column(String name, IMVCModel dataSet, List<IPoint> pointsList) {
+	public Column(String name, DataSet dataSet, List<IPoint> pointsList) {
 		this.name = name;
 		this.dataSet = dataSet;
 		this.pointsList = pointsList;
@@ -38,7 +37,7 @@ public abstract class Column implements IColumn{
 
 	@Override
 	public double getNormalizedValue(IPoint point) {
-		return this.valueNormalizer.normalize(point.getValue(this));
+		return this.valueNormalizer.normalize(point.getValue(this).toString());
 	}
 
 	@Override
@@ -52,7 +51,7 @@ public abstract class Column implements IColumn{
 	}
 
 	@Override
-	public IMVCModel getDataset() {
+	public DataSet getDataset() {
 		return this.dataSet;
 	}
 

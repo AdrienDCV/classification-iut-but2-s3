@@ -1,7 +1,6 @@
 package main;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -14,19 +13,12 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.WritableImage;
-import javafx.stage.FileChooser;
-import model.DataSet;
-import pokemon.Pokemon;
-import view.View;
 
 public class MenuBarClass {
 	MenuBar menuBar = new MenuBar();
-	FileChooser fileChooser = new FileChooser();
-	DataSet data = new DataSet();
 	MenuItem loadItem;
 	MenuItem saveItem;
 	MenuItem exitItem;
-	PokemonDataSet dataset = new PokemonDataSet("Pokemon");
 	
 	public MenuBarClass() {
 		Menu fileMenu = new Menu("Fichier");
@@ -36,6 +28,7 @@ public class MenuBarClass {
 		
 		fileMenu.getItems().addAll(loadItem, saveItem, exitItem);
 		this.menuBar.getMenus().add(fileMenu);
+		exitApplication();
 	}
 	
 	public MenuBar getMenuBar() {
@@ -49,38 +42,9 @@ public class MenuBarClass {
 				System.exit(0);
 			}
 		});
-	}
+	}	
 	
-	public DataSet loadFileName() {
-		File file = fileChooser.showOpenDialog(new View().getRealStage());
-		if (file != null) {
-			String fileName = file.getName();
-			int i = fileName.lastIndexOf('.');
-			String extension = fileName.substring(i+1);
-			if(!fileName.equals("z")) {
-				data.loadFromFile(file.toString());
-			}
-		}
-		return data;
-	}
-	
-	public void loadFile() {
-		this.fileChooser.setTitle("Charger votre fichier CSV");
-		this.loadItem.setOnAction(new EventHandler<ActionEvent>() {
-	        public void handle(final ActionEvent event) {
-	        	File file = fileChooser.showOpenDialog(new View().getRealStage());
-				if (file != null) {
-					String fileName = file.getName();
-					int i = fileName.lastIndexOf('.');
-					String extension = fileName.substring(i+1);
-					if(!fileName.equals(arg0))
-					data.loadFromFile(file.toString());
-				}
-	        }
-		});
-	}
-	
-	public void saveScatterChart(ScatterTest scatterChart) {
+	public void saveScatterChart(Scatter scatterChart) {
 		this.saveItem.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				String path;
