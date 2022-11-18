@@ -21,76 +21,22 @@ import main.MenuBarClass;
 //import main.ScatterTest;
 import pokemon.PokemonDataSet;
 
-public class View extends Application{
+public class View extends Stage{
 	
 	// class attributes
-	Button confirmer=new Button("confirmer");
-    Button parcourir=new Button("parcourir");
+	static Button confirmer, parcourir;
     //Button sauvegarde=new Button("sauvegarder");
-    protected ComboBox<String> premiereVar=new ComboBox<>();
-    ComboBox<String> deuxiemeVar=new ComboBox<>();
+    static ComboBox<String> criteriaX, criteriaY;
     //TextField entrerK=new TextField();
-    FileChooser fichierCsv=new FileChooser();
-	HBox hboxVariables=new HBox();
-	Canvas canvas=new Canvas();//changer en scaterChart
-	PokemonDataSet dataset = new PokemonDataSet("Ratio");
-	Stage stage=new Stage();
-	
-	
-    
-    protected VBox vBox() {
-    	
-    	
-    	//entrerK.setPromptText("entrer k");
-    	//entrerK.setMaxWidth(100);
-    	
-    	parcourir.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(final ActionEvent e) {
-                File file = fichierCsv.showOpenDialog(stage);
-           
-                dataset.loadFromFile(file.toString());
-                comboBox();  
-                
-            }
-    	});
-    	
-    	this.confirmer.setOnAction(new EventHandler<ActionEvent>() {
-    		public void handle(final ActionEvent e) {
-    			Object variableX=premiereVar.getValue();
-    			Object variableY=deuxiemeVar.getValue();
-    			//int k=Integer.parseInt(entrerK.getText());
-    			
-    			if(!variableX.equals(variableY)) {
-    				
-    			}
-    		}
-    	});
-    	
-    	VBox vbox=new VBox();
-    	vbox.setPadding(new Insets(80,10,100,10));
-    	vbox.setSpacing(10);
-    	vbox.setStyle("-fx-background-color: #101010;");
-    	vbox.getChildren().addAll(parcourir,premiereVar,deuxiemeVar,confirmer);
-    	
-    	
-    	return vbox;
-    	
-    }
-    
-    protected void comboBox() {
-    	List<IColumn> columns=dataset.getColumnsList();
-    	if(columns!=null) {
-    		for(int i=0;i<columns.size();i++) {
-    			premiereVar.getItems().add(columns.get(i).getName());
-    			deuxiemeVar.getItems().add(columns.get(i).getName());
-    		}
-    	}
-    }
-    
-    public void start(Stage stage) throws Exception {
-    	
-    	   	
-    	HBox hbox=new HBox();
+    static FileChooser fichierCsv;
+	static HBox hboxVariables;
+	static Canvas canvas;//changer en scaterChart
+	static PokemonDataSet dataSet;
+
+	public View() {
+		initWidget();
+		
+		HBox hbox=new HBox();
     	hbox.getChildren().addAll(this.vBox(), canvas);
     	
     	MenuBarClass menuBarClass = new MenuBarClass();
@@ -99,15 +45,88 @@ public class View extends Application{
     	//menuBarClass.saveScatterChart(scatter);
     	
     	Scene scene=new Scene(verticalPosition,1000,350);
-    	stage.setTitle("test");
-    	stage.setScene(scene);
-    	stage.show();
+    	this.setTitle("test");
+    	this.setScene(scene);
+    	this.show();
+		
+		this.show();
+	}
+	
+	private static void initWidget() {
+		initButton();
+	    //Button sauvegarde=new Button("sauvegarder");
+	    initComboBox();
+	    //TextField entrerK=new TextField();
+	    fichierCsv=new FileChooser();
+		hboxVariables=new HBox();
+		canvas=new Canvas();//changer en scaterChart
+		dataSet = new PokemonDataSet("Ratio");
+	}
+
+	private static void initComboBox() {
+		criteriaX=new ComboBox<>();
+	    criteriaY=new ComboBox<>();
+	}
+
+	private static void initButton() {
+		confirmer=new Button("confirmer");
+	    parcourir=new Button("parcourir");
+	}
+	
+    protected VBox vBox() {
+    	
+    	
+    	//entrerK.setPromptText("entrer k");
+    	//entrerK.setMaxWidth(100);
+    	Stage stage = this;
+    	parcourir.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(final ActionEvent e) {
+                File file = fichierCsv.showOpenDialog(stage);
+           
+                dataSet.loadFromFile(file.toString());
+                comboBox();  
+                
+            }
+    	});
+    	
+    	confirmer.setOnAction(new EventHandler<ActionEvent>() {
+    		public void handle(final ActionEvent e) {
+    			Object variableX=criteriaX.getValue();
+    			Object variableY=criteriaY.getValue();
+    			//int k=Integer.parseInt(entrerK.getText());
+    			
+    			if(!variableX.equals(variableY)) {
+    				System.out.println("ça marche, attribut selectionné :");
+    				System.out.println("X = " + variableX);
+    				System.out.println("Y = " + variableY);
+    			} else {
+    				System.out.println("Selectionne des paramètres différents !");
+    			}
+    		}
+    	});
+    	
+    	VBox vbox=new VBox();
+    	vbox.setPadding(new Insets(80,10,100,10));
+    	vbox.setSpacing(10);
+    	vbox.setStyle("-fx-background-color: #101010;");
+    	vbox.getChildren().addAll(parcourir,criteriaX,criteriaY,confirmer);
+    	
+    	
+    	return vbox;
     	
     }
     
-    public static void main(String[] args) {
-		launch(args);
-	}
+    protected void comboBox() {
+    	List<IColumn> columns=dataSet.getColumnsList();
+    	if(columns!=null) {
+    		for(int i=0;i<columns.size();i++) {
+    			criteriaX.getItems().add(columns.get(i).getName());
+    			criteriaY.getItems().add(columns.get(i).getName());
+    		}
+    	}
+    }
+ 
+    
 
 
 }
