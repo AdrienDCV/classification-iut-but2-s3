@@ -17,51 +17,53 @@ import titanic.Sex;
 import titanic.Titanic;
 
 public class EnumValueNormalizerTest {
-
-    Titanic point1, point2, point3;
-    Column column1, column2;
-    EnumValueNormalizer evn1, evn2;
-    public static List<IPoint> pointsList = new ArrayList<>();
-
+  
+	Titanic point1, point2, point3;
+	List<IPoint> pointsList;
+	EnumColumn columnEmbarked, columnSex; 
+	EnumValueNormalizer evnEmbarked, evnSex;
+	
     @BeforeEach
     void setup() {
-        this.point1 = new Titanic( 1,0,3,"Braund, Mr. Owen Harris",Sex.M,22,1,0,"A/5 21171",7.25,"",Embarked.S);
-        this.point2 = new Titanic(2,1,1,"Cumings, Mrs. John Bradley (Florence Briggs Thayer)",Sex.F,38,1,0,"PC 17599",71.2833,"C85",Embarked.C);
-        this.point3 = new Titanic(17,0,3,"Rice, Master. Eugene",Sex.M,2,4,1,"382652",29.125,"",Embarked.Q);
-        this. pointsList.add(point1); pointsList.add(point2); pointsList.add(point3);
+    	pointsList = new ArrayList<>();
+    	
+        point1 = new Titanic( 1,0,3,"Braund, Mr. Owen Harris",Sex.M,22,1,0,"A/5 21171",7.25,"",Embarked.S);
+        point2 = new Titanic(2,1,1,"Cumings, Mrs. John Bradley (Florence Briggs Thayer)",Sex.F,38,1,0,"PC 17599",71.2833,"C85",Embarked.C);
+        point3 = new Titanic(17,0,3,"Rice, Master. Eugene",Sex.M,2,4,1,"382652",29.125,"",Embarked.Q);
+        pointsList.add(point1); pointsList.add(point2); pointsList.add(point3);
         
-        this.column1 = new EnumColumn("Embarked", null, this.pointsList); 
-        this.column2 = new EnumColumn("Sex", null, this.pointsList); 
-
-        this.evn1 = new EnumValueNormalizer(column1);
-        this.evn2 = new EnumValueNormalizer(column2);
+        columnEmbarked = new EnumColumn("Embarked", null, pointsList);
+        columnSex = new EnumColumn("Sex", null, pointsList); 
+        
+        evnEmbarked  = new EnumValueNormalizer(columnEmbarked);  
+        evnSex = new EnumValueNormalizer(columnSex);
     }
 
     @Test
     public void test_enum_value_normalizer_consstrcutor() {
-        assertEquals("Embarked", ((Column) this.evn1.getNormalizerTarget()).getName());
-
-        assertEquals("Sex", ((Column) this.evn2.getNormalizerTarget()).getName());
+        assertEquals("Embarked", ((Column) evnEmbarked.getNormalizerTarget()).getName());
+        assertEquals("Sex", ((Column) evnSex.getNormalizerTarget()).getName());
     }
 
     @Test
     public void test_enum_value_normalizer_normalize() {
-        assertEquals(0, this.column1.getNormalizedValue(this.pointsList.get(0)));
-        assertEquals(0.5, this.column1.getNormalizedValue(this.pointsList.get(1)));
-        assertEquals(1, column1.getNormalizedValue(this.pointsList.get(2)));
-
-        assertEquals(0, this.column2.getNormalizedValue(this.pointsList.get(0)));
-        assertEquals(1, this.column2.getNormalizedValue(this.pointsList.get(1)));    
+    	 assertEquals(0, columnEmbarked.getNormalizedValue(pointsList.get(0)));
+         assertEquals(0.5, columnEmbarked.getNormalizedValue(pointsList.get(1)));
+         assertEquals(1, columnEmbarked.getNormalizedValue(pointsList.get(2)));
+         
+         assertEquals(0, columnSex.getNormalizedValue(pointsList.get(0)));
+         assertEquals(1, columnSex.getNormalizedValue(pointsList.get(1)));
     }
 
     @Test
     public void test_enum_value_normalizer_denormalize() {
-        assertEquals(Embarked.S, this.column1.getDenormalizedValue(0));
-        assertEquals(Embarked.Q, this.column1.getDenormalizedValue(0.5));
-        assertEquals(Embarked.C, this.column1.getDenormalizedValue(1));
+        assertEquals(Embarked.S, columnEmbarked.getDenormalizedValue(0));
+        assertEquals(Embarked.Q, columnEmbarked.getDenormalizedValue(0.5));
+        assertEquals(Embarked.C, columnEmbarked.getDenormalizedValue(1));
 
-        assertEquals(Sex.M, this.column2.getDenormalizedValue(0));
-        assertEquals(Sex.F, this.column2.getDenormalizedValue(0.5));
+        assertEquals(Sex.M, columnSex.getDenormalizedValue(0));
+        assertEquals(Sex.F, columnSex.getDenormalizedValue(0.5));
     }
+    
     
 }
