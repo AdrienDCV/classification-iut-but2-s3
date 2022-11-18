@@ -43,5 +43,5 @@ public class EnumValueNormalizer extends ValueNormalizer{
     public Object getNormalizerTarget() { // méthodes uniquement utilisée pour des tests
         return this.normalizerTarget;
     }
-
 }
+
