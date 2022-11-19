@@ -64,6 +64,5 @@ public class EnumValueNormalizerTest {
         assertEquals(Sex.M, columnSex.getDenormalizedValue(0));
         assertEquals(Sex.F, columnSex.getDenormalizedValue(0.5));
     }
-    
-    
+      
 }
