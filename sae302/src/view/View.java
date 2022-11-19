@@ -18,50 +18,107 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import main.MenuBarClass;
+import main.ScatterTest;
 //import main.ScatterTest;
 import pokemon.PokemonDataSet;
 
-public class View extends Application{
+public class View extends Stage{
 	
 	// class attributes
-	Button confirmer=new Button("confirmer");
-    Button parcourir=new Button("parcourir");
+	static Button confirmer, parcourir;
     //Button sauvegarde=new Button("sauvegarder");
-    protected ComboBox<String> premiereVar=new ComboBox<>();
-    ComboBox<String> deuxiemeVar=new ComboBox<>();
+    static ComboBox<String> criteriaX, criteriaY;
     //TextField entrerK=new TextField();
-    FileChooser fichierCsv=new FileChooser();
-	HBox hboxVariables=new HBox();
-	Canvas canvas=new Canvas();//changer en scaterChart
-	PokemonDataSet dataset = new PokemonDataSet("Ratio");
-	Stage stage=new Stage();
+
+    static FileChooser fichierCsv;
+	static HBox hboxVariables;
+	static Canvas canvas;//changer en scaterChart
+	static PokemonDataSet dataSet;
+	ScatterTest scatterChart = new ScatterTest();
+	public View() {
+		initWidget();
+		
+		HBox hbox=new HBox();
+    	hbox.getChildren().addAll(this.vBox(), canvas);
+    	
+    	MenuBarClass menuBarClass = new MenuBarClass();
+    	VBox verticalPosition = new VBox();
+    	verticalPosition.getChildren().addAll(menuBarClass.getMenuBar(), hbox);
+    	//menuBarClass.saveScatterChart(scatter);
+    	
+    	menuBarClass.loadFile();
+    	menuBarClass.exitApplication();
+    	menuBarClass.saveScatterChart(this.scatterChart);
+    	
+    	Scene scene=new Scene(verticalPosition,1000,350);
+    	this.setTitle("test");
+    	this.setScene(scene);
+    	this.show();
+		
+		this.show();
+	}
+
+
 	
+
 	
-    
+	private static void initWidget() {
+		initButton();
+	    //Button sauvegarde=new Button("sauvegarder");
+	    initComboBox();
+	    //TextField entrerK=new TextField();
+	    fichierCsv=new FileChooser();
+		hboxVariables=new HBox();
+		canvas=new Canvas();//changer en scaterChart
+		dataSet = new PokemonDataSet("Ratio");
+	}
+
+	private static void initComboBox() {
+		criteriaX=new ComboBox<>();
+	    criteriaY=new ComboBox<>();
+	}
+
+	private static void initButton() {
+		confirmer=new Button("confirmer");
+	    parcourir=new Button("parcourir");
+	}
+	
     protected VBox vBox() {
     	
     	
     	//entrerK.setPromptText("entrer k");
     	//entrerK.setMaxWidth(100);
-    	
+    	Stage stage = this;
     	parcourir.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(final ActionEvent e) {
+/*<<<<<<< HEAD
                 File file = fichierCsv.showOpenDialog(stage);
            
-                dataset.loadFromFile(file.toString());
+                dataSet.loadFromFile(file.toString());
                 comboBox();  
+=======*/
+                File file = fichierCsv.showOpenDialog(stage);
+                System.out.println(file.toString());
+                if (file != null) {
+                	dataSet.loadFromFile(file.toString());
+                	comboBox();
+                }
                 
             }
     	});
     	
-    	this.confirmer.setOnAction(new EventHandler<ActionEvent>() {
+    	confirmer.setOnAction(new EventHandler<ActionEvent>() {
     		public void handle(final ActionEvent e) {
-    			Object variableX=premiereVar.getValue();
-    			Object variableY=deuxiemeVar.getValue();
+    			Object variableX=criteriaX.getValue();
+    			Object variableY=criteriaY.getValue();
     			//int k=Integer.parseInt(entrerK.getText());
     			
     			if(!variableX.equals(variableY)) {
-    				
+    				System.out.println("ça marche, attribut selectionné :");
+    				System.out.println("X = " + variableX);
+    				System.out.println("Y = " + variableY);
+    			} else {
+    				System.out.println("Selectionne des paramètres différents !");
     			}
     		}
     	});
@@ -70,7 +127,7 @@ public class View extends Application{
     	vbox.setPadding(new Insets(80,10,100,10));
     	vbox.setSpacing(10);
     	vbox.setStyle("-fx-background-color: #101010;");
-    	vbox.getChildren().addAll(parcourir,premiereVar,deuxiemeVar,confirmer);
+    	vbox.getChildren().addAll(parcourir,criteriaX,criteriaY,confirmer);
     	
     	
     	return vbox;
@@ -78,36 +135,22 @@ public class View extends Application{
     }
     
     protected void comboBox() {
-    	List<IColumn> columns=dataset.getColumnsList();
+    	List<IColumn> columns=dataSet.getColumnsList();
     	if(columns!=null) {
     		for(int i=0;i<columns.size();i++) {
-    			premiereVar.getItems().add(columns.get(i).getName());
-    			deuxiemeVar.getItems().add(columns.get(i).getName());
+    			criteriaX.getItems().add(columns.get(i).getName());
+    			criteriaY.getItems().add(columns.get(i).getName());
     		}
     	}
     }
+ 
     
-    public void start(Stage stage) throws Exception {
-    	
-    	   	
-    	HBox hbox=new HBox();
-    	hbox.getChildren().addAll(this.vBox(), canvas);
-    	
-    	MenuBarClass menuBarClass = new MenuBarClass();
-    	VBox verticalPosition = new VBox();
-    	verticalPosition.getChildren().addAll(menuBarClass.getMenuBar(), hbox);
-    	//menuBarClass.saveScatterChart(scatter);
-    	
-    	Scene scene=new Scene(verticalPosition,1000,350);
-    	stage.setTitle("test");
-    	stage.setScene(scene);
-    	stage.show();
-    	
-    }
-    
-    public static void main(String[] args) {
-		launch(args);
+
+	public Stage getRealStage() {
+		return this;
 	}
+    
+    
 
 
 }

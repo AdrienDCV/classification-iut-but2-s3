@@ -19,13 +19,13 @@ public class ChargementDonneesTitanic {
                     .withType(Titanic.class)
                     .build().parse();
         } catch (InvalidPathException e) {
-        	System.out.println("Le fichier n'existe pas");
+        	System.err.println("Le fichier n'existe pas");
         	return new ArrayList<Titanic>();
         } catch(IllegalStateException e) {
-        	System.out.println("Java n'a pas pu executer la requête");
+        	System.err.println("Java n'a pas pu executer la requête");
         	return new ArrayList<Titanic>();
         } catch(IOException e) {
-        	System.out.println("Ioexception");
+        	System.err.println("Ioexception");
         	return new ArrayList<Titanic>();
         }
     }
