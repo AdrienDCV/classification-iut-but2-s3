@@ -58,12 +58,11 @@ public class EnumValueNormalizerTest {
     @Test
     public void test_enum_value_normalizer_denormalize() {
         assertEquals(Embarked.S, columnEmbarked.getDenormalizedValue(0));
-        assertEquals(Embarked.Q, columnEmbarked.getDenormalizedValue(0.5));
-        assertEquals(Embarked.C, columnEmbarked.getDenormalizedValue(1));
+        assertEquals(Embarked.C, columnEmbarked.getDenormalizedValue(0.5));
+        assertEquals(Embarked.Q, columnEmbarked.getDenormalizedValue(1));
 
         assertEquals(Sex.M, columnSex.getDenormalizedValue(0));
         assertEquals(Sex.F, columnSex.getDenormalizedValue(0.5));
     }
-    
-    
+      
 }
