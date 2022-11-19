@@ -26,6 +26,14 @@ public class NotLegendaryCategory  implements ICategory {
 		}
 		return this.categoryElements;
 	}
+	
+	public List<IPoint> addToCategory(IPoint point) {
+		if(!((Pokemon)point).isLegendary()) {
+			this.categoryElements.add(point);
+		}
+
+		return this.categoryElements;
+	}
 
 	public List<IPoint> getCategoryElements() {
 		return categoryElements;

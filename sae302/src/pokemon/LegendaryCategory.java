@@ -21,10 +21,18 @@ public class LegendaryCategory  extends PokemonDataSet implements ICategory{
 	public List<IPoint> addToCategory(IMVCModel dataSet) {
 		PokemonDataSet p = (PokemonDataSet) dataSet;
 		for(int i = 0; i < p.getPointsList().size(); i ++) {
-			if(!((Pokemon)p.getPointsList().get(i)).isLegendary()) {
+			if(((Pokemon)p.getPointsList().get(i)).isLegendary()) {
 				this.categoryElements.add(p.getPointsList().get(i));
 			}
 		}
+		return this.categoryElements;
+	}
+	
+	public List<IPoint> addToCategory(IPoint point) {
+		if(((Pokemon)point).isLegendary()) {
+			this.categoryElements.add(point);
+		}
+
 		return this.categoryElements;
 	}
 	

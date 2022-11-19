@@ -171,8 +171,12 @@ public abstract class DataSet implements IMVCModel {
 	public List<IColumn> getColumnsList() {
 		return columnsList;
 	}
-	
 
+	public List<ICategory> getCategoriesList() {
+		return categoriesList;
+	}
+	
+	
 
 	
 }

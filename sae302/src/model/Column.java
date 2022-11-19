@@ -19,12 +19,12 @@ public abstract class Column implements IColumn{
 	
 	// class attributes
 	protected String name;
-	protected IMVCModel dataSet;
+	protected DataSet dataSet;
 	protected List<IPoint> pointsList;
 	protected ValueNormalizer valueNormalizer;
 	
 	// constructor(s)
-	public Column(String name, IMVCModel dataSet, List<IPoint> pointsList) {
+	public Column(String name, DataSet dataSet, List<IPoint> pointsList) {
 		this.name = name;
 		this.dataSet = dataSet;
 		this.pointsList = pointsList;
@@ -52,7 +52,7 @@ public abstract class Column implements IColumn{
 	}
 
 	@Override
-	public IMVCModel getDataset() {
+	public DataSet getDataset() {
 		return this.dataSet;
 	}
 

@@ -1,4 +1,7 @@
 package intefarces;
+
+import model.DataSet;
+
 public interface IColumn {
 /**
 * stocke le <i>normaliseur</i> en parametre dans la colonne.
@@ -25,7 +28,7 @@ public String getName();
 /**
 * Retourne le DataSet auquel cette colonne appartient.
 */
-public IDataSet getDataset();
+public DataSet getDataset();
 /**
 * Indique si cette colonne est normalisable (a un <i>normaliseur</i>).
 */
