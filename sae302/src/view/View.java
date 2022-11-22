@@ -30,7 +30,7 @@ public class View extends Stage{
 	
 	// class attributes
 	static Button confirmer, parcourir;
-    static ComboBox<String> criteriaX, criteriaY;
+    static ComboBox<String> criteriaX, criteriaY, typeDataSet, typeDistance;
     //TextField entrerK=new TextField();
 
     static FileChooser fichierCsv;
@@ -47,6 +47,9 @@ public class View extends Stage{
     	MenuBarClass menuBarClass = new MenuBarClass();
     	VBox verticalPosition = new VBox();
     	verticalPosition.getChildren().addAll(menuBarClass.getMenuBar(), hbox);
+    	
+    	
+    	dataSetComboBox();
     	
 //    	menuBarClass.loadFile();
     	menuBarClass.exitApplication();
@@ -77,6 +80,7 @@ public class View extends Stage{
 	private static void initComboBox() {
 		criteriaX=new ComboBox<>();
 	    criteriaY=new ComboBox<>();
+	    typeDataSet = new ComboBox<>();
 	}
 
 	private static void initButton() {
@@ -134,7 +138,7 @@ public class View extends Stage{
     	vbox.setPadding(new Insets(80,10,100,10));
     	vbox.setSpacing(10);
     	vbox.setStyle("-fx-background-color: #101010;");
-    	vbox.getChildren().addAll(parcourir,criteriaX,criteriaY,confirmer);
+    	vbox.getChildren().addAll(typeDataSet,parcourir,criteriaX,criteriaY,confirmer);
     	
     	
     	return vbox;
@@ -149,7 +153,16 @@ public class View extends Stage{
     			criteriaY.getItems().add(columns.get(i).getName());
     		}
     	}
+    	
     }
+    
+    protected void dataSetComboBox() {
+    	typeDataSet.getItems().add("Pokemon");
+    	typeDataSet.getItems().add("Iris");
+    	typeDataSet.getItems().add("Titanic");
+    	typeDataSet.getSelectionModel().selectFirst();
+    }
+    
  
     
 
