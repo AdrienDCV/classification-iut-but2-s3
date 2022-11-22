@@ -12,6 +12,7 @@ import intefarces.IPoint;
 import model.DataSet;
 import model.NumberColumn;
 import pokemon.Pokemon;
+import pokemon.PokemonDataSet;
 
 public class NumberColumnTest {
     
@@ -21,9 +22,9 @@ public class NumberColumnTest {
 
     @BeforeEach
     void setup() {
-        this.pikachu = new Pokemon("Pikachu", 2560, 190, 1000000, 6.0, false);
-        this.charizard = new Pokemon("Charizard", 5120, 45.0, 1059860, 90.5, false);
-        this.dialga = new Pokemon("Dialga", 30720, 3.0, 1250000, 683.0, true);
+        this.pikachu = new Pokemon("Pikachu", 2560, 190, 1000000, 0, 0, 0, 0, 0, null, null, 6.0, false);
+        this.charizard = new Pokemon("Charizard", 5120, 0, 45.0, 1059860, 0, 0, 0, 0, null, null, 90.5, false);
+        this.dialga = new Pokemon("Dialga", 30720, 0, 3.0, 1250000, 0, 0, 0, 0, null, null, 683.0, true);
         this.pointsList = new ArrayList<>();
         pointsList.add(pikachu); pointsList.add(charizard); pointsList.add(dialga); 
 
@@ -34,7 +35,7 @@ public class NumberColumnTest {
 
     @Test
     public void test_number_column_constructor() {
-        assertEquals("nColumn", new NumberColumn("nColumn", new DataSet(), new ArrayList<>()).getName());
+        assertEquals("nColumn", new NumberColumn("nColumn", new PokemonDataSet(), new ArrayList<>()).getName());
     }
 
 
