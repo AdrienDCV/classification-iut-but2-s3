@@ -25,12 +25,13 @@ import pokemon.LegendaryCategory;
 import pokemon.NotLegendaryCategory;
 //import main.ScatterTest;
 import pokemon.PokemonDataSet;
+import utils.Observer;
+import utils.Subject;
 
-public class View extends Stage{
+public class View extends Stage implements Observer{
 	
 	// class attributes
 	static Button confirmer, parcourir;
-    //Button sauvegarde=new Button("sauvegarder");
     static ComboBox<String> criteriaX, criteriaY;
     //TextField entrerK=new TextField();
 
@@ -48,9 +49,8 @@ public class View extends Stage{
     	MenuBarClass menuBarClass = new MenuBarClass();
     	VBox verticalPosition = new VBox();
     	verticalPosition.getChildren().addAll(menuBarClass.getMenuBar(), hbox);
-    	//menuBarClass.saveScatterChart(scatter);
     	
-    	menuBarClass.loadFile();
+//    	menuBarClass.loadFile();
     	menuBarClass.exitApplication();
     	menuBarClass.saveScatterChart(this.scatterChart);
     	
@@ -58,14 +58,9 @@ public class View extends Stage{
     	this.setTitle("test");
     	this.setScene(scene);
     	this.show();
-		
-		this.show();
+
 	}
 
-
-	
-
-	
 	private static void initWidget() {
 		initButton();
 	    //Button sauvegarde=new Button("sauvegarder");
@@ -155,12 +150,27 @@ public class View extends Stage{
     }
  
     
-
 	public Stage getRealStage() {
 		return this;
 	}
-    
-    
+
+
+
+
+
+	@Override
+	public void update(Subject subj) {
+		
+	}
+
+
+
+
+
+	@Override
+	public void update(Subject subj, Object data) {
+		
+	}
 
 
 }

@@ -1,7 +1,6 @@
 package main;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -16,25 +15,22 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.image.WritableImage;
 import javafx.stage.FileChooser;
 import model.DataSet;
-import pokemon.Pokemon;
-import pokemon.PokemonDataSet;
-import view.View;
 
 public class MenuBarClass {
 	MenuBar menuBar = new MenuBar();
 	FileChooser fileChooser = new FileChooser();
 	DataSet data;
-	MenuItem loadItem;
+//	MenuItem loadItem;
 	MenuItem saveItem;
 	MenuItem exitItem;
 	
 	public MenuBarClass() {
 		Menu fileMenu = new Menu("Fichier");
-		loadItem = new MenuItem("Charger fichier");
+//		loadItem = new MenuItem("Charger fichier");
 		saveItem = new MenuItem("Sauvegarder graphique");
 		exitItem = new MenuItem("Quitter application");
 		
-		fileMenu.getItems().addAll(loadItem, saveItem, exitItem);
+		fileMenu.getItems().addAll(saveItem, exitItem);
 		this.menuBar.getMenus().add(fileMenu);
 	}
 	
@@ -51,38 +47,38 @@ public class MenuBarClass {
 		});
 	}
 	
-	public void loadFileName() {
-		File file = fileChooser.showOpenDialog(new View().getRealStage());
-		if (file != null) {
-			String fileName = file.getName();
-			String[] tabSplit = fileName.split("\\.");
-			fileName = tabSplit[0].toLowerCase();
-			String extension = tabSplit[tabSplit.length - 1].toLowerCase();
-			if(fileName.equals("pokemon") && extension.equals("csv")) {
-				this.data = new PokemonDataSet();
-				this.data.loadFromFile(file.toString());
-			} else if(fileName.equals("titanic") && extension.equals("csv")) {
-				this.data = new PokemonDataSet();
-				this.data.loadFromFile(file.toString());
-			} else if(fileName.equals("iris") && extension.equals("csv")) {
-				this.data = new PokemonDataSet();
-				this.data.loadFromFile(file.toString());
-			} else {
-				System.err.println("erreur: ce fichier n'appartient pas à la liste");
-			}
-		}
-	}
-    
-	
-	public void loadFile() {
-		this.fileChooser.setTitle("Charger votre fichier CSV");
-		this.loadItem.setOnAction(new EventHandler<ActionEvent>() {
-	        public void handle(final ActionEvent event) {
-	        	loadFileName();
-	        }
-	        	
-		});
-	}
+//	public void loadFileName() {
+//		File file = fileChooser.showOpenDialog(new View().getRealStage());
+//		if (file != null) {
+//			String fileName = file.getName();
+//			String[] tabSplit = fileName.split("\\.");
+//			fileName = tabSplit[0].toLowerCase();
+//			String extension = tabSplit[tabSplit.length - 1].toLowerCase();
+//			if(fileName.equals("pokemon") && extension.equals("csv")) {
+//				this.data = new PokemonDataSet();
+//				this.data.loadFromFile(file.toString());
+//			} else if(fileName.equals("titanic") && extension.equals("csv")) {
+//				this.data = new PokemonDataSet();
+//				this.data.loadFromFile(file.toString());
+//			} else if(fileName.equals("iris") && extension.equals("csv")) {
+//				this.data = new PokemonDataSet();
+//				this.data.loadFromFile(file.toString());
+//			} else {
+//				System.err.println("erreur: ce fichier n'appartient pas à la liste");
+//			}
+//		}
+//	}
+//    
+//	
+//	public void loadFile() {
+//		this.fileChooser.setTitle("Charger votre fichier CSV");
+//		this.loadItem.setOnAction(new EventHandler<ActionEvent>() {
+//	        public void handle(final ActionEvent event) {
+//	        	loadFileName();
+//	        }
+//	        	
+//		});
+//	}
 	
 	public void saveScatterChart(ScatterTest scatterChart) {
 		this.saveItem.setOnAction(new EventHandler<ActionEvent>() {
