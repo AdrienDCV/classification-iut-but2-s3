@@ -9,7 +9,7 @@ public class NumberValueNormalizer extends ValueNormalizer{
 	/* no attributes */
 
 	// constructor(s)
-	public NumberValueNormalizer(NumberColumn normalizerTarget) {
+	public NumberValueNormalizer(Column normalizerTarget) {
 		super("NUMBER_NORMALIZER", normalizerTarget);
 	}
 

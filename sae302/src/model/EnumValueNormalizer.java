@@ -3,17 +3,12 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-import intefarces.IPoint;
-import titanic.Embarked;
-import titanic.Sex;
-import titanic.Titanic;
-
 public class EnumValueNormalizer extends ValueNormalizer{
 
     private Class<Enum> enumType;
     private List<Object> elemsTypes;
 
-    public EnumValueNormalizer(EnumColumn normalizerTarget) {
+    public EnumValueNormalizer(Column normalizerTarget) {
         super("ENUM_NORMALIZER", normalizerTarget);
         this.getEnumType();
         this.fillElemsTypes();

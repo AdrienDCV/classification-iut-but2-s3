@@ -1,10 +1,8 @@
 package model;
 
-import java.util.Collection;
 import java.util.List;
 
 import intefarces.IColumn;
-import intefarces.IDataSet;
 import intefarces.IMVCModel;
 import intefarces.IPoint;
 import intefarces.IValueNormalizer;
@@ -12,7 +10,7 @@ import intefarces.IValueNormalizer;
 
 /**
  * 
- * @author adrien
+ * @author adrien.dacostaveiga.etu
  *
  */
 public abstract class Column implements IColumn{

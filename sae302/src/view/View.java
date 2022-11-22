@@ -25,8 +25,10 @@ import pokemon.LegendaryCategory;
 import pokemon.NotLegendaryCategory;
 //import main.ScatterTest;
 import pokemon.PokemonDataSet;
+import utils.Observer;
+import utils.Subject;
 
-public class View extends Stage{
+public class View extends Stage implements Observer{
 	
 	// class attributes
 	static Button confirmer, parcourir;
@@ -62,10 +64,6 @@ public class View extends Stage{
 
 	}
 
-
-	
-
-	
 	private static void initWidget() {
 		initButton();
 	    //Button sauvegarde=new Button("sauvegarder");
@@ -165,12 +163,27 @@ public class View extends Stage{
     
  
     
-
 	public Stage getRealStage() {
 		return this;
 	}
-    
-    
+
+
+
+
+
+	@Override
+	public void update(Subject subj) {
+		
+	}
+
+
+
+
+
+	@Override
+	public void update(Subject subj, Object data) {
+		
+	}
 
 
 }
