@@ -16,7 +16,7 @@ import intefarces.IPoint;
  * @author adrien.dacostaveiga
  * 
  */
-public abstract class DataSet implements IMVCModel {
+public abstract class DataSet extends Subject implements IMVCModel {
 
 	// class attributes
 	protected String title;
