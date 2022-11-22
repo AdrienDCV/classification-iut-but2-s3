@@ -145,12 +145,9 @@ public class View extends Stage{
     }
  
     
-
 	public Stage getRealStage() {
 		return this;
 	}
-    
-    
 
 
 }

@@ -2,7 +2,7 @@ package model;
 
 public class BooleanValueNormalizer extends ValueNormalizer {
 
-    public BooleanValueNormalizer(BooleanColumn normalizerTarget) {
+    public BooleanValueNormalizer(Column normalizerTarget) {
         super("BOOLEAN_NORMALIZER", normalizerTarget);
     }
 

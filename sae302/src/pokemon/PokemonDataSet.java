@@ -18,6 +18,7 @@ import intefarces.IColumn;
 import intefarces.IMVCModel;
 import intefarces.IPoint;
 import model.BooleanColumn;
+import model.ColumnFactory;
 import model.DataSet;
 import model.EnumColumn;
 import model.NumberColumn;
@@ -33,6 +34,7 @@ public class PokemonDataSet extends DataSet {
 	public PokemonDataSet() {
 		this("");
 	}
+	
 	@Override
 	public void loadFromFile(String datafile) {
 		try {
@@ -50,30 +52,10 @@ public class PokemonDataSet extends DataSet {
         	Pokemon p = pokemonList.get(0);
         	Field[] field = p.getClass().getDeclaredFields();
         	
-        	List<String> columnType = new ArrayList<String>();
-        	for(int i = 0; i < field.length; i ++) {
-        		String[] type = field[i].toString().split(" ");
-        		columnType.add(type[1]);
-        	}
+        	List<String> columnType = getFieldType(field);
         	//init des col
-  
-        	for(int j = 0; j < columnType.size(); j++) {
-        		if(columnType.get(j).equals("java.lang.String"));
-        		else if(columnType.get(j).equals("int") || columnType.get(j).equals("double")) {
-        			List<IPoint> points = new ArrayList<>();
-        			points.addAll(this.pointsList);
-        			this.columnsList.add(new NumberColumn(columnName[j], this, points));
-        		} else if (columnType.get(j).equals("boolean")){
-        			List<IPoint> points = new ArrayList<>();
-        			points.addAll(this.pointsList);
-        			this.columnsList.add(new BooleanColumn(columnName[j], this, points));
-        		} else {
-        			List<IPoint> points = new ArrayList<>();
-        			points.addAll(this.pointsList);
-        			this.columnsList.add(new EnumColumn(columnName[j], this, points));
-        		}
-        	}
-        	
+			initColumns(columnName, columnType);
+
         } catch (InvalidPathException e) {
         	System.out.println("Le fichier n'existe pas");
         } catch(IllegalStateException e) {
@@ -81,6 +63,21 @@ public class PokemonDataSet extends DataSet {
         } catch(IOException e) {
         	System.out.println("Ioexception");
         }
+	}
+
+	protected void initColumns(String[] columnName, List<String> columnType) {
+		for(int j = 0; j < columnType.size(); j++) {
+		 	this.columnsList.add(ColumnFactory.createColumn(this, this.columnsList, columnType.get(j), columnName[j]));
+		}
+	}
+
+	protected List<String> getFieldType(Field[] field) {
+		List<String> columnType = new ArrayList<String>();
+		for(int i = 0; i < field.length; i ++) {
+			String[] type = field[i].toString().split(" ");
+			columnType.add(type[1]);
+		}
+		return columnType;
 	}
 
 	@Override
