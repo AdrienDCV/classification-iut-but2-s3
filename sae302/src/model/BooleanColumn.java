@@ -7,7 +7,7 @@ import intefarces.IPoint;
 
 public class BooleanColumn extends Column {
 
-    public BooleanColumn(String name, IMVCModel dataSet, List<IPoint> pointsList) {
+    public BooleanColumn(String name, DataSet dataSet, List<IPoint> pointsList) {
         super(name, dataSet, pointsList);
         this.setNormalizer(new BooleanValueNormalizer(this));
     }

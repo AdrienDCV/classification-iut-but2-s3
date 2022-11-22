@@ -48,6 +48,7 @@ public class PokemonDataSet extends DataSet {
         	BufferedReader columnReader = new BufferedReader(new FileReader(datafile));
         	String[] columnName = columnReader.readLine().split(",");
         	
+        	
         	//type de la classe pokemon
         	Pokemon p = pokemonList.get(0);
         	Field[] field = p.getClass().getDeclaredFields();

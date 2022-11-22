@@ -19,6 +19,10 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import main.MenuBarClass;
 import main.ScatterTest;
+import model.Classification;
+import model.Criteria;
+import pokemon.LegendaryCategory;
+import pokemon.NotLegendaryCategory;
 //import main.ScatterTest;
 import pokemon.PokemonDataSet;
 
@@ -26,7 +30,6 @@ public class View extends Stage{
 	
 	// class attributes
 	static Button confirmer, parcourir;
-    //Button sauvegarde=new Button("sauvegarder");
     static ComboBox<String> criteriaX, criteriaY;
     //TextField entrerK=new TextField();
 
@@ -44,9 +47,8 @@ public class View extends Stage{
     	MenuBarClass menuBarClass = new MenuBarClass();
     	VBox verticalPosition = new VBox();
     	verticalPosition.getChildren().addAll(menuBarClass.getMenuBar(), hbox);
-    	//menuBarClass.saveScatterChart(scatter);
     	
-    	menuBarClass.loadFile();
+//    	menuBarClass.loadFile();
     	menuBarClass.exitApplication();
     	menuBarClass.saveScatterChart(this.scatterChart);
     	
@@ -54,8 +56,7 @@ public class View extends Stage{
     	this.setTitle("test");
     	this.setScene(scene);
     	this.show();
-		
-		this.show();
+
 	}
 
 
@@ -109,17 +110,23 @@ public class View extends Stage{
     	
     	confirmer.setOnAction(new EventHandler<ActionEvent>() {
     		public void handle(final ActionEvent e) {
-    			Object variableX=criteriaX.getValue();
-    			Object variableY=criteriaY.getValue();
     			//int k=Integer.parseInt(entrerK.getText());
-    			
-    			if(!variableX.equals(variableY)) {
-    				System.out.println("ça marche, attribut selectionné :");
-    				System.out.println("X = " + variableX);
-    				System.out.println("Y = " + variableY);
-    			} else {
-    				System.out.println("Selectionne des paramètres différents !");
+    			if(criteriaX != null && criteriaY != null) {
+    				if(!criteriaX.equals(criteriaY)) {
+    					dataSet.addCategory(new LegendaryCategory());
+    					dataSet.addCategory(new NotLegendaryCategory());
+        				Criteria criteria = new Criteria(criteriaX.getValue(), criteriaY.getValue());
+        				Classification classification = new Classification(dataSet.getColumnsList(), criteria);
+        				classification.toClassify();
+        				System.out.println("KNN : ");
+        				System.out.println(classification.knnCalcul(3, dataSet.getPointsList().get(12), dataSet.getPointsList()));
+        				System.out.println("Robustness : ");
+        				System.out.println(classification.calculRobustness(3, dataSet.getPointsList().get(12), dataSet.getCategoriesList().get(1)));
+        			} else {
+        				System.out.println("Selectionne des paramètres différents !");
+        			}
     			}
+    			
     		}
     	});
     	
