@@ -30,7 +30,6 @@ public class View extends Stage{
 	
 	// class attributes
 	static Button confirmer, parcourir;
-    //Button sauvegarde=new Button("sauvegarder");
     static ComboBox<String> criteriaX, criteriaY;
     //TextField entrerK=new TextField();
 
@@ -48,9 +47,8 @@ public class View extends Stage{
     	MenuBarClass menuBarClass = new MenuBarClass();
     	VBox verticalPosition = new VBox();
     	verticalPosition.getChildren().addAll(menuBarClass.getMenuBar(), hbox);
-    	//menuBarClass.saveScatterChart(scatter);
     	
-    	menuBarClass.loadFile();
+//    	menuBarClass.loadFile();
     	menuBarClass.exitApplication();
     	menuBarClass.saveScatterChart(this.scatterChart);
     	
@@ -58,8 +56,7 @@ public class View extends Stage{
     	this.setTitle("test");
     	this.setScene(scene);
     	this.show();
-		
-		this.show();
+
 	}
 
 
