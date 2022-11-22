@@ -120,7 +120,7 @@ public class View extends Stage{
     					dataSet.addCategory(new NotLegendaryCategory());
         				Criteria criteria = new Criteria(criteriaX.getValue(), criteriaY.getValue());
         				Classification classification = new Classification(dataSet.getColumnsList(), criteria);
-        				classification.toClassify();
+        				classification.categoryInit();
         				System.out.println("KNN : ");
         				System.out.println(classification.knnCalcul(3, dataSet.getPointsList().get(12), dataSet.getPointsList()));
         				System.out.println("Robustness : ");
