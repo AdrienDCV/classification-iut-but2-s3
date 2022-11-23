@@ -21,6 +21,7 @@ public class PokemonDataSet extends DataSet {
 	
 	public PokemonDataSet(String title) {
 		super(title);
+		this.addCategory(new LegendaryCategory("Legendary")); this.addCategory(new NotLegendaryCategory("NotLegendary"));
 	}
 
 	public PokemonDataSet() {
