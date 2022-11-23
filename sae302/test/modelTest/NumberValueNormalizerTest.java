@@ -11,12 +11,13 @@ import model.Column;
 import model.DataSet;
 import model.NumberColumn;
 import model.NumberValueNormalizer;
+import pokemon.PokemonDataSet;
 
 public class NumberValueNormalizerTest {
     
     @Test
     public void test_number_value_normalizer_constructor() {
-        NumberColumn nColumn = new NumberColumn("nColumn", new DataSet(), new ArrayList<>());
+        NumberColumn nColumn = new NumberColumn("nColumn", new PokemonDataSet(), new ArrayList<>());
         NumberValueNormalizer numberValueNormalizer = new NumberValueNormalizer(nColumn);
 
         assertEquals("NN", numberValueNormalizer.getValueNormalizer());
@@ -28,7 +29,7 @@ public class NumberValueNormalizerTest {
 
     @Test
     public void test_number_value_normalizer_normalize() {
-        NumberColumn nColumn = new NumberColumn("nColumn", new DataSet(), new ArrayList<>());
+        NumberColumn nColumn = new NumberColumn("nColumn", new PokemonDataSet(), new ArrayList<>());
 
         NumberValueNormalizer numberValueNormalizer = new NumberValueNormalizer(nColumn);
 
