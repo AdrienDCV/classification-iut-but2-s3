@@ -3,12 +3,22 @@ package main;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Bounds;
+import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 
 public class ScatterTest {
@@ -46,13 +56,27 @@ public class ScatterTest {
 		scatterChart.getData().add(series1);
         scatterChart.getData().add(series2);
         
-        for(XYChart.Data<Double,Double> data : series1.getData()) {
-            data.getNode().setOnMouseClicked(e -> {
-            	System.out.println();
-            });
-        }
-        
-        
+	    Stage nodeInformation = new Stage();
+	    nodeInformation.initStyle(StageStyle.UNDECORATED);
+	    
+
+	    for(XYChart.Data<Double,Double> data: series1.getData()) {
+	    	data.getNode().hoverProperty().addListener((ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
+		        if (newValue) {
+		        	Group group = new Group();
+		        	Label label = new Label("X = " + data.getXValue() + "\nY = " + data.getYValue());
+		    	    group.getChildren().add(label);
+		    	    nodeInformation.setScene(new Scene(group));
+		        	
+		        	Bounds boundsInScene = data.getNode().localToScreen(data.getNode().getBoundsInLocal());
+		        	nodeInformation.setX(boundsInScene.getCenterX() + 20);
+		    	    nodeInformation.setY(boundsInScene.getCenterY() - 25);
+		            nodeInformation.show();
+		        } else {
+		        	nodeInformation.hide();
+		        }
+		    });
+	    }
         
         
 	}
