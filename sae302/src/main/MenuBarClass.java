@@ -80,7 +80,7 @@ public class MenuBarClass {
 //		});
 //	}
 	
-	public void saveScatterChart(ScatterTest scatterChart) {
+	public void saveScatterChart(ScatterChartObject scatterChart) {
 		this.saveItem.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				String path;

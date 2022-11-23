@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.List;
 
 import intefarces.IColumn;
+import intefarces.IDistance;
+import iris.IrisDataSet;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -18,13 +20,19 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import main.MenuBarClass;
+import main.ScatterChartObject;
 import main.ScatterTest;
 import model.Classification;
 import model.Criteria;
+import model.DataSet;
+import model.DataSetFactory;
+import model.DistanceEuclidienne;
+import model.DistanceManhattan;
 import pokemon.LegendaryCategory;
 import pokemon.NotLegendaryCategory;
 //import main.ScatterTest;
 import pokemon.PokemonDataSet;
+import titanic.TitanicDataSet;
 import utils.Observer;
 import utils.Subject;
 
@@ -32,14 +40,17 @@ public class View extends Stage implements Observer{
 	
 	// class attributes
 	static Button confirmer, parcourir;
-    static ComboBox<String> criteriaX, criteriaY;
+    static ComboBox<String> criteriaX, criteriaY, typeDataSet, typeDistance;
     //TextField entrerK=new TextField();
 
     static FileChooser fichierCsv;
 	static HBox hboxVariables;
 	static Canvas canvas;//changer en scaterChart
-	static PokemonDataSet dataSet;
-	ScatterTest scatterChart = new ScatterTest();
+	static DataSet dataSet;
+	static IDistance distance;
+	static ScatterChartObject scatterChart;
+	static VBox verticalPosition;
+	
 	public View() {
 		initWidget();
 		
@@ -47,14 +58,18 @@ public class View extends Stage implements Observer{
     	hbox.getChildren().addAll(this.vBox(), canvas);
     	
     	MenuBarClass menuBarClass = new MenuBarClass();
-    	VBox verticalPosition = new VBox();
-    	verticalPosition.getChildren().addAll(menuBarClass.getMenuBar(), hbox, this.scatterChart.getScatterChart());
+    	verticalPosition = new VBox();
+    	verticalPosition.getChildren().addAll(menuBarClass.getMenuBar(), hbox);
+
+    	
+    	dataSetComboBox();
+    	distanceComboBox();
     	
 //    	menuBarClass.loadFile();
     	menuBarClass.exitApplication();
     	menuBarClass.saveScatterChart(this.scatterChart);
     	
-    	Scene scene=new Scene(verticalPosition,1000,350);
+    	Scene scene=new Scene(verticalPosition,1000,500);
     	this.setTitle("test");
     	this.setScene(scene);
     	this.show();
@@ -75,6 +90,8 @@ public class View extends Stage implements Observer{
 	private static void initComboBox() {
 		criteriaX=new ComboBox<>();
 	    criteriaY=new ComboBox<>();
+	    typeDataSet = new ComboBox<>();
+	    typeDistance = new ComboBox<>();
 	}
 
 	private static void initButton() {
@@ -99,6 +116,7 @@ public class View extends Stage implements Observer{
                 File file = fichierCsv.showOpenDialog(stage);
                 System.out.println(file.toString());
                 if (file != null) {
+                	View.dataSet = DataSetFactory.createDataSet(typeDataSet.getValue());
                 	dataSet.loadFromFile(file.toString());
                 	comboBox();
                 }
@@ -111,11 +129,20 @@ public class View extends Stage implements Observer{
     			//int k=Integer.parseInt(entrerK.getText());
     			if(criteriaX != null && criteriaY != null) {
     				if(!criteriaX.equals(criteriaY)) {
-    					dataSet.addCategory(new LegendaryCategory());
-    					dataSet.addCategory(new NotLegendaryCategory());
+    					
+    					generateDistance();
         				Criteria criteria = new Criteria(criteriaX.getValue(), criteriaY.getValue());
-        				Classification classification = new Classification(dataSet.getColumnsList(), criteria);
-        				classification.toClassify();
+        				System.out.println(criteria.getCriteriaX());
+        				System.out.println(criteria.getCriteriaY());
+        				Classification classification = new Classification(dataSet.getColumnsList(), criteria, distance);
+        				
+        				View.scatterChart = new ScatterChartObject(criteria, View.dataSet);
+        				verticalPosition.getChildren().addAll(scatterChart.getScatterChart());
+        				//A METTRE DANS DATASET 
+        				//classification.categoryInit();
+        				
+        				
+        				
         				System.out.println("KNN : ");
         				System.out.println(classification.knnCalcul(3, dataSet.getPointsList().get(12), dataSet.getPointsList()));
         				System.out.println("Robustness : ");
@@ -132,7 +159,7 @@ public class View extends Stage implements Observer{
     	vbox.setPadding(new Insets(80,10,100,10));
     	vbox.setSpacing(10);
     	vbox.setStyle("-fx-background-color: #101010;");
-    	vbox.getChildren().addAll(parcourir,criteriaX,criteriaY,confirmer);
+    	vbox.getChildren().addAll(typeDataSet,typeDistance,parcourir,criteriaX,criteriaY,confirmer);
     	
     	
     	return vbox;
@@ -147,7 +174,30 @@ public class View extends Stage implements Observer{
     			criteriaY.getItems().add(columns.get(i).getName());
     		}
     	}
+    	
     }
+    
+    protected void dataSetComboBox() {
+    	typeDataSet.getItems().add("Pokemon");
+    	typeDataSet.getItems().add("Iris");
+    	typeDataSet.getItems().add("Titanic");
+    	typeDataSet.getSelectionModel().selectFirst();
+    }
+    protected void distanceComboBox() {
+    	typeDistance.getItems().add("Euclidienne");
+    	typeDistance.getItems().add("Manhattan");
+    	typeDistance.getSelectionModel().selectFirst();
+    }
+    
+
+    protected static void generateDistance() {
+    	if(typeDistance.getValue().equals("Euclidienne")) {
+    		distance = new DistanceEuclidienne();
+    	} else if (typeDistance.getValue().equals("Manhattan")) {
+    		distance = new DistanceManhattan();
+    	}
+    }
+    
  
     
 	public Stage getRealStage() {
