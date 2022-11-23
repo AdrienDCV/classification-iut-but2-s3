@@ -60,7 +60,7 @@ public class View extends Stage implements Observer{
     	MenuBarClass menuBarClass = new MenuBarClass();
     	verticalPosition = new VBox();
     	verticalPosition.getChildren().addAll(menuBarClass.getMenuBar(), hbox);
-    	
+
     	
     	dataSetComboBox();
     	distanceComboBox();
@@ -84,7 +84,7 @@ public class View extends Stage implements Observer{
 	    fichierCsv=new FileChooser();
 		hboxVariables=new HBox();
 		canvas=new Canvas();//changer en scaterChart
-		dataSet = new PokemonDataSet("Ratio");
+//		dataSet = new PokemonDataSet("Ratio");
 	}
 
 	private static void initComboBox() {
