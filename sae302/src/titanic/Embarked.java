@@ -1,7 +1,7 @@
 package titanic;
 
 public enum Embarked {
-	S("S"), C("C"), Q("Q");
+	UNKNOWN("unknown"), S("S"), C("C"), Q("Q");
 
 	private String label;
 

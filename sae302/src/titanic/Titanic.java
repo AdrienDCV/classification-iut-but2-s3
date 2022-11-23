@@ -18,7 +18,7 @@ public class Titanic implements IPoint {
 	@CsvBindByName(column = "Sex")
 	private Sex sex;
 	@CsvBindByName(column = "Age")
-	private int age;
+	private double age;
 	@CsvBindByName(column = "SibSp")
 	private int sibSp;
 	@CsvBindByName(column = "Parch")
@@ -35,7 +35,7 @@ public class Titanic implements IPoint {
 	
 	public Titanic() {};
 
-	public Titanic(int passengerID, int survived, int pClass, String name, Sex sex, int age, int sibSp,
+	public Titanic(int passengerID, int survived, int pClass, String name, Sex sex, double age, int sibSp,
 			int parch, String ticket, double fare, String cabin, Embarked embarked) {
 		super();
 		this.passengerID = passengerID;
@@ -83,7 +83,7 @@ public class Titanic implements IPoint {
 		return sex;
 	}
 
-	public int getAge() {
+	public double getAge() {
 		return age;
 	}
 
@@ -117,15 +117,22 @@ public class Titanic implements IPoint {
 		if (col.getName().equals("Survived")) return this.survived;
 		if (col.getName().equals("Pclass")) return this.pClass;
 		if (col.getName().equals("Name")) return this.name;
-		if (col.getName().equals("Sex")) return this.sex;
+		if (col.getName().equals("Sex") && this.sex != null) {
+			return this.sex;
+		} else if ((col.getName().equals("Sex"))) {
+			return Sex.UNKNOWN;
+		}
 		if (col.getName().equals("Age")) return this.age;
 		if (col.getName().equals("SibSp")) return this.sibSp;
 		if (col.getName().equals("Parch")) return this.parch;
 		if (col.getName().equals("Ticket")) return this.ticket;
 		if (col.getName().equals("Fare")) return this.fare;
 		if (col.getName().equals("Cabin")) return this.cabin;
-		if (col.getName().equals("Embarked")) return this.embarked;
-		System.out.println(col.getName());
+		if (col.getName().equals("Embarked") && this.embarked != null) {
+			return this.embarked;
+		} else if (col.getName().equals("Embarked")) {
+			return Embarked.UNKNOWN;
+		}
 		return null;
 	}
 

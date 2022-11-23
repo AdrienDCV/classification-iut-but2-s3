@@ -30,6 +30,7 @@ public class EnumValueNormalizer extends ValueNormalizer{
     }
     public void fillElemsTypes() {
     	this.elemsTypes = new ArrayList<>();
+    	System.out.println(elemsTypes);
     	 for (int i=0; i < this.enumType.getEnumConstants().length; i++) {
          	elemsTypes.add(this.enumType.getEnumConstants()[i]);
          }

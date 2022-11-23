@@ -8,8 +8,7 @@ import java.util.List;
 import intefarces.IColumn;
 import intefarces.IMVCModel;
 import intefarces.IPoint;
-import pokemon.LegendaryCategory;
-import pokemon.NotLegendaryCategory;
+
 import utils.Subject;
 
 /**
@@ -87,6 +86,12 @@ public abstract class DataSet extends Subject implements IMVCModel {
 	@Override
 	public Collection<Category> allCategories() {
 		return this.categoriesList;
+	}
+	
+	public void categoryInit() {
+		for(int i = 0; i < this.getCategoriesList().size(); i++) {
+			this.getCategoriesList().get(i).addToCategory(this);
+		}
 	}
 
 	@Override
