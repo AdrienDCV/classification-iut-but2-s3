@@ -9,19 +9,11 @@ import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
-import intefarces.ICategory;
 import intefarces.IColumn;
-import intefarces.IMVCModel;
-import intefarces.IPoint;
-import model.BooleanColumn;
 import model.ColumnFactory;
 import model.DataSet;
-import model.EnumColumn;
-import model.NumberColumn;
 
 import com.opencsv.bean.CsvToBeanBuilder;
 

@@ -5,11 +5,12 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-
-import intefarces.ICategory;
 import intefarces.IColumn;
 import intefarces.IMVCModel;
 import intefarces.IPoint;
+import pokemon.LegendaryCategory;
+import pokemon.NotLegendaryCategory;
+import utils.Subject;
 
 /**
  * 
@@ -22,7 +23,7 @@ public abstract class DataSet extends Subject implements IMVCModel {
 	protected String title;
 	protected List<IPoint> pointsList;
 	protected List<IColumn> columnsList;
-	protected List<ICategory> categoriesList;
+	protected List<Category> categoriesList;
 
 	// constructor(s)
 	public DataSet(String title) {
@@ -30,6 +31,7 @@ public abstract class DataSet extends Subject implements IMVCModel {
 		this.columnsList = new ArrayList<>();
 		this.pointsList = new ArrayList<>();
 		this.categoriesList = new ArrayList<>();
+		this.addCategory(new LegendaryCategory()); this.addCategory(new NotLegendaryCategory());
 	}
 
 	public DataSet() {

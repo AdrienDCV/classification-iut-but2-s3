@@ -3,7 +3,6 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-import intefarces.ICategory;
 import intefarces.IColumn;
 import intefarces.IPoint;
 
@@ -66,17 +65,17 @@ public class Classification {
 		return listeProcheVoisin;
 	}
 	
-	public List<ICategory> toClassify() {
+	public List<Category> toClassify() {
 		for(int i = 0; i < this.dataset.getCategoriesList().size(); i++) {
 			this.dataset.getCategoriesList().get(i).addToCategory(this.dataset);
 		}
 		return this.dataset.getCategoriesList();
 	}
 	
-	public double calculRobustness(int k, IPoint point, ICategory pointCategory) {
+	public double calculRobustness(int k, IPoint point, Category pointCategory) {
 		double res = 0;
 		double nombreElemParPaquet = this.dataset.getPointsList().size() / 10;
-		List<ICategory> numberCategory = new ArrayList<>();
+		List<Category> numberCategory = new ArrayList<>();
 		
 		List<List<IPoint>> listPaquet = new ArrayList<>();
 		List<IPoint> paquet = new ArrayList<IPoint>();
@@ -90,7 +89,7 @@ public class Classification {
 			}
 		}
 		
-		List<ICategory> listCategory = new ArrayList<>();
+		List<Category> listCategory = new ArrayList<>();
 		listCategory.addAll(dataset.getCategoriesList());
 		
 		for(int z = 0; z < listPaquet.size(); z ++) {
@@ -100,14 +99,14 @@ public class Classification {
 			List<IPoint> knn = this.knnCalcul(k, point, listPaquet.get(z));
 			
 			for(int i = 0; i < knn.size(); i ++) {
-				for(ICategory c : listCategory) {
+				for(Category c : listCategory) {
 					c.addToCategory(knn.get(i));
 				}
 			}
 			
 			int max = -1;
-			ICategory category = null;
-			for(ICategory c : listCategory) {
+			Category category = null;
+			for(Category c : listCategory) {
 				if(max < c.getCategoryElements().size()) {
 					max = c.getCategoryElements().size();
 					category = c;
@@ -122,7 +121,7 @@ public class Classification {
 		}
 
 		int nbr = 0;
-		for(ICategory c : numberCategory) {
+		for(Category c : numberCategory) {
 
 			if (c.getCategoryName().equals(pointCategory.getCategoryName())) {
 				nbr += 1;
