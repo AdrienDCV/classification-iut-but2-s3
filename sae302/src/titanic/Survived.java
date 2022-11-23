@@ -8,5 +8,27 @@ import model.Category;
 
 public class Survived extends Category {
 
+    public Survived(String categoryName) {
+        super("Survived");
+    }
+
+    @Override
+    public List<IPoint> addToCategory(IMVCModel dataset) {
+        TitanicDataSet titanicDataSet = (TitanicDataSet) dataset;
+        for (IPoint passenger : titanicDataSet.getPointsList()) {
+            if (((Titanic) passenger).hasSurvived()) {
+                this.categoryElements.add(passenger);
+            }
+        }
+		return this.categoryElements;
+    }
+
+    @Override
+    public List<IPoint> addToCategory(IPoint point) {
+        if(!((Titanic)point).hasSurvived()) {
+			this.categoryElements.add(point);
+		}
+		return this.categoryElements;
+    }
     
 }

@@ -13,11 +13,17 @@ public abstract class Category {
 	
 	public Category(String categoryName) {
 		this.categoryElements = new ArrayList<IPoint>();
-		this.categoryName = "Legendary";
+		this.categoryName = categoryName;
 	}
 
 	public abstract List<IPoint> addToCategory(IMVCModel dataset);
 	public abstract List<IPoint> addToCategory(IPoint point);
-	public abstract String getCategoryName();
-	public abstract List<IPoint> getCategoryElements();
+	
+	public  String getCategoryName() {
+		return this.categoryName;
+	}
+	
+	public List<IPoint> getCategoryElements() {
+		return this.categoryElements;
+	}
 }
