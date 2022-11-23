@@ -31,7 +31,6 @@ public abstract class DataSet extends Subject implements IMVCModel {
 		this.columnsList = new ArrayList<>();
 		this.pointsList = new ArrayList<>();
 		this.categoriesList = new ArrayList<>();
-		this.addCategory(new LegendaryCategory()); this.addCategory(new NotLegendaryCategory());
 	}
 
 	public DataSet() {
@@ -81,12 +80,12 @@ public abstract class DataSet extends Subject implements IMVCModel {
 	public abstract IColumn defaultYCol();
 
 	@Override
-	public void addCategory(ICategory classe) {
+	public void addCategory(Category classe) {
 		this.categoriesList.add(classe);
 	}
 
 	@Override
-	public Collection<ICategory> allCategories() {
+	public Collection<Category> allCategories() {
 		return this.categoriesList;
 	}
 
@@ -114,7 +113,7 @@ public abstract class DataSet extends Subject implements IMVCModel {
 		return columnsList;
 	}
 
-	public List<ICategory> getCategoriesList() {
+	public List<Category> getCategoriesList() {
 		return categoriesList;
 	}
 	
