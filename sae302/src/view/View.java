@@ -20,10 +20,12 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import main.MenuBarClass;
+import main.ScatterChartObject;
 import main.ScatterTest;
 import model.Classification;
 import model.Criteria;
 import model.DataSet;
+import model.DataSetFactory;
 import model.DistanceEuclidienne;
 import model.DistanceManhattan;
 import pokemon.LegendaryCategory;
@@ -46,7 +48,9 @@ public class View extends Stage implements Observer{
 	static Canvas canvas;//changer en scaterChart
 	static DataSet dataSet;
 	static IDistance distance;
-	ScatterTest scatterChart = new ScatterTest();
+	static ScatterChartObject scatterChart;
+	static VBox verticalPosition;
+	
 	public View() {
 		initWidget();
 		
@@ -54,7 +58,7 @@ public class View extends Stage implements Observer{
     	hbox.getChildren().addAll(this.vBox(), canvas);
     	
     	MenuBarClass menuBarClass = new MenuBarClass();
-    	VBox verticalPosition = new VBox();
+    	verticalPosition = new VBox();
     	verticalPosition.getChildren().addAll(menuBarClass.getMenuBar(), hbox);
     	
     	
@@ -124,9 +128,13 @@ public class View extends Stage implements Observer{
     			//int k=Integer.parseInt(entrerK.getText());
     			if(criteriaX != null && criteriaY != null) {
     				if(!criteriaX.equals(criteriaY)) {
+    					View.dataSet = DataSetFactory.createDataSet(typeDataSet.getValue());
+    					generateDistance();
         				Criteria criteria = new Criteria(criteriaX.getValue(), criteriaY.getValue());
         				Classification classification = new Classification(dataSet.getColumnsList(), criteria, distance);
         				
+        				View.scatterChart = new ScatterChartObject(criteria, View.dataSet);
+        				verticalPosition.getChildren().addAll(scatterChart.getScatterChart());
         				//A METTRE DANS DATASET 
         				//classification.categoryInit();
         				

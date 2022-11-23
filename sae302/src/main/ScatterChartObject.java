@@ -1,56 +1,63 @@
 package main;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import intefarces.IColumn;
 import intefarces.IPoint;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
+import model.Category;
 import model.Column;
+import model.Criteria;
+import model.DataSet;
 
 
 public class ScatterChartObject {
-	ScatterChart<Double, Double> scatterChart;
+//	ScatterChart<Double, Double> scatterChart = new ScatterChart<Double, Double>(new NumberAxis(), new NumberAxis());
+	ScatterChart<Number, Number> scatterChart = new ScatterChart<>(new NumberAxis(), new NumberAxis());
 	Column xCol; 
 	Column yCol;
+	NumberAxis x;
+	NumberAxis y;
+	DataSet dataSet;
 
 	
 //	Column xCol, Column yCol
-	
+	public ScatterChartObject(Criteria criteria, DataSet dataset) {
+		x.setLabel(criteria.getCriteriaX());
+		y.setLabel(criteria.getCriteriaY());
+		this.dataSet = dataset;
+		for(IColumn c : this.dataSet.getColumnsList()) {
+			if(c.getName().equals(criteria.getCriteriaX())) {
+				xCol = (Column) c;
+			} else if(c.getName().equals(criteria.getCriteriaY())) {
+				yCol = (Column) c;
+			}
+		}
+	}
 	
 	// voir pour rajouter les options "k, colonneCatégorieX, colonneCatégorieY 
 	public ScatterChartObject() {
-		NumberAxis x = new NumberAxis();
-		x.setLabel("Axe des X");
-		NumberAxis y = new NumberAxis();
-		y.setLabel("Axe des Y");
-		
-		
 		scatterChart = new ScatterChart(x, y);
-		XYChart.Series<Double, Double> series1 = new XYChart.Series<Double, Double>();
-		XYChart.Series<Double, Double> series2 = new XYChart.Series<Double, Double>();
-		series1.setName("x");
-		series2.setName("y");
-		for (int i=0; i < this.xCol.getPointsList().size(); i++) {
-			 IPoint xCurrentPoint = xCol.getPointsList().get(i);
-			 IPoint yCurrentPoint = yCol.getPointsList().get(i);
-			 series1.getData().add(new XYChart.Data<Double,Double>(xCol.getNormalizedValue(xCurrentPoint), yCol.getNormalizedValue(yCurrentPoint)));
-		 }
+		List<XYChart.Series<Number, Number>> listeCategory = new ArrayList<>();
+		for(Category c : this.dataSet.getCategoriesList()) {
+			listeCategory.add(new XYChart.Series<Number, Number>());
+			listeCategory.get(listeCategory.size()-1).setName(c.getCategoryName());
+		}
 		
-		for (int i=0; i < this.xCol.getPointsList().size(); i++) {
-			 IPoint xCurrentPoint = xCol.getPointsList().get(i);
-			 IPoint yCurrentPoint = yCol.getPointsList().get(i);
-			 series2.getData().add(new XYChart.Data<Double,Double>(xCol.getNormalizedValue(xCurrentPoint), yCol.getNormalizedValue(yCurrentPoint)));
-		 }
-		
-		scatterChart.getData().add(series1);
-        scatterChart.getData().add(series2);
+		for(int i = 0; i < listeCategory.size(); i ++) {
+			for(IPoint p : this.dataSet.getPointsList()) {
+				listeCategory.get(i).getData().add(new XYChart.Data<Number,Number>(xCol.getNormalizedValue(p), yCol.getNormalizedValue(p)));
+			}
+			scatterChart.getData().add(listeCategory.get(i));
+		}
 	}
 
-	public ScatterChart<Double, Double> getScatterChart() {
+	public ScatterChart<Number, Number> getScatterChart() {
 		return scatterChart;
 	}
 
-	public void setScatterChart(ScatterChart<Double, Double> scatterChart) {
-		this.scatterChart = scatterChart;
-	}
 	
 }

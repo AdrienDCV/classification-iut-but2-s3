@@ -47,6 +47,7 @@ public class TitanicDataSet extends DataSet{
         	List<String> columnType = getFieldType(field);
         	//init des col
 			initColumns(columnName, columnType);
+			this.categoryInit();
 
         } catch (InvalidPathException e) {
         	System.out.println("Le fichier n'existe pas");
