@@ -10,6 +10,7 @@ import intefarces.ICategory;
 import intefarces.IColumn;
 import intefarces.IMVCModel;
 import intefarces.IPoint;
+import utils.Subject;
 
 /**
  * 
@@ -86,6 +87,12 @@ public abstract class DataSet extends Subject implements IMVCModel {
 	@Override
 	public Collection<ICategory> allCategories() {
 		return this.categoriesList;
+	}
+	
+	public void categoryInit() {
+		for(int i = 0; i < this.getCategoriesList().size(); i++) {
+			this.getCategoriesList().get(i).addToCategory(this);
+		}
 	}
 
 	@Override

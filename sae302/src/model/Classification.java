@@ -53,12 +53,7 @@ public class Classification {
 		return listeProcheVoisin;
 	}
 	
-	public List<ICategory> categoryInit() {
-		for(int i = 0; i < this.dataset.getCategoriesList().size(); i++) {
-			this.dataset.getCategoriesList().get(i).addToCategory(this.dataset);
-		}
-		return this.dataset.getCategoriesList();
-	}
+	
 	
 	public String classifyPoint(int k, IPoint point, List<IPoint> pointList) {
 		//Knn par rapport au point
