@@ -140,5 +140,10 @@ public class Titanic implements IPoint {
 	public double getNormalizedValue(IColumn xcol) {
 		return xcol.getNormalizedValue(this);
 	}
+
+    public boolean hasSurvived() {
+		if (this.survived == 1 ) return true;
+		return false;
+    }
 	
 }
