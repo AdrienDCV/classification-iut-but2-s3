@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import intefarces.ICategory;
 import intefarces.IColumn;
 import intefarces.IDistance;
 import intefarces.IPoint;
@@ -53,15 +52,13 @@ public class Classification {
 		return listeProcheVoisin;
 	}
 	
-	
-	
 	public String classifyPoint(int k, IPoint point, List<IPoint> pointList) {
 		//Knn par rapport au point
 		
 		List<IPoint> knn = this.knnCalcul(k, point, this.dataset.getPointsList());
 		//Ajout du nom de la catégory de chaque point du knn
 		List<String> listeColumnName = new ArrayList<>();
-		for(ICategory c : this.dataset.getCategoriesList()) {
+		for(Category c : this.dataset.getCategoriesList()) {
 			for(IPoint p : knn) {
 				if(c.getCategoryElements().contains(p)) {
 					listeColumnName.add(c.getCategoryName());
@@ -90,24 +87,24 @@ public class Classification {
 		}
 		
 		if(Integer.MAX_VALUE == max) {
-			for(ICategory c : this.dataset.getCategoriesList()) {
+			for(Category c : this.dataset.getCategoriesList()) {
 				if(c.getCategoryElements().contains(knn.get(0))) {
 					category = c.getCategoryName();
 				}
 			}
+			
 		}
 		return category;
 	}
-	
-	
-	
-	public double calculRobustness(int k, IPoint point, ICategory pointCategory) {
-		//paquet de 10 élements de données
+	public double calculRobustness(int k, IPoint point, Category pointCategory) {
+		double res = 0;
 		double nombreElemParPaquet = this.dataset.getPointsList().size() / 10;
-		//liste regroupant chaque paquet
+		List<Category> numberCategory = new ArrayList<>();
+		
+
 		List<List<IPoint>> listPaquet = new ArrayList<>();
 		
-		List<ICategory> listeCategoryPossiblePoint = new ArrayList<>();
+		List<Category> listeCategoryPossiblePoint = new ArrayList<>();
 		
 		//init paquet de données
 		List<IPoint> paquet = new ArrayList<IPoint>();
@@ -121,8 +118,10 @@ public class Classification {
 			}
 		}
 		
+
 		//création d'une copie des catégories du dataset
-		List<ICategory> listCategory = new ArrayList<>();
+
+		List<Category> listCategory = new ArrayList<>();
 		listCategory.addAll(dataset.getCategoriesList());
 		
 		
@@ -135,17 +134,21 @@ public class Classification {
 			//prend les plus proches voisins du point dans chaque paquet
 			List<IPoint> knn = this.knnCalcul(k, point, listPaquet.get(z));
 			for(int i = 0; i < knn.size(); i ++) {
-				//on met chaque point du knn dans leur bonne catégorie
-				for(ICategory c : listCategory) {
+	
+//on met chaque point du knn dans leur bonne catégorie
+				for(Category c : listCategory) {
+
 					c.addToCategory(knn.get(i));
 				}
 				
 			}
 			
 			int max = -1;
-			ICategory category = null;
-			for(ICategory c : listCategory) {
-				//on cherche la category contenant le plus d'élément (= classification par les voisins)
+
+			Category category = null;
+//on cherche la category contenant le plus d'élément (= classification par les voisins)
+			for(Category c : listCategory) {
+
 				if(max < c.getCategoryElements().size()) {
 					max = c.getCategoryElements().size();
 					category = c;
@@ -156,7 +159,7 @@ public class Classification {
 				}
 			}
 			if(max == Integer.MAX_VALUE) {
-				for(ICategory c2 : listCategory) {
+				for(Category c2 : listCategory) {
 					if(c2.getCategoryElements().contains(knn.get(0))) {
 						category = c2;
 					}
@@ -166,8 +169,9 @@ public class Classification {
 			listeCategoryPossiblePoint.add(category);
 		}
 
+
 		int sameCategory = 0;
-		for(ICategory c : listeCategoryPossiblePoint) {
+		for(Category c : listeCategoryPossiblePoint) {
 			//si la catégory est la même que celle du point on incrémente le compteur de category
 			if (c.getCategoryName().equals(pointCategory.getCategoryName())) {
 				sameCategory += 1;

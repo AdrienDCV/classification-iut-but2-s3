@@ -3,20 +3,17 @@ package pokemon;
 import java.util.ArrayList;
 import java.util.List;
 
-import intefarces.ICategory;
 import intefarces.IMVCModel;
 import intefarces.IPoint;
+import model.Category;
 
 
-public class LegendaryCategory  extends PokemonDataSet implements ICategory{
-	private List<IPoint> categoryElements;
-	private String categoryName;
+public class LegendaryCategory  extends Category{
 	
-	public LegendaryCategory() {
-		this.categoryElements = new ArrayList<IPoint>();
-		this.categoryName = this.getClass().getName();
+	public LegendaryCategory(String categoryName) {
+		super(categoryName);
 	}
-	
+
 	@Override
 	public List<IPoint> addToCategory(IMVCModel dataSet) {
 		PokemonDataSet p = (PokemonDataSet) dataSet;

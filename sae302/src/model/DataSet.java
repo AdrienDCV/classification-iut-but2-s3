@@ -5,11 +5,10 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-
-import intefarces.ICategory;
 import intefarces.IColumn;
 import intefarces.IMVCModel;
 import intefarces.IPoint;
+
 import utils.Subject;
 
 /**
@@ -23,7 +22,7 @@ public abstract class DataSet extends Subject implements IMVCModel {
 	protected String title;
 	protected List<IPoint> pointsList;
 	protected List<IColumn> columnsList;
-	protected List<ICategory> categoriesList;
+	protected List<Category> categoriesList;
 
 	// constructor(s)
 	public DataSet(String title) {
@@ -80,12 +79,12 @@ public abstract class DataSet extends Subject implements IMVCModel {
 	public abstract IColumn defaultYCol();
 
 	@Override
-	public void addCategory(ICategory classe) {
+	public void addCategory(Category classe) {
 		this.categoriesList.add(classe);
 	}
 
 	@Override
-	public Collection<ICategory> allCategories() {
+	public Collection<Category> allCategories() {
 		return this.categoriesList;
 	}
 	
@@ -119,7 +118,7 @@ public abstract class DataSet extends Subject implements IMVCModel {
 		return columnsList;
 	}
 
-	public List<ICategory> getCategoriesList() {
+	public List<Category> getCategoriesList() {
 		return categoriesList;
 	}
 	
