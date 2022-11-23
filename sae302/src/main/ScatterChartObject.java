@@ -26,6 +26,7 @@ public class ScatterChartObject {
 	
 //	Column xCol, Column yCol
 	public ScatterChartObject(Criteria criteria, DataSet dataset) {
+		System.out.println(criteria.getCriteriaX());
 		x.setLabel(criteria.getCriteriaX());
 		y.setLabel(criteria.getCriteriaY());
 		this.dataSet = dataset;

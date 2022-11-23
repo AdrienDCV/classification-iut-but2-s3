@@ -1,7 +1,7 @@
 package titanic;
 
 public enum Sex {
-	M("male"), F("female");
+	UNKNOWN("unknown"), MALE("male"), FEMALE("female");
 	
 	String valeur;
 

@@ -116,6 +116,7 @@ public class View extends Stage implements Observer{
                 File file = fichierCsv.showOpenDialog(stage);
                 System.out.println(file.toString());
                 if (file != null) {
+                	View.dataSet = DataSetFactory.createDataSet(typeDataSet.getValue());
                 	dataSet.loadFromFile(file.toString());
                 	comboBox();
                 }
@@ -128,9 +129,11 @@ public class View extends Stage implements Observer{
     			//int k=Integer.parseInt(entrerK.getText());
     			if(criteriaX != null && criteriaY != null) {
     				if(!criteriaX.equals(criteriaY)) {
-    					View.dataSet = DataSetFactory.createDataSet(typeDataSet.getValue());
+    					
     					generateDistance();
         				Criteria criteria = new Criteria(criteriaX.getValue(), criteriaY.getValue());
+        				System.out.println(criteria.getCriteriaX());
+        				System.out.println(criteria.getCriteriaY());
         				Classification classification = new Classification(dataSet.getColumnsList(), criteria, distance);
         				
         				View.scatterChart = new ScatterChartObject(criteria, View.dataSet);

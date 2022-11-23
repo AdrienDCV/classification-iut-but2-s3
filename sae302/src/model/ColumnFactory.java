@@ -8,20 +8,20 @@ import intefarces.IPoint;
 
 public class ColumnFactory {
 
-    public static Column createColumn(DataSet dataSet, List<IColumn> columnsList, String type, String columnName) {
-        List<IPoint> points = new ArrayList<>();
-
+    public static Column createColumn(DataSet dataSet, List<IPoint> pointsList, String type, String columnName) {
         if (type.equals("int") || type.equals("double")) {
-            points.addAll(dataSet.getPointsList());
-            return new NumberColumn(columnName, dataSet, points);
-        } 
-        if (type.equals("boolean")){
-            points.addAll(dataSet.pointsList);
-            return new BooleanColumn(columnName, dataSet, points);
-        } else {
-        	points.addAll(dataSet.pointsList);
-        	return new EnumColumn(columnName, dataSet, points);
+        	return new NumberColumn(columnName, dataSet, pointsList);
+        }if (type.equals("boolean")){
+        	return new BooleanColumn(columnName, dataSet, pointsList);
         }
+        if (type.equals("java.lang.String")) {
+        	/* do nothing */
+        }
+        else {
+        	return new EnumColumn(columnName, dataSet, pointsList);
+        }
+
+		return null;
     }
     
 }
