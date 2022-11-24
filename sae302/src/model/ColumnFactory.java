@@ -8,7 +8,7 @@ public class ColumnFactory {
 
     public static Column createColumn(DataSet dataSet, List<IPoint> pointsList, String type, String columnName) {
         
-        if (type.equals("int") || type.equals("double")) {
+    	if (type.equals("int") || type.equals("double")) {
         	return new NumberColumn(columnName, dataSet, pointsList);
         }if (type.equals("boolean")){
         	return new BooleanColumn(columnName, dataSet, pointsList);
@@ -18,7 +18,7 @@ public class ColumnFactory {
         else {
         	return new EnumColumn(columnName, dataSet, pointsList);
         }
-
+        
 		return null;
     }
     

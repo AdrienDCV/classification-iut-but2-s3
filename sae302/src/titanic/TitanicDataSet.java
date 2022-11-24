@@ -14,6 +14,7 @@ import java.util.List;
 import com.opencsv.bean.CsvToBeanBuilder;
 
 import intefarces.IColumn;
+import model.Column;
 import model.ColumnFactory;
 import model.DataSet;
 
@@ -21,6 +22,7 @@ public class TitanicDataSet extends DataSet{
     
     public TitanicDataSet(String title) {
 		super(title);
+		this.addCategory(new Survived());
 	}
 
 	public TitanicDataSet() {
@@ -60,7 +62,10 @@ public class TitanicDataSet extends DataSet{
 
 	protected void initColumns(String[] columnName, List<String> columnType) {
 		for(int j = 0; j < columnType.size(); j++) {
-		 	this.columnsList.add(ColumnFactory.createColumn(this, this.pointsList, columnType.get(j), columnName[j]));
+			Column column = ColumnFactory.createColumn(this, this.pointsList, columnType.get(j), columnName[j]);
+			if(column != null) {
+				this.columnsList.add(column);
+			}
 		}
 	}
 
