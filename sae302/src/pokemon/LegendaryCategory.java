@@ -1,6 +1,5 @@
 package pokemon;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import intefarces.IMVCModel;
@@ -10,7 +9,7 @@ import model.Category;
 
 public class LegendaryCategory  extends Category{
 	
-	public LegendaryCategory(String categoryName) {
+	public LegendaryCategory() {
 		super("Legendary");
 	}
 

@@ -9,7 +9,7 @@ import model.Category;
 
 public class NotLegendaryCategory  extends Category {
 	
-	public NotLegendaryCategory(String categoryName) {
+	public NotLegendaryCategory() {
 		super("NotLegendary");
 	}
 
