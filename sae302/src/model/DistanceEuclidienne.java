@@ -1,10 +1,9 @@
 package model;
 
 import intefarces.IColumn;
-import intefarces.IDistance;
 import intefarces.IPoint;
 
-public class DistanceEuclidienne implements IDistance{
+public class DistanceEuclidienne extends DistanceStrategy{
 
 	@Override
 	public double calculDistance(IPoint p1, IPoint p2, IColumn colX, IColumn colY) {

@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import intefarces.IColumn;
-import intefarces.IDistance;
 import intefarces.IPoint;
 
 public class Classification {
@@ -16,12 +15,12 @@ public class Classification {
 	Criteria criteria;
 	IColumn colX;
 	IColumn colY;
-	IDistance distance;
+	DistanceStrategy distance;
 	
-	public Classification(List<IColumn> column, Criteria criteria, IDistance distance) {
+	public Classification(List<IColumn> column, Criteria criteria, String distanceStrategyName) {
 		this.column = column;
 		this.criteria = criteria;
-		this.distance = distance;
+		this.setDistanceStrategy(distanceStrategyName);
 		for(int i = 0; i < this.column.size(); i ++) {
 			if(this.column.get(i).getName().equals(this.criteria.getCriteriaX())) {
 				this.colX = this.column.get(i);
@@ -31,6 +30,11 @@ public class Classification {
 		}
 		this.dataset = this.colX.getDataset();
 	}
+	private void setDistanceStrategy(String distanceStrategyName) {
+		this.distance = DistanceStrategyFactory.createDistanceStrategy(distanceStrategyName);
+	}
+
+	
 	public List<IPoint> knnCalcul(int k, IPoint p, List<IPoint> pointList) {
 		List <IPoint> listeProcheVoisin = new ArrayList<IPoint>();
 		double[] distance = new double[pointList.size()];

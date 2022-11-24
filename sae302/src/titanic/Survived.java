@@ -25,10 +25,9 @@ public class Survived extends Category {
 
     @Override
     public List<IPoint> addToCategory(IPoint point) {
-        if(!((Titanic)point).hasSurvived()) {
+        if(((Titanic)point).hasSurvived()) {
 			this.categoryElements.add(point);
 		}
 		return this.categoryElements;
     }
-    
 }

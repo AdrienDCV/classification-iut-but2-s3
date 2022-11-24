@@ -1,10 +1,9 @@
 package model;
 
 import intefarces.IColumn;
-import intefarces.IDistance;
 import intefarces.IPoint;
 
-public class DistanceManhattan implements IDistance{
+public class DistanceManhattan extends DistanceStrategy{
 
 	@Override
 	public double calculDistance(IPoint p1, IPoint p2, IColumn colX, IColumn colY) {
