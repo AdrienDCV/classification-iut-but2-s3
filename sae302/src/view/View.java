@@ -5,7 +5,7 @@ import java.util.List;
 
 import intefarces.IColumn;
 import intefarces.IDistance;
-
+import intefarces.IPoint;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -20,41 +20,46 @@ import javafx.stage.Stage;
 import main.MenuBarClass;
 import main.ScatterChartObject;
 import model.Classification;
+import model.Column;
 import model.Criteria;
 import model.DataSet;
 import model.DataSetFactory;
 import model.DistanceEuclidienne;
 import model.DistanceManhattan;
+import pokemon.Pokemon;
 import utils.Observer;
 import utils.Subject;
 
 public class View extends Stage implements Observer{
 	
 	// class attributes
-	static Button confirmer, parcourir;
+	static Button confirmer, parcourir, testPokemon;
     static ComboBox<String> criteriaX, criteriaY, typeDataSet, typeDistance;
     //TextField entrerK=new TextField();
 
     static FileChooser fichierCsv;
 	static HBox hboxVariables;
 	static Canvas canvas;//changer en scaterChart
-	static DataSet dataSet;
+	static DataSet model;
 	static IDistance distance;
+	static Criteria criteria;
 	static ScatterChartObject scatterChart;
 	//static VBox verticalPosition;
 	static HBox hbox;
+	static VBox vbox;
 	
 	public View() {
 		initWidget();
 		
+		
+		
 		hbox=new HBox();
     	hbox.getChildren().addAll(this.vBox(), canvas);
-    	
     	MenuBarClass menuBarClass = new MenuBarClass();
     	VBox verticalPosition = new VBox();
         verticalPosition.getChildren().addAll(menuBarClass.getMenuBar(), hbox);
-
-    	
+       
+        
     	dataSetComboBox();
     	distanceComboBox();
     	
@@ -90,6 +95,7 @@ public class View extends Stage implements Observer{
 	private static void initButton() {
 		confirmer=new Button("confirmer");
 	    parcourir=new Button("parcourir");
+	    testPokemon= new Button("Test pokemon");
 	}
 	
     protected VBox vBox() {
@@ -98,6 +104,7 @@ public class View extends Stage implements Observer{
     	//entrerK.setPromptText("entrer k");
     	//entrerK.setMaxWidth(100);
     	Stage stage = this;
+    	View view = this;
     	parcourir.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(final ActionEvent e) {
 /*<<<<<<< HEAD
@@ -109,30 +116,32 @@ public class View extends Stage implements Observer{
                 File file = fichierCsv.showOpenDialog(stage);
                 System.out.println(file.toString());
                 if (file != null) {
-                	View.dataSet = DataSetFactory.createDataSet(typeDataSet.getValue());
-                	dataSet.loadFromFile(file.toString());
-                	comboBox();
+                	View.model = DataSetFactory.createDataSet(typeDataSet.getValue());
+                	model.loadFromFile(file.toString());
+                	View.model.attach(view);
+                	if(criteriaX != null && criteriaY != null) {
+                		comboBox();
+                	}else {
+                		vbox.getChildren().set(vbox.getChildren().indexOf(criteriaX), criteriaX);
+                		vbox.getChildren().set(vbox.getChildren().indexOf(criteriaY), criteriaY);
+                	}
                 }
-                
             }
+            
     	});
-    	
     	confirmer.setOnAction(new EventHandler<ActionEvent>() {
     		public void handle(final ActionEvent e) {
     			//int k=Integer.parseInt(entrerK.getText());
     			if(criteriaX != null && criteriaY != null) {
     				if(!criteriaX.equals(criteriaY)) {
     					if(View.scatterChart != null) {
-    						hbox.getChildren().remove(scatterChart.getScatterChart());
+    						updateScatter();
+    					} else {
+    						createScatter();
     					}
-    					generateDistance();
-        				Criteria criteria = new Criteria(criteriaX.getValue(), criteriaY.getValue());
-        				Classification classification = new Classification(dataSet.getColumnsList(), criteria, distance);
         				
-        				View.scatterChart = new ScatterChartObject(criteria, View.dataSet);
-        				//verticalPosition.getChildren().addAll(scatterChart.getScatterChart()); 
-        				View.scatterChart.initScatter();
-        				hbox.getChildren().addAll(scatterChart.getScatterChart());
+        				generateDistance();
+        				
         				
         				
         				/*System.out.println("KNN : ");
@@ -147,20 +156,39 @@ public class View extends Stage implements Observer{
     		}
     	});
     	
-    	VBox vbox=new VBox();
+    	testPokemon.setOnMouseClicked(e -> {
+    		System.out.println(View.model.getPointsList().size());
+    			Pokemon p = new Pokemon("TestPokemon", 95, 16000, 250.0, 55, 600001, 50, 74, 75, "normal", "flying", 2, false);
+    			View.model.addLine(p);
+    			Classification classification = new Classification(model.getColumnsList(), criteria, distance);
+    			classification.classifyPoint(3, p, model.getPointsList()).addToCategory(p);
+    			System.out.println(classification.classifyPoint(3, p, model.getPointsList()).getCategoryName());
+    			System.out.println("category size "+View.model.getCategoriesList().get(0).getCategoryElements().size());
+    	});
+    	vbox=new VBox();
     	vbox.setPadding(new Insets(80,10,100,10));
     	vbox.setSpacing(10);
     	vbox.setStyle("-fx-background-color: #101010;");
-    	vbox.getChildren().addAll(typeDataSet,typeDistance,parcourir,criteriaX,criteriaY,confirmer);
-    	
-    	
+    	vbox.getChildren().addAll(typeDataSet,typeDistance,parcourir,criteriaX,criteriaY,confirmer, testPokemon);
     	return vbox;
-    	
     }
     
+    public void createScatter() {
+    	View.criteria = new Criteria(criteriaX.getValue(), criteriaY.getValue());
+		View.scatterChart = new ScatterChartObject(criteria, View.model);
+		View.scatterChart.initScatter();
+		hbox.getChildren().addAll(scatterChart.getScatterChart());
+    }
+    
+    public void updateScatter() {
+    	hbox.getChildren().remove(scatterChart.getScatterChart());
+    	createScatter();
+    }
+
+    
+   
     protected void comboBox() {
-    	List<IColumn> columns=dataSet.getColumnsList();
-    	
+    	List<IColumn> columns=model.getColumnsList();
     	if(criteriaX.getItems().size()!=0 && criteriaY.getItems().size()!=0) {
     		criteriaX=new ComboBox<>();
     	    criteriaY=new ComboBox<>();
@@ -196,29 +224,19 @@ public class View extends Stage implements Observer{
     	}
     }
     
- 
-    
+
 	public Stage getRealStage() {
 		return this;
 	}
 
-
-
-
-
 	@Override
 	public void update(Subject subj) {
-		
+		updateScatter();
 	}
-
-
-
-
 
 	@Override
 	public void update(Subject subj, Object data) {
-		
+		updateScatter();
 	}
-
 
 }

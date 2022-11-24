@@ -52,7 +52,7 @@ public class Classification {
 		return listeProcheVoisin;
 	}
 	
-	public String classifyPoint(int k, IPoint point, List<IPoint> pointList) {
+	public Category classifyPoint(int k, IPoint point, List<IPoint> pointList) {
 		//Knn par rapport au point
 		
 		List<IPoint> knn = this.knnCalcul(k, point, this.dataset.getPointsList());
@@ -76,11 +76,16 @@ public class Classification {
 		}
 		//on prend le max de la map ou le plus proche voisin si deux category ont la même taille
 		int max = -1;
-		String category = "";
+		Category category = null;
+		
 		for(String clé: numberColumnName.keySet()) {
 			if(numberColumnName.get(clé) > max) {
 				max = numberColumnName.get(clé);
-				category = clé;
+				for(Category c : this.dataset.getCategoriesList()) {
+					if(clé.equals(c.getCategoryName())) {
+						category = c;
+					}
+				}
 			} else if(numberColumnName.get(clé) == max) {
 				max = Integer.MAX_VALUE;
 			}
@@ -89,11 +94,12 @@ public class Classification {
 		if(Integer.MAX_VALUE == max) {
 			for(Category c : this.dataset.getCategoriesList()) {
 				if(c.getCategoryElements().contains(knn.get(0))) {
-					category = c.getCategoryName();
+					category = c;
 				}
 			}
 			
 		}
+		category.addToCategory(point);
 		return category;
 	}
 	public double calculRobustness(int k, IPoint point, Category pointCategory) {

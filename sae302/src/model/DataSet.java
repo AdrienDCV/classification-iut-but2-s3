@@ -50,16 +50,20 @@ public abstract class DataSet extends Subject implements IMVCModel {
 	@Override
 	public void setLines(List<IPoint> lines) {
 		this.pointsList = lines;
+		this.notifyObservers(this.pointsList);
 	}
 
 	@Override
 	public void addLine(IPoint element) {
-		this.pointsList.add(element);		
+		this.pointsList.add(element);
+		
+		this.notifyObservers(this.pointsList);
 	}
 
 	@Override
 	public void addAllLine(List<IPoint> elements) {
 		this.pointsList.addAll(elements);
+		this.notifyObservers(this.pointsList);
 	}
 
 	public Iterator<IPoint> iterator() {

@@ -20,8 +20,8 @@ public class ScatterChartObject {
 	ScatterChart<Number, Number> scatterChart = new ScatterChart<>(new NumberAxis(), new NumberAxis());
 	Column xCol; 
 	Column yCol;
-	NumberAxis x = new NumberAxis(-0.02, 1.02, 0.01);
-	NumberAxis y = new NumberAxis(-0.02, 1.02, 0.01);
+	NumberAxis x = new NumberAxis(0, 1, 0.01);
+	NumberAxis y = new NumberAxis(0, 1, 0.01);
 	DataSet dataSet;
 
 	
@@ -42,19 +42,17 @@ public class ScatterChartObject {
 	
 	// voir pour rajouter les options "k, colonneCatégorieX, colonneCatégorieY 
 	public void initScatter() {
+		System.out.println("taille du data set dans scatter :"+this.dataSet.getPointsList().size());
 		scatterChart = new ScatterChart(x, y);
 		List<XYChart.Series<Number, Number>> listeCategory = new ArrayList<>();
 		for(Category c : this.dataSet.getCategoriesList()) {
 			listeCategory.add(new XYChart.Series<Number, Number>());
-			System.out.println(c.getCategoryName());
 			listeCategory.get(listeCategory.size()-1).setName(c.getCategoryName());
 		}
 		
 		for(int i = 0; i < listeCategory.size(); i ++) {
-			List<Data<Number, Number>>listData = listeCategory.get(i).getData();
+			List<XYChart.Data<Number, Number>>listData = listeCategory.get(i).getData();
 			for(IPoint p : this.dataSet.getCategoriesList().get(i).getCategoryElements()) {
-				System.out.println(xCol.getNormalizedValue(p));
-				System.out.println(yCol.getNormalizedValue(p));
 				listData.add(new XYChart.Data<Number,Number>(xCol.getNormalizedValue(p), yCol.getNormalizedValue(p)));
 			}
 			scatterChart.getData().add(listeCategory.get(i));
