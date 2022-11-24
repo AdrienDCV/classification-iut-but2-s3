@@ -1,9 +1,7 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import intefarces.IColumn;
 import intefarces.IPoint;
 
 public class ColumnFactory {

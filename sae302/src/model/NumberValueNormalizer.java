@@ -1,5 +1,6 @@
 package model;
 
+
 import intefarces.IColumn;
 
 
@@ -18,6 +19,10 @@ public class NumberValueNormalizer extends ValueNormalizer{
 	public double normalize(Object value) {
 		NumberColumn column = ((NumberColumn) this.normalizerTarget);
 		column.setAmplitudeValueClomun();
+		System.out.println("max =" + column.getMaximumValue());
+		System.out.println("min =" + column.getMinimumValue());
+		System.out.println("amplitude =" + column.getAmplitudeValueColumn());
+		System.out.println((Double.parseDouble(value.toString()) - column.getMinimumValue()) / (column.getAmplitudeValueColumn()));
 		return (Double.parseDouble(value.toString()) - column.getMinimumValue()) / (column.getAmplitudeValueColumn());
 	}
 

@@ -8,32 +8,27 @@ import model.Category;
 
 public class Died extends Category  {
 
-    public Died(String categoryName) {
+    public Died() {
         super("Died");
     }
 
     @Override
     public List<IPoint> addToCategory(IMVCModel dataset) {
-        // TODO Auto-generated method stub
-        return null;
+        TitanicDataSet titanicDataSet = (TitanicDataSet) dataset;
+
+		for (IPoint passenger : titanicDataSet.getPointsList()) {
+			if (!((Titanic) passenger).hasSurvived()) {
+				this.categoryElements.add(passenger);
+			}
+		}
+		return this.categoryElements;
     }
 
     @Override
     public List<IPoint> addToCategory(IPoint point) {
-        // TODO Auto-generated method stub
-        return null;
+        if(!((Titanic)point).hasSurvived()) {
+			this.categoryElements.add(point);
+		}
+		return this.categoryElements;
     }
-
-    @Override
-    public String getCategoryName() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public List<IPoint> getCategoryElements() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-    
 }
