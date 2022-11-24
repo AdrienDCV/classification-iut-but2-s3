@@ -7,6 +7,7 @@ import intefarces.IPoint;
 
 public class NumberColumn extends Column{
 
+
     private double minimumValue;
     private double amplitude;
 
@@ -16,7 +17,7 @@ public class NumberColumn extends Column{
     }
 
     public double getMinimumValue() {
-        setMinimumValue();
+        this.setMinimumValue();
         return minimumValue;
     }
 
@@ -30,7 +31,7 @@ public class NumberColumn extends Column{
     }
 
     public double getMaximumValue() {
-        double max = maximumValue();
+        double max = this.maximumValue();
         return max;
     }
 

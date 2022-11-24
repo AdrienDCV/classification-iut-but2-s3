@@ -34,4 +34,13 @@ public class BooleanValueNormalizerTest {
 		assertEquals(1.0,booleanValueNormalizer.normalize(true));
 		assertEquals(0.0,booleanValueNormalizer.normalize(false));
 	}
+	
+	@Test
+	public void testBooleanValueNormalizerDenormalize() {
+		BooleanColumn bcolumn=new BooleanColumn("nColumn", new PokemonDataSet(), new ArrayList<>());
+		BooleanValueNormalizer booleanValueNormalizer=new BooleanValueNormalizer(bcolumn);
+		assertEquals(true,booleanValueNormalizer.denormalize(1));
+		assertEquals(false,booleanValueNormalizer.denormalize(0));
+	}
 }
+

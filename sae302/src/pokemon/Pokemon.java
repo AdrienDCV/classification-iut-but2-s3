@@ -129,7 +129,7 @@ public class Pokemon implements IPoint {
 		if (col.getName().equals("type1")) return this.type1;
 		if (col.getName().equals("type2")) return this.type2;
 		if (col.getName().equals("speed")) return this.speed;
-		if (col.getName().equals("isLegendary")) return this.is_legendary;
+		if (col.getName().equals("is_legendary")) return this.is_legendary;
 		return null;
 	}
 
