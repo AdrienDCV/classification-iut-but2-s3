@@ -19,6 +19,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import main.MenuBarClass;
 import main.ScatterChartObject;
+import model.Category;
 import model.Classification;
 import model.Column;
 import model.Criteria;
@@ -26,6 +27,8 @@ import model.DataSet;
 import model.DataSetFactory;
 import model.DistanceEuclidienne;
 import model.DistanceManhattan;
+import model.DistanceStrategy;
+import model.DistanceStrategyFactory;
 import pokemon.Pokemon;
 import utils.Observer;
 import utils.Subject;
@@ -41,7 +44,7 @@ public class View extends Stage implements Observer{
 	static HBox hboxVariables;
 	static Canvas canvas;//changer en scaterChart
 	static DataSet model;
-	static IDistance distance;
+	static DistanceStrategy distance;
 	static Criteria criteria;
 	static ScatterChartObject scatterChart;
 	//static VBox verticalPosition;
@@ -117,6 +120,7 @@ public class View extends Stage implements Observer{
                 System.out.println(file.toString());
                 if (file != null) {
                 	View.model = DataSetFactory.createDataSet(typeDataSet.getValue());
+                	View.distance = DistanceStrategyFactory.createDistanceStrategy(typeDistance.getValue());
                 	model.loadFromFile(file.toString());
                 	View.model.attach(view);
                 	if(criteriaX != null && criteriaY != null) {
@@ -161,7 +165,12 @@ public class View extends Stage implements Observer{
     			Pokemon p = new Pokemon("TestPokemon", 95, 16000, 250.0, 55, 600001, 50, 74, 75, "normal", "flying", 2, false);
     			View.model.addLine(p);
     			Classification classification = new Classification(model.getColumnsList(), criteria, distance);
-    			classification.classifyPoint(3, p, model.getPointsList()).addToCategory(p);
+    			Category c = classification.classifyPoint(3, p, model.getPointsList());
+    			for(Category dataC : View.model.getCategoriesList()) {
+    				if(c.getCategoryName().equals(dataC.getCategoryName())) {
+    					dataC.addToCategory(p);
+    				}
+    			}
     			System.out.println(classification.classifyPoint(3, p, model.getPointsList()).getCategoryName());
     			System.out.println("category size "+View.model.getCategoriesList().get(0).getCategoryElements().size());
     	});
