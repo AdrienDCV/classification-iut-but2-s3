@@ -20,7 +20,7 @@ import pokemon.Pokemon;
 import pokemon.PokemonDataSet;
 import titanic.TitanicDataSet;
 
-public class creationNouveauPoint extends Application {
+public class CreateNewPoint extends Application {
 	DataSet dataSet;
 	String result;
 	List<TextField> listTextField = new ArrayList<>();
