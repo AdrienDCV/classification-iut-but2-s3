@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import model.BooleanColumn;
 import model.BooleanValueNormalizer;
 import model.Column;
 import model.DataSet;
@@ -16,12 +17,15 @@ import model.NumberValueNormalizer;
 
 public class ColumnTest {
 	
-    @Test
-    public void test_column_constructor() {
-    }
-
-    @Test
-    public void test_set_get_normalizer() {
-
-    }
+  @Test
+  public void getDatasetTest() {
+	  assertEquals(null,new BooleanColumn("bColumn", null , new ArrayList<>()).getDataset());
+  }
+  
+  @Test
+  public void getValueNormalizerTest() {
+	  BooleanColumn columnTest=new BooleanColumn("bColumn", null , new ArrayList<>());
+	  BooleanValueNormalizer valueNormalizerTest=(BooleanValueNormalizer) columnTest.getNormalizer();
+	  assertEquals(valueNormalizerTest,columnTest.getNormalizer());
+  }
 }

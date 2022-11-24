@@ -51,7 +51,7 @@ public class EnumValueNormalizerTest {
          assertEquals(0.5, columnEmbarked.getNormalizedValue(pointsList.get(1)));
          assertEquals(1, columnEmbarked.getNormalizedValue(pointsList.get(2)));
          
-         assertEquals(0.3333333333333333, columnSex.getNormalizedValue(pointsList.get(0)));
+         assertEquals(0, columnSex.getNormalizedValue(pointsList.get(0)));
          assertEquals(1, columnSex.getNormalizedValue(pointsList.get(1)));
     }
 

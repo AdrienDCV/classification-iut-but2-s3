@@ -41,7 +41,13 @@ public class Classification {
 		for(int i = 0; i < pointList.size(); i ++) {
 			distance[i] = this.distance.calculDistance(p, pointList.get(i), this.colX, this.colY);
 		}
+
+		getKNN(k, pointList, listeProcheVoisin, distance);
 		
+		return listeProcheVoisin;
+	}
+
+	public void getKNN(int k, List<IPoint> pointList, List<IPoint> listeProcheVoisin, double[] distance) {
 		for(int j = 0; j < k; j ++) {
 			int min = 0;
 			for(int idx = 0; idx < distance.length; idx ++) {
@@ -52,8 +58,6 @@ public class Classification {
 			distance[min] = -1;
 			listeProcheVoisin.add(pointList.get(min));
 		}
-		
-		return listeProcheVoisin;
 	}
 	
 	public Category classifyPoint(int k, IPoint point, List<IPoint> pointList) {
@@ -107,16 +111,95 @@ public class Classification {
 		return category;
 	}
 	public double calculRobustness(int k, IPoint point, Category pointCategory) {
-		double res = 0;
 		double nombreElemParPaquet = this.dataset.getPointsList().size() / 10;
-		List<Category> numberCategory = new ArrayList<>();
-		
-
 		List<List<IPoint>> listPaquet = new ArrayList<>();
-		
 		List<Category> listeCategoryPossiblePoint = new ArrayList<>();
 		
 		//init paquet de données
+		initDataPackages(nombreElemParPaquet, listPaquet);
+	
+		//création d'une copie des catégories du dataset
+		List<Category> listCategory = new ArrayList<>(dataset.getCategoriesList());
+		
+		for(List<IPoint> paquet : listPaquet) {
+			clearCategories(listCategory);
+			
+			//prend les plus proches voisins du point dans chaque paquet
+			List<IPoint> knn = this.knnCalcul(k, point, paquet);
+	
+			addPointsToRightCategory(listCategory, knn);	
+			
+			Category category = null;
+			//on cherche la category contenant le plus d'élément (= classification par les voisins)
+			category = getMaxElemsCategory(listCategory, knn, category);
+			listeCategoryPossiblePoint.add(category);
+		}
+
+		int sameCategory = getNbrElemSameCategory(pointCategory, listeCategoryPossiblePoint);		
+		return (double) sameCategory/(double)listeCategoryPossiblePoint.size();
+	}
+
+	public void clearCategories(List<Category> listCategory) {
+		for(Category category :  listCategory) {
+			//clear les category à chaque itération
+			category.getCategoryElements().clear();
+		}
+	}
+
+	public void addPointsToRightCategory(List<Category> listCategory, List<IPoint> knn) {
+		for(int i = 0; i < knn.size(); i ++) {
+			//on met chaque point du knn dans leur bonne catégorie
+			for(Category category : listCategory) {
+				category.addToCategory(knn.get(i));
+			}		
+		}
+
+// 		//prend les plus proches voisins du point dans chaque paquet
+// 		List<IPoint> knn = this.knnCalcul(k, point, listPaquet.get(z));
+// 		for(int i = 0; i < knn.size(); i ++) {
+// 		//on met chaque point du knn dans leur bonne catégorie
+// 			for(Category c : listCategory) {
+// 				c.addToCategory(knn.get(i));
+// 			}		
+// 		}
+
+	}
+
+	public int getNbrElemSameCategory(Category pointCategory, List<Category> listeCategoryPossiblePoint) {
+		int sameCategory = 0;
+		for(Category c : listeCategoryPossiblePoint) {
+			//si la catégory est la même que celle du point on incrémente le compteur de category
+			if (c.getCategoryName().equals(pointCategory.getCategoryName())) {
+				sameCategory += 1;
+			}
+		}
+		return sameCategory;
+	}
+	
+	public Category getMaxElemsCategory(List<Category> listCategory, List<IPoint> knn, Category category) {
+		int max = -1;
+		for(Category categoryElem : listCategory) {
+
+			if(max < categoryElem.getCategoryElements().size()) {
+				max = categoryElem.getCategoryElements().size();
+				category = categoryElem;
+				
+			//cas où deux category ont la même taille -> renvoie catégory du plus proche voisin
+			} else if (max == categoryElem.getCategoryElements().size()) {
+				max = Integer.MAX_VALUE;
+			}
+		}
+		if(max == Integer.MAX_VALUE) {
+			for(Category c2 : listCategory) {
+				if(c2.getCategoryElements().contains(knn.get(0))) {
+					category = c2;
+				}
+			}
+		}
+		return category;
+	}
+
+	public void initDataPackages(double nombreElemParPaquet, List<List<IPoint>> listPaquet) {
 		List<IPoint> paquet = new ArrayList<IPoint>();
 		for(int i = 0; i < this.dataset.getPointsList().size(); i++) {
 			if(paquet.size() != nombreElemParPaquet) {
@@ -127,67 +210,6 @@ public class Classification {
 				paquet.add(this.dataset.getPointsList().get(i));
 			}
 		}
-		
-
-		//création d'une copie des catégories du dataset
-
-		List<Category> listCategory = new ArrayList<>();
-		listCategory.addAll(dataset.getCategoriesList());
-		
-		
-		for(int z = 0; z < listPaquet.size(); z ++) {
-			for(int i = 0; i < listCategory.size(); i ++) {
-				//clear les category à chaque itération
-				listCategory.get(i).getCategoryElements().clear();
-			}
-			
-			//prend les plus proches voisins du point dans chaque paquet
-			List<IPoint> knn = this.knnCalcul(k, point, listPaquet.get(z));
-			for(int i = 0; i < knn.size(); i ++) {
-	
-//on met chaque point du knn dans leur bonne catégorie
-				for(Category c : listCategory) {
-
-					c.addToCategory(knn.get(i));
-				}
-				
-			}
-			
-			int max = -1;
-
-			Category category = null;
-//on cherche la category contenant le plus d'élément (= classification par les voisins)
-			for(Category c : listCategory) {
-
-				if(max < c.getCategoryElements().size()) {
-					max = c.getCategoryElements().size();
-					category = c;
-					
-				//cas où deux catégory ont la même taille -> renvoie catégory du plus proche voisin
-				} else if (max == c.getCategoryElements().size()) {
-					max = Integer.MAX_VALUE;
-				}
-			}
-			if(max == Integer.MAX_VALUE) {
-				for(Category c2 : listCategory) {
-					if(c2.getCategoryElements().contains(knn.get(0))) {
-						category = c2;
-					}
-				}
-			}
-			
-			listeCategoryPossiblePoint.add(category);
-		}
-
-
-		int sameCategory = 0;
-		for(Category c : listeCategoryPossiblePoint) {
-			//si la catégory est la même que celle du point on incrémente le compteur de category
-			if (c.getCategoryName().equals(pointCategory.getCategoryName())) {
-				sameCategory += 1;
-			}
-		}		
-		return (double) sameCategory/(double)listeCategoryPossiblePoint.size();
 	}
 
 }

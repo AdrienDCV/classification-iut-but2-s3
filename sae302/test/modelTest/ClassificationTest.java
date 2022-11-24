@@ -16,7 +16,7 @@ public class ClassificationTest {
 	Classification classi;
 	Pokemon poke1;
 	Pokemon poke2;
-	
+
 	
 	
 	@Test
@@ -37,4 +37,5 @@ public class ClassificationTest {
 	}
 	
 	
+
 }

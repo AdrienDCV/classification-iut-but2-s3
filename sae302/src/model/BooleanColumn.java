@@ -2,7 +2,6 @@ package model;
 
 import java.util.List;
 
-import intefarces.IMVCModel;
 import intefarces.IPoint;
 
 public class BooleanColumn extends Column {
