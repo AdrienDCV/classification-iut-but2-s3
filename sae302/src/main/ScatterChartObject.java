@@ -42,7 +42,6 @@ public class ScatterChartObject {
 	
 	// voir pour rajouter les options "k, colonneCatégorieX, colonneCatégorieY 
 	public void initScatter() {
-		System.out.println("taille du data set dans scatter :"+this.dataSet.getPointsList().size());
 		scatterChart = new ScatterChart(x, y);
 		List<XYChart.Series<Number, Number>> listeCategory = new ArrayList<>();
 		for(Category c : this.dataSet.getCategoriesList()) {

@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.List;
 
 import intefarces.IColumn;
-import intefarces.IDistance;
 import intefarces.IPoint;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -164,16 +163,22 @@ public class View extends Stage implements Observer{
     		System.out.println(View.model.getPointsList().size());
     			Pokemon p = new Pokemon("TestPokemon", 95, 16000, 250.0, 55, 600001, 50, 74, 75, "normal", "flying", 2, false);
     			View.model.addLine(p);
-    			Classification classification = new Classification(model.getColumnsList(), criteria, distance);
+    			Classification classification = new Classification(model.getColumnsList(), criteria, typeDistance.getValue());
     			Category c = classification.classifyPoint(3, p, model.getPointsList());
     			for(Category dataC : View.model.getCategoriesList()) {
     				if(c.getCategoryName().equals(dataC.getCategoryName())) {
     					dataC.addToCategory(p);
+    					/*
+    					 * 
+    					 * SI LE POINT EST DIT LEGENDAIRE ALORS QUIL NE L'EST PAS
+    					 * SET ISLEGENDARY TRUE
+    					 * ET INVERSEMENT
+    					 * 
+    					 * 
+    					 */
     				}
     			}
-    			System.out.println(classification.classifyPoint(3, p, model.getPointsList()).getCategoryName());
-    			System.out.println("category size "+View.model.getCategoriesList().get(0).getCategoryElements().size());
-    	});
+    			});
     	vbox=new VBox();
     	vbox.setPadding(new Insets(80,10,100,10));
     	vbox.setSpacing(10);
@@ -197,7 +202,16 @@ public class View extends Stage implements Observer{
     
    
     protected void comboBox() {
+    	/*
+    	 * 
+    	 * 
+    	 * CHANGER LE CAS COLUMN NULL POUR EVITER COLUMN FANTOME
+    	 * 
+    	 * 
+    	 * 
+    	 */
     	List<IColumn> columns=model.getColumnsList();
+    	System.out.println(columns);
     	if(criteriaX.getItems().size()!=0 && criteriaY.getItems().size()!=0) {
     		criteriaX=new ComboBox<>();
     	    criteriaY=new ComboBox<>();
