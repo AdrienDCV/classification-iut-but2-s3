@@ -11,7 +11,7 @@ public class Pokemon implements IPoint {
 	@CsvBindByName(column = "attack")
 	private int attack;
 	@CsvBindByName(column = "base_egg_steps")
-	private int base_egg_steps;
+	private int baseEggSteps;
 	@CsvBindByName(column = "capture_rate")
 	private double capture_rate;
 	@CsvBindByName(column = "defense")
@@ -39,7 +39,7 @@ public class Pokemon implements IPoint {
 
 		this.name = name;
 		this.attack = attack;
-		this.base_egg_steps = baseEggSteps;
+		this.baseEggSteps = baseEggSteps;
 		this.capture_rate = captureRate;
 		this.defense = defense;
 		this.experience_growth = experienceGrowth;
@@ -56,7 +56,7 @@ public class Pokemon implements IPoint {
 
 	@Override
 	public String toString() {
-		return "Pokemon [name=" + name + ", attack=" + attack + ", baseEggSteps=" + base_egg_steps + ", captureRate="
+		return "Pokemon [name=" + name + ", attack=" + attack + ", baseEggSteps=" + baseEggSteps + ", captureRate="
 				+ capture_rate + ", defense=" + defense + ", experienceGrowth=" + experience_growth + ", hp=" + hp
 				+ ", sp_attack=" + sp_attack + ", sp_defense=" + sp_defense + ", type1=" + type1 + ", type2=" + type2
 				+ ", speed=" + speed + ", isLegendary=" + is_legendary + "]";
@@ -72,7 +72,7 @@ public class Pokemon implements IPoint {
 	}
 
 	public int getBaseEggSteps() {
-		return base_egg_steps;
+		return baseEggSteps;
 	}
 
 	public double getCaptureRate() {
@@ -119,7 +119,7 @@ public class Pokemon implements IPoint {
 	public Object getValue(IColumn col) {
         if (col.getName().equals("name")) return this.name;
         if (col.getName().equals("attack")) return this.attack;
-		if (col.getName().equals("base_egg_steps")) return this.base_egg_steps;
+		if (col.getName().equals("base_egg_steps")) return this.baseEggSteps;
 		if (col.getName().equals("capture_rate")) return this.capture_rate;
 		if (col.getName().equals("defense")) return this.defense;
 		if (col.getName().equals("experience_growth")) return this.experience_growth;

@@ -7,7 +7,8 @@ import intefarces.IPoint;
 
 public class NumberColumn extends Column{
 
-    private  double minimumValue;
+
+    private double minimumValue;
     private double amplitude;
 
     public NumberColumn(String name, DataSet dataSet, List<IPoint> pointsList) {
@@ -37,8 +38,8 @@ public class NumberColumn extends Column{
     private double maximumValue() {
         double max = 0.0;
         for (IPoint point : this.pointsList) {
-            if ((Double) point.getValue(this) > max) {
-                max = Double.parseDouble(point.getValue(this).toString());
+            if (point.getValue(this) != null && Double.parseDouble(point.getValue(this).toString()) > max) {
+                max = (double) Double.parseDouble(point.getValue(this).toString());
             }
         }
         return max;

@@ -5,8 +5,7 @@ import java.util.List;
 
 import intefarces.IColumn;
 import intefarces.IDistance;
-import iris.IrisDataSet;
-import javafx.application.Application;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -14,25 +13,18 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import main.MenuBarClass;
 import main.ScatterChartObject;
-import main.ScatterTest;
 import model.Classification;
 import model.Criteria;
 import model.DataSet;
 import model.DataSetFactory;
 import model.DistanceEuclidienne;
 import model.DistanceManhattan;
-import pokemon.LegendaryCategory;
-import pokemon.NotLegendaryCategory;
-//import main.ScatterTest;
-import pokemon.PokemonDataSet;
-import titanic.TitanicDataSet;
 import utils.Observer;
 import utils.Subject;
 
@@ -49,17 +41,18 @@ public class View extends Stage implements Observer{
 	static DataSet dataSet;
 	static IDistance distance;
 	static ScatterChartObject scatterChart;
-	static VBox verticalPosition;
+	//static VBox verticalPosition;
+	static HBox hbox;
 	
 	public View() {
 		initWidget();
 		
-		HBox hbox=new HBox();
+		hbox=new HBox();
     	hbox.getChildren().addAll(this.vBox(), canvas);
     	
     	MenuBarClass menuBarClass = new MenuBarClass();
-    	verticalPosition = new VBox();
-    	verticalPosition.getChildren().addAll(menuBarClass.getMenuBar(), hbox);
+    	VBox verticalPosition = new VBox();
+        verticalPosition.getChildren().addAll(menuBarClass.getMenuBar(), hbox);
 
     	
     	dataSetComboBox();
@@ -129,24 +122,23 @@ public class View extends Stage implements Observer{
     			//int k=Integer.parseInt(entrerK.getText());
     			if(criteriaX != null && criteriaY != null) {
     				if(!criteriaX.equals(criteriaY)) {
-    					
+    					if(View.scatterChart != null) {
+    						hbox.getChildren().remove(scatterChart.getScatterChart());
+    					}
     					generateDistance();
         				Criteria criteria = new Criteria(criteriaX.getValue(), criteriaY.getValue());
-        				System.out.println(criteria.getCriteriaX());
-        				System.out.println(criteria.getCriteriaY());
         				Classification classification = new Classification(dataSet.getColumnsList(), criteria, distance);
         				
         				View.scatterChart = new ScatterChartObject(criteria, View.dataSet);
-        				verticalPosition.getChildren().addAll(scatterChart.getScatterChart());
-        				//A METTRE DANS DATASET 
-        				//classification.categoryInit();
+        				//verticalPosition.getChildren().addAll(scatterChart.getScatterChart()); 
+        				View.scatterChart.initScatter();
+        				hbox.getChildren().addAll(scatterChart.getScatterChart());
         				
         				
-        				
-        				System.out.println("KNN : ");
+        				/*System.out.println("KNN : ");
         				System.out.println(classification.knnCalcul(3, dataSet.getPointsList().get(12), dataSet.getPointsList()));
-        				System.out.println("Robustness : ");
-        				System.out.println(classification.calculRobustness(3, dataSet.getPointsList().get(12), dataSet.getCategoriesList().get(1)));
+        				System.out.println("Robustnesss : ");
+        				System.out.println(classification.calculRobustness(3, dataSet.getPointsList().get(12), dataSet.getCategoriesList().get(1)));*/
         			} else {
         				System.out.println("Selectionne des paramètres différents !");
         			}
@@ -168,10 +160,16 @@ public class View extends Stage implements Observer{
     
     protected void comboBox() {
     	List<IColumn> columns=dataSet.getColumnsList();
+    	
+    	if(criteriaX.getItems().size()!=0 && criteriaY.getItems().size()!=0) {
+    		criteriaX=new ComboBox<>();
+    	    criteriaY=new ComboBox<>();
+    	}
+    	
     	if(columns!=null) {
     		for(int i=0;i<columns.size();i++) {
     			criteriaX.getItems().add(columns.get(i).getName());
-    			criteriaY.getItems().add(columns.get(i).getName());
+        		criteriaY.getItems().add(columns.get(i).getName());
     		}
     	}
     	

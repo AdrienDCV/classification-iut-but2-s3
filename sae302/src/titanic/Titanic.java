@@ -56,7 +56,7 @@ public class Titanic implements IPoint {
 
 	@Override
 	public String toString() {
-		return "FormatDonneeBrut [passengerID=" + passengerID + ", survived=" + survived + ", pClass=" + pClass
+		return "Titanic [passengerID=" + passengerID + ", survived=" + survived + ", pClass=" + pClass
 				+ ", name=" + name + ", sex=" + sex + ", age=" + age + ", sibSp=" + sibSp + ", parch=" + parch
 				+ ", ticket=" + ticket + ", fare=" + fare + ", cabin=" + cabin + ", embarked=" + embarked + "]";
 	}
