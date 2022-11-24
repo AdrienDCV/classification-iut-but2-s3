@@ -8,6 +8,7 @@ import intefarces.IPoint;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.chart.XYChart.Data;
 import model.Category;
 import model.Column;
 import model.Criteria;
@@ -19,8 +20,8 @@ public class ScatterChartObject {
 	ScatterChart<Number, Number> scatterChart = new ScatterChart<>(new NumberAxis(), new NumberAxis());
 	Column xCol; 
 	Column yCol;
-	NumberAxis x = new NumberAxis(0, 1, 0.1);
-	NumberAxis y = new NumberAxis(0, 1, 0.1);
+	NumberAxis x = new NumberAxis(0, 1, 0.01);
+	NumberAxis y = new NumberAxis(0, 1, 0.01);
 	DataSet dataSet;
 
 	
@@ -49,9 +50,9 @@ public class ScatterChartObject {
 		}
 		
 		for(int i = 0; i < listeCategory.size(); i ++) {
+			List<Data<Number, Number>>listData = listeCategory.get(i).getData();
 			for(IPoint p : this.dataSet.getCategoriesList().get(i).getCategoryElements()) {
-				listeCategory.get(i).getData().add(new XYChart.Data<Number,Number>(xCol.getNormalizedValue(p), yCol.getNormalizedValue(p)));
-				
+				listData.add(new XYChart.Data<Number,Number>(xCol.getNormalizedValue(p), yCol.getNormalizedValue(p)));
 			}
 			scatterChart.getData().add(listeCategory.get(i));
 		}

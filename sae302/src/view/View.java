@@ -122,6 +122,9 @@ public class View extends Stage implements Observer{
     			//int k=Integer.parseInt(entrerK.getText());
     			if(criteriaX != null && criteriaY != null) {
     				if(!criteriaX.equals(criteriaY)) {
+    					if(View.scatterChart != null) {
+    						hbox.getChildren().remove(scatterChart.getScatterChart());
+    					}
     					generateDistance();
         				Criteria criteria = new Criteria(criteriaX.getValue(), criteriaY.getValue());
         				Classification classification = new Classification(dataSet.getColumnsList(), criteria, distance);
@@ -157,10 +160,15 @@ public class View extends Stage implements Observer{
     
     protected void comboBox() {
     	List<IColumn> columns=dataSet.getColumnsList();
+    	
+    	if(criteriaX.getItems().size()!=0 && criteriaY.getItems().size()!=0) {
+    		criteriaX=new ComboBox<>();
+    	    criteriaY=new ComboBox<>();
+    	}
     	if(columns!=null) {
     		for(int i=0;i<columns.size();i++) {
     			criteriaX.getItems().add(columns.get(i).getName());
-    			criteriaY.getItems().add(columns.get(i).getName());
+        		criteriaY.getItems().add(columns.get(i).getName());
     		}
     	}
     	
