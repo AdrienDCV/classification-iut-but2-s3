@@ -119,17 +119,17 @@ public class Pokemon implements IPoint {
 	public Object getValue(IColumn col) {
         if (col.getName().equals("name")) return this.name;
         if (col.getName().equals("attack")) return this.attack;
-		if (col.getName().equals("baseEggStep")) return this.base_egg_steps;
-		if (col.getName().equals("captureRate")) return this.capture_rate;
+		if (col.getName().equals("base_egg_steps")) return this.base_egg_steps;
+		if (col.getName().equals("capture_rate")) return this.capture_rate;
 		if (col.getName().equals("defense")) return this.defense;
-		if (col.getName().equals("experienceGrowth")) return this.experience_growth;
+		if (col.getName().equals("experience_growth")) return this.experience_growth;
 		if (col.getName().equals("hp")) return this.hp;
 		if (col.getName().equals("sp_attack")) return this.sp_attack;
 		if (col.getName().equals("sp_defense")) return this.sp_defense;
 		if (col.getName().equals("type1")) return this.type1;
 		if (col.getName().equals("type2")) return this.type2;
 		if (col.getName().equals("speed")) return this.speed;
-		if (col.getName().equals("isLegendary")) return this.is_legendary;
+		if (col.getName().equals("is_legendary")) return this.is_legendary;
 		return null;
 	}
 

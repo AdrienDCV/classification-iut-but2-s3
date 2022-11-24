@@ -7,8 +7,8 @@ import intefarces.IPoint;
 
 public class NumberColumn extends Column{
 
-    private static double minimumValue;
-    private static double amplitude;
+    private  double minimumValue;
+    private double amplitude;
 
     public NumberColumn(String name, DataSet dataSet, List<IPoint> pointsList) {
         super(name, dataSet, pointsList);
@@ -16,7 +16,7 @@ public class NumberColumn extends Column{
     }
 
     public double getMinimumValue() {
-        setMinimumValue();
+        this.setMinimumValue();
         return minimumValue;
     }
 
@@ -30,26 +30,26 @@ public class NumberColumn extends Column{
     }
 
     public double getMaximumValue() {
-        double max = maximumValue();
+        double max = this.maximumValue();
         return max;
     }
 
     private double maximumValue() {
         double max = 0.0;
         for (IPoint point : this.pointsList) {
-            if (Double.parseDouble(point.getValue(this).toString()) > max) {
-                max = (double) Double.parseDouble(point.getValue(this).toString());
+            if ((Double) point.getValue(this) > max) {
+                max = Double.parseDouble(point.getValue(this).toString());
             }
         }
         return max;
     }
 
     public void setAmplitudeValueClomun() {
-        NumberColumn.amplitude = this.getMaximumValue() - NumberColumn.minimumValue;
+        this.amplitude = this.getMaximumValue() - this.minimumValue;
     }
 
     public double getAmplitudeValueColumn() {
-        return NumberColumn.amplitude;
+        return this.amplitude;
     }
 
 	@Override

@@ -27,9 +27,9 @@ public class EnumValueNormalizerTest {
     void setup() {
     	pointsList = new ArrayList<>();
     	
-        point1 = new Titanic( 1,0,3,"Braund, Mr. Owen Harris",Sex.M,22,1,0,"A/5 21171",7.25,"",Embarked.S);
-        point2 = new Titanic(2,1,1,"Cumings, Mrs. John Bradley (Florence Briggs Thayer)",Sex.F,38,1,0,"PC 17599",71.2833,"C85",Embarked.C);
-        point3 = new Titanic(17,0,3,"Rice, Master. Eugene",Sex.M,2,4,1,"382652",29.125,"",Embarked.Q);
+        point1 = new Titanic( 1,0,3,"Braund, Mr. Owen Harris",Sex.MALE,22,1,0,"A/5 21171",7.25,"",Embarked.S);
+        point2 = new Titanic(2,1,1,"Cumings, Mrs. John Bradley (Florence Briggs Thayer)",Sex.FEMALE,38,1,0,"PC 17599",71.2833,"C85",Embarked.C);
+        point3 = new Titanic(17,0,3,"Rice, Master. Eugene",Sex.MALE,2,4,1,"382652",29.125,"",Embarked.Q);
         pointsList.add(point1); pointsList.add(point2); pointsList.add(point3);
         
         columnEmbarked = new EnumColumn("Embarked", null, pointsList);
@@ -61,8 +61,8 @@ public class EnumValueNormalizerTest {
         assertEquals(Embarked.C, columnEmbarked.getDenormalizedValue(0.5));
         assertEquals(Embarked.Q, columnEmbarked.getDenormalizedValue(1));
 
-        assertEquals(Sex.M, columnSex.getDenormalizedValue(0));
-        assertEquals(Sex.F, columnSex.getDenormalizedValue(0.5));
+        assertEquals(Sex.MALE, columnSex.getDenormalizedValue(0));
+        assertEquals(Sex.FEMALE, columnSex.getDenormalizedValue(0.5));
     }
       
 }
