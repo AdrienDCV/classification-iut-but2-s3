@@ -11,7 +11,7 @@ import model.Category;
 public class LegendaryCategory  extends Category{
 	
 	public LegendaryCategory(String categoryName) {
-		super(categoryName);
+		super("Legendary");
 	}
 
 	@Override
@@ -32,15 +32,5 @@ public class LegendaryCategory  extends Category{
 
 		return this.categoryElements;
 	}
-	
-	public List<IPoint> getCategoryElements() {
-		return categoryElements;
-	}
-
-	public String getCategoryName() {
-		return categoryName;
-	}
-
-	
 	
 }

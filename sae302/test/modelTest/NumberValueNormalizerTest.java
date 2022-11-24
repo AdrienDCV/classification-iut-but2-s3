@@ -35,5 +35,6 @@ public class NumberValueNormalizerTest {
 
         assertEquals(1.0, numberValueNormalizer.normalize(25.0));
     }
+    
 
 }

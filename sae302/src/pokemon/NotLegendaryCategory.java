@@ -10,15 +10,16 @@ import model.Category;
 public class NotLegendaryCategory  extends Category {
 	
 	public NotLegendaryCategory(String categoryName) {
-		super(categoryName);
+		super("NotLegendary");
 	}
 
 	@Override
 	public List<IPoint> addToCategory(IMVCModel dataset) {
-		PokemonDataSet p = (PokemonDataSet) dataset;
-		for(int i = 0; i < p.getPointsList().size(); i ++) {
-			if(!((Pokemon) p.getPointsList().get(i)).isLegendary()) {
-				this.categoryElements.add(p.getPointsList().get(i));
+		PokemonDataSet pokemonDataSet = (PokemonDataSet) dataset;
+
+		for (IPoint pokemon : pokemonDataSet.getPointsList()) {
+			if (!((Pokemon) pokemon).isLegendary()) {
+				this.categoryElements.add(pokemon);
 			}
 		}
 		return this.categoryElements;
@@ -28,18 +29,7 @@ public class NotLegendaryCategory  extends Category {
 		if(!((Pokemon)point).isLegendary()) {
 			this.categoryElements.add(point);
 		}
-
 		return this.categoryElements;
 	}
-
-	public List<IPoint> getCategoryElements() {
-		return categoryElements;
-	}
-
-	public String getCategoryName() {
-		return categoryName;
-	}
-	
-	
 	
 }
