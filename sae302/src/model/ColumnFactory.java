@@ -19,7 +19,7 @@ public class ColumnFactory {
         	return new EnumColumn(columnName, dataSet, pointsList);
         }
         
-		return null;
+		return new ColumnNull();
     }
     
 }

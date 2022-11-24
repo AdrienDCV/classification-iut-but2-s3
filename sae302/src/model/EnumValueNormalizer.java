@@ -21,8 +21,12 @@ public class EnumValueNormalizer extends ValueNormalizer{
 
     @Override
     public Object denormalize(double value) {
-    	if (value == 0) return this.elemsTypes.get(0);
-        return this.elemsTypes.get((int) value * this.elemsTypes.size() / this.elemsTypes.size()+1);
+        Object denormalizedValue = null;
+        if (value >= 0 && value <= 1) {
+            if (value == 0)  denormalizedValue = this.elemsTypes.get(0);
+            denormalizedValue = this.elemsTypes.get((int) value * this.elemsTypes.size() / this.elemsTypes.size()+1);
+        }  	
+        return denormalizedValue;
     }
 
     public Object getNormalizerTarget() { // méthodes uniquement utilisée pour des tests
