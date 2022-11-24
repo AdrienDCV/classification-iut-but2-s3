@@ -8,7 +8,7 @@ import model.Category;
 
 public class Survived extends Category {
 
-    public Survived(String categoryName) {
+    public Survived() {
         super("Survived");
     }
 

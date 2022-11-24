@@ -165,6 +165,7 @@ public class View extends Stage implements Observer{
     		criteriaX=new ComboBox<>();
     	    criteriaY=new ComboBox<>();
     	}
+    	
     	if(columns!=null) {
     		for(int i=0;i<columns.size();i++) {
     			criteriaX.getItems().add(columns.get(i).getName());

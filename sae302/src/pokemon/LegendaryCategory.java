@@ -10,7 +10,7 @@ import model.Category;
 
 public class LegendaryCategory  extends Category{
 	
-	public LegendaryCategory(String categoryName) {
+	public LegendaryCategory() {
 		super("Legendary");
 	}
 

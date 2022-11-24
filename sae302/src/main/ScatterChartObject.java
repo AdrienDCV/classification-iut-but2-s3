@@ -20,13 +20,14 @@ public class ScatterChartObject {
 	ScatterChart<Number, Number> scatterChart = new ScatterChart<>(new NumberAxis(), new NumberAxis());
 	Column xCol; 
 	Column yCol;
-	NumberAxis x = new NumberAxis(0, 1, 0.01);
-	NumberAxis y = new NumberAxis(0, 1, 0.01);
+	NumberAxis x = new NumberAxis(-0.02, 1.02, 0.01);
+	NumberAxis y = new NumberAxis(-0.02, 1.02, 0.01);
 	DataSet dataSet;
 
 	
 //	Column xCol, Column yCol
 	public ScatterChartObject(Criteria criteria, DataSet dataset) {
+		
 		x.setLabel(criteria.getCriteriaX());
 		y.setLabel(criteria.getCriteriaY());
 		this.dataSet = dataset;
@@ -52,6 +53,8 @@ public class ScatterChartObject {
 		for(int i = 0; i < listeCategory.size(); i ++) {
 			List<Data<Number, Number>>listData = listeCategory.get(i).getData();
 			for(IPoint p : this.dataSet.getCategoriesList().get(i).getCategoryElements()) {
+				System.out.println(xCol.getNormalizedValue(p));
+				System.out.println(yCol.getNormalizedValue(p));
 				listData.add(new XYChart.Data<Number,Number>(xCol.getNormalizedValue(p), yCol.getNormalizedValue(p)));
 			}
 			scatterChart.getData().add(listeCategory.get(i));
