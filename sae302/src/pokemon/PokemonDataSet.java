@@ -93,12 +93,12 @@ public class PokemonDataSet extends DataSet {
 
 	@Override
 	public Column defaultXCol() {
-		return this.getColumnsList().get(1);
+		return this.getColumnsList().get(0);
 	}
 
 	@Override
 	public Column defaultYCol() {
-		return this.getColumnsList().get(2);
+		return this.getColumnsList().get(1);
 	}
 
 	
