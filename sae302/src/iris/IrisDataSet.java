@@ -20,10 +20,13 @@ public class IrisDataSet extends DataSet {
 
     public IrisDataSet(String title) {
 		super(title);
+		this.addCategory(new Setosa());
+		this.addCategory(new Versicolor());
+		this.addCategory(new Virginica());
 	}
 
 	public IrisDataSet() {
-		this("");
+		this("IrisDataSet");
 	}
 	
 	@Override

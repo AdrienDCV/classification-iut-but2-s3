@@ -4,6 +4,7 @@ import com.opencsv.bean.CsvBindAndJoinByName;
 import com.opencsv.bean.CsvBindByName;
 
 import intefarces.IPoint;
+import model.Column;
 
 public class Iris implements IPoint {
 	@CsvBindByName(column = "sepal.length")
