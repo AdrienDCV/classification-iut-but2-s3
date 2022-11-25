@@ -3,8 +3,8 @@ package iris;
 import com.opencsv.bean.CsvBindAndJoinByName;
 import com.opencsv.bean.CsvBindByName;
 
-import intefarces.IColumn;
 import intefarces.IPoint;
+import model.Column;
 
 public class Iris implements IPoint {
 	@CsvBindByName(column = "sepal.length")
@@ -36,7 +36,7 @@ public class Iris implements IPoint {
 	}
 
 	@Override
-	public Object getValue(IColumn col) {
+	public Object getValue(Column col) {
 		if (col.getName().equals("sepal.length")) return this.sepalLength;
 		if (col.getName().equals("sepal.width")) return this.sepalWidth;
 		if (col.getName().equals("petal.length")) return this.petalLength;
@@ -46,7 +46,7 @@ public class Iris implements IPoint {
 	}
 
 	@Override
-	public double getNormalizedValue(IColumn xcol) {
+	public double getNormalizedValue(Column xcol) {
 		return xcol.getNormalizedValue(this);
 	};
 	

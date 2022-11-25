@@ -35,7 +35,7 @@ import utils.Subject;
 public class View extends Stage implements Observer{
 	
 	// class attributes
-	static Button confirmer, parcourir, testPokemon;
+	static Button confirmer, parcourir, classifier;
     static ComboBox<String> criteriaX, criteriaY, typeDataSet, typeDistance;
     //TextField entrerK=new TextField();
 
@@ -43,12 +43,17 @@ public class View extends Stage implements Observer{
 	static HBox hboxVariables;
 	static Canvas canvas;//changer en scaterChart
 	static DataSet model;
-	static DistanceStrategy distance;
 	static Criteria criteria;
+	static Classification classification;
 	static ScatterChartObject scatterChart;
 	//static VBox verticalPosition;
 	static HBox hbox;
 	static VBox vbox;
+	/*
+	 * A supprimer
+	 */
+	static Pokemon p;
+	
 	
 	public View() {
 		initWidget();
@@ -97,7 +102,7 @@ public class View extends Stage implements Observer{
 	private static void initButton() {
 		confirmer=new Button("confirmer");
 	    parcourir=new Button("parcourir");
-	    testPokemon= new Button("Test pokemon");
+	    classifier= new Button("Classifier Point");
 	}
 	
     protected VBox vBox() {
@@ -119,14 +124,14 @@ public class View extends Stage implements Observer{
                 System.out.println(file.toString());
                 if (file != null) {
                 	View.model = DataSetFactory.createDataSet(typeDataSet.getValue());
-                	View.distance = DistanceStrategyFactory.createDistanceStrategy(typeDistance.getValue());
                 	model.loadFromFile(file.toString());
                 	View.model.attach(view);
-                	if(criteriaX != null && criteriaY != null) {
+                	if(criteriaX != null && criteriaY != null && criteriaX.getItems().size() == 0) {
                 		comboBox();
                 	}else {
-                		vbox.getChildren().set(vbox.getChildren().indexOf(criteriaX), criteriaX);
-                		vbox.getChildren().set(vbox.getChildren().indexOf(criteriaY), criteriaY);
+                		criteriaX.getItems().clear();
+                		criteriaY.getItems().clear();
+                		comboBox();
                 	}
                 }
             }
@@ -142,10 +147,11 @@ public class View extends Stage implements Observer{
     					} else {
     						createScatter();
     					}
-        				
-        				generateDistance();
-        				
-        				
+    					classification = new Classification(model.getColumnsList(), criteria, typeDistance.getValue());
+    					
+    					p = new Pokemon("TestPokemon", 95, 16000, 250.0, 55, 600001, 50, 74, 75, "normal", "flying", 2, false);
+    	    			model.getCategoriesList().get(2).addToCategory(p);
+    	    			View.model.addLine(p);
         				
         				/*System.out.println("KNN : ");
         				System.out.println(classification.knnCalcul(3, dataSet.getPointsList().get(12), dataSet.getPointsList()));
@@ -159,31 +165,27 @@ public class View extends Stage implements Observer{
     		}
     	});
     	
-    	testPokemon.setOnMouseClicked(e -> {
-    		System.out.println(View.model.getPointsList().size());
-    			Pokemon p = new Pokemon("TestPokemon", 95, 16000, 250.0, 55, 600001, 50, 74, 75, "normal", "flying", 2, false);
-    			Classification classification = new Classification(model.getColumnsList(), criteria, typeDistance.getValue());
-    			Category c = classification.classifyPoint(3, p, model.getPointsList());
-    			for(Category dataC : View.model.getCategoriesList()) {
-    				if(c.getCategoryName().equals(dataC.getCategoryName())) {
-    					dataC.addToCategory(p);
-    					/*
-    					 * 
-    					 * SI LE POINT EST DIT LEGENDAIRE ALORS QUIL NE L'EST PAS
-    					 * SET ISLEGENDARY TRUE
-    					 * ET INVERSEMENT
-    					 * 
-    					 * 
-    					 */
-    				}
+    	classifier.setOnMouseClicked(e -> {
+    		Category c = classification.classifyPoint(3, p, model.getPointsList());
+			
+    			for(IPoint point : model.getCategoriesList().get(2).getCategoryElements()) {
+    				p.setIsLegendary(c);
+    				for(Category dataC : View.model.getCategoriesList()) {
+        				if(c.getCategoryName().equals(dataC.getCategoryName())) {
+        					dataC.addToCategory(p);
+        				}
+        			}
     			}
-    			View.model.addLine(p);
+    			model.getCategoriesList().get(2).getCategoryElements().clear();
+    			
+    			model.notifyObservers();
+   
     			});
     	vbox=new VBox();
     	vbox.setPadding(new Insets(80,10,100,10));
     	vbox.setSpacing(10);
     	vbox.setStyle("-fx-background-color: #101010;");
-    	vbox.getChildren().addAll(typeDataSet,typeDistance,parcourir,criteriaX,criteriaY,confirmer, testPokemon);
+    	vbox.getChildren().addAll(typeDataSet,typeDistance,parcourir,criteriaX,criteriaY,confirmer, classifier);
     	return vbox;
     }
     
@@ -202,16 +204,7 @@ public class View extends Stage implements Observer{
     
    
     protected void comboBox() {
-    	/*
-    	 * 
-    	 * 
-    	 * CHANGER LE CAS COLUMN NULL POUR EVITER COLUMN FANTOME
-    	 * 
-    	 * 
-    	 * 
-    	 */
     	List<Column> columns=model.getColumnsList();
-    	System.out.println(columns);
     	if(criteriaX.getItems().size()!=0 && criteriaY.getItems().size()!=0) {
     		criteriaX=new ComboBox<>();
     	    criteriaY=new ComboBox<>();
@@ -239,18 +232,6 @@ public class View extends Stage implements Observer{
     }
     
 
-    protected static void generateDistance() {
-    	if(typeDistance.getValue().equals("Euclidienne")) {
-    		distance = new DistanceEuclidienne();
-    	} else if (typeDistance.getValue().equals("Manhattan")) {
-    		distance = new DistanceManhattan();
-    	}
-    }
-    
-
-	public Stage getRealStage() {
-		return this;
-	}
 
 	@Override
 	public void update(Subject subj) {
