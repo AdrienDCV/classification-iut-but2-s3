@@ -4,8 +4,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import intefarces.IColumn;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -20,6 +18,7 @@ import javafx.stage.Stage;
 import main.MenuBarClass;
 import main.ScatterChartObject;
 import model.Classification;
+import model.Column;
 import model.Criteria;
 import model.DataSet;
 import model.DataSetFactory;
@@ -178,7 +177,7 @@ public class View extends Stage implements Observer{
     }
     
     protected void comboBox() {
-    	List<IColumn> columns=dataSet.getColumnsList();
+    	List<Column> columns=dataSet.getColumnsList();
     	
     	if(criteriaX.getItems().size()!=0 && criteriaY.getItems().size()!=0) {
     		criteriaX=new ComboBox<>();
