@@ -10,10 +10,9 @@ import java.nio.file.InvalidPathException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.opencsv.bean.CsvToBeanBuilder;
 
-import intefarces.IColumn;
+import model.Column;
 import model.ColumnFactory;
 import model.DataSet;
 
@@ -83,12 +82,12 @@ public class IrisDataSet extends DataSet {
 	}
 
 	@Override
-	public IColumn defaultXCol() {
+	public Column defaultXCol() {
 		return this.getColumnsList().get(0);
 	}
 
 	@Override
-	public IColumn defaultYCol() {
+	public Column defaultYCol() {
 		return this.getColumnsList().get(1);
 	}
     

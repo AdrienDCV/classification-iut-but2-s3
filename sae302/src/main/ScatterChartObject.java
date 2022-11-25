@@ -3,7 +3,6 @@ package main;
 import java.util.ArrayList;
 import java.util.List;
 
-import intefarces.IColumn;
 import intefarces.IPoint;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
