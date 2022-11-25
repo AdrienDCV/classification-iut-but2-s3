@@ -3,7 +3,7 @@ package model;
 public class ValueNormalizerNull extends ValueNormalizer{
 
     public ValueNormalizerNull() {
-        super("", new ColumnNull());
+        super("NULL", new ColumnNull());
     }
 
     @Override
