@@ -10,7 +10,6 @@ import java.nio.file.InvalidPathException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.opencsv.bean.CsvToBeanBuilder;
 
 import model.Column;
@@ -21,10 +20,13 @@ public class IrisDataSet extends DataSet {
 
     public IrisDataSet(String title) {
 		super(title);
+		this.addCategory(new Setosa());
+		this.addCategory(new Versicolor());
+		this.addCategory(new Virginica());
 	}
 
 	public IrisDataSet() {
-		this("");
+		this("IrisDataSet");
 	}
 	
 	@Override

@@ -1,8 +1,8 @@
 package view;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
-
 
 import intefarces.IPoint;
 import javafx.event.ActionEvent;
@@ -27,7 +27,6 @@ import model.DataSetFactory;
 import model.DistanceEuclidienne;
 import model.DistanceManhattan;
 import model.DistanceStrategy;
-import model.DistanceStrategyFactory;
 import pokemon.Pokemon;
 import utils.Observer;
 import utils.Subject;
@@ -42,6 +41,7 @@ public class View extends Stage implements Observer{
     static FileChooser fichierCsv;
 	static HBox hboxVariables;
 	static Canvas canvas;//changer en scaterChart
+
 	static DataSet model;
 	static Criteria criteria;
 	static Classification classification;
@@ -54,19 +54,19 @@ public class View extends Stage implements Observer{
 	 */
 	static Pokemon p;
 	
+
 	
 	public View() {
 		initWidget();
 		
-		
-		
 		hbox=new HBox();
     	hbox.getChildren().addAll(this.vBox(), canvas);
+    	
     	MenuBarClass menuBarClass = new MenuBarClass();
     	VBox verticalPosition = new VBox();
         verticalPosition.getChildren().addAll(menuBarClass.getMenuBar(), hbox);
-       
-        
+
+    	
     	dataSetComboBox();
     	distanceComboBox();
     	
@@ -102,7 +102,9 @@ public class View extends Stage implements Observer{
 	private static void initButton() {
 		confirmer=new Button("confirmer");
 	    parcourir=new Button("parcourir");
+
 	    classifier= new Button("Classifier Point");
+
 	}
 	
     protected VBox vBox() {
@@ -123,6 +125,7 @@ public class View extends Stage implements Observer{
                 File file = fichierCsv.showOpenDialog(stage);
                 System.out.println(file.toString());
                 if (file != null) {
+
                 	View.model = DataSetFactory.createDataSet(typeDataSet.getValue());
                 	model.loadFromFile(file.toString());
                 	View.model.attach(view);
@@ -133,25 +136,26 @@ public class View extends Stage implements Observer{
                 		criteriaY.getItems().clear();
                 		comboBox();
                 	}
+
                 }
+                
             }
-            
     	});
+    	
     	confirmer.setOnAction(new EventHandler<ActionEvent>() {
     		public void handle(final ActionEvent e) {
     			//int k=Integer.parseInt(entrerK.getText());
     			if(criteriaX != null && criteriaY != null) {
     				if(!criteriaX.equals(criteriaY)) {
     					if(View.scatterChart != null) {
-    						updateScatter();
-    					} else {
-    						createScatter();
+    						hbox.getChildren().remove(scatterChart.getScatterChart());
     					}
     					classification = new Classification(model.getColumnsList(), criteria, typeDistance.getValue());
     					
     					p = new Pokemon("TestPokemon", 95, 16000, 250.0, 55, 600001, 50, 74, 75, "normal", "flying", 2, false);
     	    			model.getCategoriesList().get(2).addToCategory(p);
     	    			View.model.addLine(p);
+
         				
         				/*System.out.println("KNN : ");
         				System.out.println(classification.knnCalcul(3, dataSet.getPointsList().get(12), dataSet.getPointsList()));
@@ -165,6 +169,7 @@ public class View extends Stage implements Observer{
     		}
     	});
     	
+
     	classifier.setOnMouseClicked(e -> {
     		Category c = classification.classifyPoint(3, p, model.getPointsList());
 			
@@ -187,33 +192,21 @@ public class View extends Stage implements Observer{
     	vbox.setStyle("-fx-background-color: #101010;");
     	vbox.getChildren().addAll(typeDataSet,typeDistance,parcourir,criteriaX,criteriaY,confirmer, classifier);
     	return vbox;
+    	
     }
     
-    public void createScatter() {
-    	View.criteria = new Criteria(criteriaX.getValue(), criteriaY.getValue());
-		View.scatterChart = new ScatterChartObject(criteria, View.model);
-		View.scatterChart.initScatter();
-		hbox.getChildren().addAll(scatterChart.getScatterChart());
-    }
-    
-    public void updateScatter() {
-    	hbox.getChildren().remove(scatterChart.getScatterChart());
-    	createScatter();
-    }
-
-    
-   
     protected void comboBox() {
     	List<Column> columns=model.getColumnsList();
+
     	if(criteriaX.getItems().size()!=0 && criteriaY.getItems().size()!=0) {
     		criteriaX=new ComboBox<>();
     	    criteriaY=new ComboBox<>();
     	}
     	
-    	for(Column column : columns) {
-    		if(!column.getName().equals("null")) {
-    			criteriaX.getItems().add(column.getName());
-            	criteriaY.getItems().add(column.getName());
+    	if(columns!=null) {
+    		for(int i=0;i<columns.size();i++) {
+    			criteriaX.getItems().add(columns.get(i).getName());
+        		criteriaY.getItems().add(columns.get(i).getName());
     		}
     	}
     	
@@ -230,17 +223,24 @@ public class View extends Stage implements Observer{
     	typeDistance.getItems().add("Manhattan");
     	typeDistance.getSelectionModel().selectFirst();
     }
-    
+  
+
+
 
 
 	@Override
 	public void update(Subject subj) {
-		updateScatter();
+		
 	}
+
+
+
+
 
 	@Override
 	public void update(Subject subj, Object data) {
-		updateScatter();
+		
 	}
+
 
 }
