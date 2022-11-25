@@ -98,6 +98,19 @@ public class View extends Stage implements Observer{
 	    typeDataSet = new ComboBox<>();
 	    typeDistance = new ComboBox<>();
 	}
+	
+	  protected void dataSetComboBox() {
+	    	typeDataSet.getItems().add("Pokemon");
+	    	typeDataSet.getItems().add("Iris");
+	    	typeDataSet.getItems().add("Titanic");
+	    	typeDataSet.getSelectionModel().selectFirst();
+	    }
+	    protected void distanceComboBox() {
+	    	typeDistance.getItems().add("Euclidienne");
+	    	typeDistance.getItems().add("Manhattan");
+	    	typeDistance.getSelectionModel().selectFirst();
+	    }
+	    
 
 	private static void initButton() {
 		confirmer=new Button("confirmer");
@@ -153,7 +166,7 @@ public class View extends Stage implements Observer{
     	    			model.getCategoriesList().get(2).addToCategory(p);
     	    			View.model.addLine(p);
         				
-        				/*System.out.println("KNN : ");
+        				/*
         				System.out.println(classification.knnCalcul(3, dataSet.getPointsList().get(12), dataSet.getPointsList()));
         				System.out.println("Robustnesss : ");
         				System.out.println(classification.calculRobustness(3, dataSet.getPointsList().get(12), dataSet.getCategoriesList().get(1)));*/
@@ -205,32 +218,18 @@ public class View extends Stage implements Observer{
    
     protected void comboBox() {
     	List<Column> columns=model.getColumnsList();
-    	if(criteriaX.getItems().size()!=0 && criteriaY.getItems().size()!=0) {
+    	if(criteriaY.getItems().size()!=0 && criteriaX.getItems().size()!=0) {
     		criteriaX=new ComboBox<>();
     	    criteriaY=new ComboBox<>();
     	}
-    	
     	for(Column column : columns) {
     		if(!column.getName().equals("null")) {
     			criteriaX.getItems().add(column.getName());
             	criteriaY.getItems().add(column.getName());
     		}
     	}
-    	
     }
-    
-    protected void dataSetComboBox() {
-    	typeDataSet.getItems().add("Pokemon");
-    	typeDataSet.getItems().add("Iris");
-    	typeDataSet.getItems().add("Titanic");
-    	typeDataSet.getSelectionModel().selectFirst();
-    }
-    protected void distanceComboBox() {
-    	typeDistance.getItems().add("Euclidienne");
-    	typeDistance.getItems().add("Manhattan");
-    	typeDistance.getSelectionModel().selectFirst();
-    }
-    
+   
 
 
 	@Override
