@@ -43,7 +43,7 @@ public class CreateNewPoint extends Application{
 	}
 	
 	protected void dataSetFile() {
-		this.dataSet = View.dataSet;
+		this.dataSet = View.model;
 		this.columnList = dataSet.getColumnsList();
 	}
 	
