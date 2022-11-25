@@ -15,12 +15,15 @@ import com.opencsv.bean.CsvToBeanBuilder;
 import model.Column;
 import model.ColumnFactory;
 import model.DataSet;
+import model.Undefined;
 
 public class TitanicDataSet extends DataSet{
     
     public TitanicDataSet(String title) {
 		super(title);
 		this.addCategory(new Survived());
+		this.addCategory(new Died());
+		this.addCategory(new Undefined());
 	}
 
 	public TitanicDataSet() {
@@ -94,6 +97,8 @@ public class TitanicDataSet extends DataSet{
 	public Column defaultYCol() {
 		return this.getColumnsList().get(1);
 	}
+	
+	
 
 	
 }

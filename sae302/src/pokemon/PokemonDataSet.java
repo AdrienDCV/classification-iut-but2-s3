@@ -14,6 +14,7 @@ import java.util.List;
 import model.Column;
 import model.ColumnFactory;
 import model.DataSet;
+import model.Undefined;
 
 import com.opencsv.bean.CsvToBeanBuilder;
 
@@ -23,6 +24,7 @@ public class PokemonDataSet extends DataSet {
 		super(title);
 		this.addCategory(new LegendaryCategory()); 
 		this.addCategory(new NotLegendaryCategory());
+		this.addCategory(new Undefined());
 	}
 
 	public PokemonDataSet() {
@@ -91,12 +93,12 @@ public class PokemonDataSet extends DataSet {
 
 	@Override
 	public Column defaultXCol() {
-		return this.getColumnsList().get(1);
+		return this.getColumnsList().get(0);
 	}
 
 	@Override
 	public Column defaultYCol() {
-		return this.getColumnsList().get(2);
+		return this.getColumnsList().get(1);
 	}
 
 	

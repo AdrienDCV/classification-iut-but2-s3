@@ -4,6 +4,7 @@ import com.opencsv.bean.CsvBindByName;
 
 
 import intefarces.IPoint;
+import model.Category;
 import model.Column;
 
 public class Pokemon implements IPoint {
@@ -14,17 +15,17 @@ public class Pokemon implements IPoint {
 	@CsvBindByName(column = "base_egg_steps")
 	private int baseEggSteps;
 	@CsvBindByName(column = "capture_rate")
-	private double capture_rate;
+	private double captureRate;
 	@CsvBindByName(column = "defense")
 	private int defense;
 	@CsvBindByName(column = "experience_growth")
-	private int experience_growth;
+	private int experienceGrowth;
 	@CsvBindByName(column = "hp")
 	private int hp;
 	@CsvBindByName(column = "sp_attack")
-	private int sp_attack;
+	private int spAttack;
 	@CsvBindByName(column = "sp_defense")
-	private int sp_defense;
+	private int spDefense;
 	@CsvBindByName(column = "type1")
 	private String type1;
 	@CsvBindByName(column = "type2")
@@ -32,7 +33,7 @@ public class Pokemon implements IPoint {
 	@CsvBindByName(column = "speed")
 	private double speed;
 	@CsvBindByName(column = "is_legendary")
-	private boolean is_legendary;
+	private boolean isLegendary;
 	
 	
 	public Pokemon(String name, int attack, int baseEggSteps, double captureRate, int defense, int experienceGrowth,
@@ -41,16 +42,16 @@ public class Pokemon implements IPoint {
 		this.name = name;
 		this.attack = attack;
 		this.baseEggSteps = baseEggSteps;
-		this.capture_rate = captureRate;
+		this.captureRate = captureRate;
 		this.defense = defense;
-		this.experience_growth = experienceGrowth;
+		this.experienceGrowth = experienceGrowth;
 		this.hp = hp;
-		this.sp_attack = sp_attack;
-		this.sp_defense = sp_defense;
+		this.spAttack = sp_attack;
+		this.spDefense = sp_defense;
 		this.type1 = type1;
 		this.type2 = type2;
 		this.speed = speed;
-		this.is_legendary = isLegendary;
+		this.isLegendary = isLegendary;
 	}
 
 	public Pokemon() {};
@@ -58,9 +59,9 @@ public class Pokemon implements IPoint {
 	@Override
 	public String toString() {
 		return "Pokemon [name=" + name + ", attack=" + attack + ", baseEggSteps=" + baseEggSteps + ", captureRate="
-				+ capture_rate + ", defense=" + defense + ", experienceGrowth=" + experience_growth + ", hp=" + hp
-				+ ", sp_attack=" + sp_attack + ", sp_defense=" + sp_defense + ", type1=" + type1 + ", type2=" + type2
-				+ ", speed=" + speed + ", isLegendary=" + is_legendary + "]";
+				+ captureRate + ", defense=" + defense + ", experienceGrowth=" + experienceGrowth + ", hp=" + hp
+				+ ", sp_attack=" + spAttack + ", sp_defense=" + spDefense + ", type1=" + type1 + ", type2=" + type2
+				+ ", speed=" + speed + ", isLegendary=" + isLegendary + "]";
 	}
 
 	
@@ -77,7 +78,7 @@ public class Pokemon implements IPoint {
 	}
 
 	public double getCaptureRate() {
-		return capture_rate;
+		return captureRate;
 	}
 
 	public int getDefense() {
@@ -85,19 +86,19 @@ public class Pokemon implements IPoint {
 	}
 
 	public int getExperienceGrowth() {
-		return experience_growth;
+		return experienceGrowth;
 	}
 
 	public int getHp() {
 		return hp;
 	}
 
-	public int getSp_attack() {
-		return sp_attack;
+	public int getSpAttack() {
+		return spAttack;
 	}
 
-	public int getSp_defense() {
-		return sp_defense;
+	public int getSpDefense() {
+		return spDefense;
 	}
 
 	public String getType1() {
@@ -113,7 +114,7 @@ public class Pokemon implements IPoint {
 	}
 
 	public boolean isLegendary() {
-		return is_legendary;
+		return isLegendary;
 	}
 
 	@Override
@@ -121,16 +122,16 @@ public class Pokemon implements IPoint {
         if (col.getName().equals("name")) return this.name;
         if (col.getName().equals("attack")) return this.attack;
 		if (col.getName().equals("base_egg_steps")) return this.baseEggSteps;
-		if (col.getName().equals("capture_rate")) return this.capture_rate;
+		if (col.getName().equals("capture_rate")) return this.captureRate;
 		if (col.getName().equals("defense")) return this.defense;
-		if (col.getName().equals("experience_growth")) return this.experience_growth;
+		if (col.getName().equals("experience_growth")) return this.experienceGrowth;
 		if (col.getName().equals("hp")) return this.hp;
-		if (col.getName().equals("sp_attack")) return this.sp_attack;
-		if (col.getName().equals("sp_defense")) return this.sp_defense;
+		if (col.getName().equals("sp_attack")) return this.spAttack;
+		if (col.getName().equals("sp_defense")) return this.spDefense;
 		if (col.getName().equals("type1")) return this.type1;
 		if (col.getName().equals("type2")) return this.type2;
 		if (col.getName().equals("speed")) return this.speed;
-		if (col.getName().equals("is_legendary")) return this.is_legendary;
+		if (col.getName().equals("is_legendary")) return this.isLegendary;
 		return null;
 	}
 
@@ -138,6 +139,16 @@ public class Pokemon implements IPoint {
 	public double getNormalizedValue(Column xcol) {
 		return xcol.getNormalizedValue(this);
 	}
+
+	public void setIsLegendary(Category category) {
+		if(category.getCategoryName().equals("Legendary")) {
+			this.isLegendary = true;
+		} else {
+			this.isLegendary = false;
+		}
+	}
+	
+	
 	
 	
 }
