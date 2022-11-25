@@ -1,6 +1,5 @@
 package model;
 
-import intefarces.IColumn;
 
 public class DataSetNull extends DataSet {
 
@@ -20,13 +19,13 @@ public class DataSetNull extends DataSet {
     }
 
     @Override
-    public IColumn defaultXCol() {
+    public Column defaultXCol() {
         /* nothing */
         return new ColumnNull();
     }
 
     @Override
-    public IColumn defaultYCol() {
+    public Column defaultYCol() {
         /* nothing */
         return new ColumnNull();
     }

@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import intefarces.IColumn;
+
 import intefarces.IMVCModel;
 import intefarces.IPoint;
 
@@ -21,7 +21,7 @@ public abstract class DataSet extends Subject implements IMVCModel {
 	// class attributes
 	protected String title;
 	protected List<IPoint> pointsList;
-	protected List<IColumn> columnsList;
+	protected List<Column> columnsList;
 	protected List<Category> categoriesList;
 
 	// constructor(s)
@@ -77,10 +77,10 @@ public abstract class DataSet extends Subject implements IMVCModel {
 	public abstract void loadFromString(String data); 
 
 	@Override
-	public abstract IColumn defaultXCol();
+	public abstract Column defaultXCol();
 
 	@Override
-	public abstract IColumn defaultYCol();
+	public abstract Column defaultYCol();
 
 	@Override
 	public void addCategory(Category classe) {
@@ -104,9 +104,9 @@ public abstract class DataSet extends Subject implements IMVCModel {
 	}
 
 	@Override
-	public List<IColumn> getNormalizableColumns() {
-		List <IColumn> normalizableColumns = new ArrayList<>();
-		for (IColumn column : this.columnsList) {
+	public List<Column> getNormalizableColumns() {
+		List <Column> normalizableColumns = new ArrayList<>();
+		for (Column column : this.columnsList) {
 			if (column.isNormalizable()) {
 				normalizableColumns.add(column);
 			}
@@ -118,7 +118,7 @@ public abstract class DataSet extends Subject implements IMVCModel {
 		return pointsList;
 	}
 
-	public List<IColumn> getColumnsList() {
+	public List<Column> getColumnsList() {
 		return columnsList;
 	}
 

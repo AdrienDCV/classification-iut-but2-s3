@@ -3,7 +3,6 @@ package view;
 import java.util.ArrayList;
 import java.util.List;
 
-import intefarces.IColumn;
 import iris.IrisDataSet;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -15,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.Column;
 import model.DataSet;
 import pokemon.Pokemon;
 import pokemon.PokemonDataSet;
@@ -28,7 +28,7 @@ public class CreateNewPoint extends Application {
 	VBox vbox = new VBox();
 	Label error = new Label("error");
 	List<String> labelList = new ArrayList<String>();
-	List<IColumn> columnList = new ArrayList<IColumn>();
+	List<Column> columnList = new ArrayList<Column>();
 	
 	@Override
 	public void start(Stage stage) throws Exception {

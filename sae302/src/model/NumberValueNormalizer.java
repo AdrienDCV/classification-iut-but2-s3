@@ -1,7 +1,6 @@
 package model;
 
 
-import intefarces.IColumn;
 
 
 public class NumberValueNormalizer extends ValueNormalizer{

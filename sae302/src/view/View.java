@@ -3,7 +3,7 @@ package view;
 import java.io.File;
 import java.util.List;
 
-import intefarces.IColumn;
+
 import intefarces.IPoint;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -162,7 +162,6 @@ public class View extends Stage implements Observer{
     	testPokemon.setOnMouseClicked(e -> {
     		System.out.println(View.model.getPointsList().size());
     			Pokemon p = new Pokemon("TestPokemon", 95, 16000, 250.0, 55, 600001, 50, 74, 75, "normal", "flying", 2, false);
-    			View.model.addLine(p);
     			Classification classification = new Classification(model.getColumnsList(), criteria, typeDistance.getValue());
     			Category c = classification.classifyPoint(3, p, model.getPointsList());
     			for(Category dataC : View.model.getCategoriesList()) {
@@ -178,6 +177,7 @@ public class View extends Stage implements Observer{
     					 */
     				}
     			}
+    			View.model.addLine(p);
     			});
     	vbox=new VBox();
     	vbox.setPadding(new Insets(80,10,100,10));
@@ -210,17 +210,17 @@ public class View extends Stage implements Observer{
     	 * 
     	 * 
     	 */
-    	List<IColumn> columns=model.getColumnsList();
+    	List<Column> columns=model.getColumnsList();
     	System.out.println(columns);
     	if(criteriaX.getItems().size()!=0 && criteriaY.getItems().size()!=0) {
     		criteriaX=new ComboBox<>();
     	    criteriaY=new ComboBox<>();
     	}
     	
-    	if(columns!=null) {
-    		for(int i=0;i<columns.size();i++) {
-    			criteriaX.getItems().add(columns.get(i).getName());
-        		criteriaY.getItems().add(columns.get(i).getName());
+    	for(Column column : columns) {
+    		if(!column.getName().equals("null")) {
+    			criteriaX.getItems().add(column.getName());
+            	criteriaY.getItems().add(column.getName());
     		}
     	}
     	

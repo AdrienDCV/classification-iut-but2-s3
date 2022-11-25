@@ -2,8 +2,9 @@ package pokemon;
 
 import com.opencsv.bean.CsvBindByName;
 
-import intefarces.IColumn;
+
 import intefarces.IPoint;
+import model.Column;
 
 public class Pokemon implements IPoint {
 	@CsvBindByName(column = "name")
@@ -116,7 +117,7 @@ public class Pokemon implements IPoint {
 	}
 
 	@Override
-	public Object getValue(IColumn col) {
+	public Object getValue(Column col) {
         if (col.getName().equals("name")) return this.name;
         if (col.getName().equals("attack")) return this.attack;
 		if (col.getName().equals("base_egg_steps")) return this.baseEggSteps;
@@ -134,7 +135,7 @@ public class Pokemon implements IPoint {
 	}
 
 	@Override
-	public double getNormalizedValue(IColumn xcol) {
+	public double getNormalizedValue(Column xcol) {
 		return xcol.getNormalizedValue(this);
 	}
 	

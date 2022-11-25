@@ -2,7 +2,6 @@ package model;
 
 import java.util.List;
 
-import intefarces.IColumn;
 import intefarces.IMVCModel;
 import intefarces.IPoint;
 import intefarces.IValueNormalizer;
@@ -13,7 +12,7 @@ import intefarces.IValueNormalizer;
  * @author adrien.dacostaveiga.etu
  *
  */
-public abstract class Column implements IColumn{
+public abstract class Column{
 	
 	// class attributes
 	protected String name;
@@ -29,32 +28,31 @@ public abstract class Column implements IColumn{
 	}
 	
 	// methods
-	@Override
+
 	public void setNormalizer(IValueNormalizer valueNormalizer) {
 		this.valueNormalizer = (ValueNormalizer) valueNormalizer;
 	}
 
-	@Override
+
 	public double getNormalizedValue(IPoint point) {
 		return this.valueNormalizer.normalize(point.getValue(this));
 	}
 
-	@Override
 	public Object getDenormalizedValue(double value) {
 		return this.valueNormalizer.denormalize(value);
 	}
 
-	@Override
+
 	public String getName() {
 		return this.name;
 	}
 
-	@Override
+
 	public DataSet getDataset() {
 		return this.dataSet;
 	}
 
-	@Override
+
 	public abstract boolean isNormalizable();
 
 	public ValueNormalizer getNormalizer() { // pour effectuer tester

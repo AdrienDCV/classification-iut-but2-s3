@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class ColumnNull extends Column{
 
     public ColumnNull() {
-        super("", null, new ArrayList<>());
+        super("null", null, new ArrayList<>());
     }
 
     @Override

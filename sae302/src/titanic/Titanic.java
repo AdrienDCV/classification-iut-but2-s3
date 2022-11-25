@@ -1,9 +1,8 @@
 package titanic;
 
 import com.opencsv.bean.CsvBindByName;
-
-import intefarces.IColumn;
 import intefarces.IPoint;
+import model.Column;
 
 public class Titanic implements IPoint {
 	
@@ -112,7 +111,7 @@ public class Titanic implements IPoint {
 	}
 
 	@Override
-	public Object getValue(IColumn col) {
+	public Object getValue(Column col) {
 		if (col.getName().equals("PassengerId")) return this.passengerID;
 		if (col.getName().equals("Survived")) return this.survived;
 		if (col.getName().equals("Pclass")) return this.pClass;
@@ -137,7 +136,7 @@ public class Titanic implements IPoint {
 	}
 
 	@Override
-	public double getNormalizedValue(IColumn xcol) {
+	public double getNormalizedValue(Column xcol) {
 		return xcol.getNormalizedValue(this);
 	}
 

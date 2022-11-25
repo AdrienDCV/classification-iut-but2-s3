@@ -31,7 +31,7 @@ public class ScatterChartObject {
 		x.setLabel(criteria.getCriteriaX());
 		y.setLabel(criteria.getCriteriaY());
 		this.dataSet = dataset;
-		for(IColumn c : this.dataSet.getColumnsList()) {
+		for(Column c : this.dataSet.getColumnsList()) {
 			if(c.getName().equals(criteria.getCriteriaX())) {
 				xCol = (Column) c;
 			} else if(c.getName().equals(criteria.getCriteriaY())) {

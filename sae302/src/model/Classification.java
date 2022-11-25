@@ -5,19 +5,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import intefarces.IColumn;
 import intefarces.IPoint;
 
 public class Classification {
 	
-	List<IColumn> column;
+	List<Column> column;
 	DataSet dataset;
 	Criteria criteria;
-	IColumn colX;
-	IColumn colY;
+	Column colX;
+	Column colY;
 	DistanceStrategy distance;
 	
-	public Classification(List<IColumn> column, Criteria criteria, String distanceStrategyName) {
+	public Classification(List<Column> column, Criteria criteria, String distanceStrategyName) {
 		this.column = column;
 		this.criteria = criteria;
 		this.setDistanceStrategy(distanceStrategyName);

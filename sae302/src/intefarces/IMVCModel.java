@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import model.Category;
+import model.Column;
 
 public interface IMVCModel extends IDataSet {
 /**
@@ -22,12 +23,12 @@ public void loadFromString(String data);
 * Retourne la colonne a utiliser par defaut pour l'axe des X lors de
 * l'affichage du nuage de points.
 */
-public IColumn defaultXCol();
+public Column defaultXCol();
 /**
 * Retourne la colonne a utiliser par defaut pour l'axe des Y lors de
 * l'affichage du nuage de points.
 */
-public IColumn defaultYCol();
+public Column defaultYCol();
 /**
 * Ajoute une Categorie (ou classe) de donnees au model.
 */
@@ -48,5 +49,5 @@ abstract public int nbColumns();
 * nuage de points.
 * La normalisation doit retourner une valeur dans l’intervalle [0;1]
 */
-public List<IColumn> getNormalizableColumns();
+public List<Column> getNormalizableColumns();
 }
