@@ -126,14 +126,14 @@ public class Classification {
 			//prend les plus proches voisins du point dans chaque paquet
 			List<IPoint> knn = this.knnCalcul(k, point, paquet);
 	
-			addPointsToRightCategory(listCategory, knn);	
+			addPointsToRightCategory(listCategory, knn);
 			
 			Category category = null;
 			//on cherche la category contenant le plus d'élément (= classification par les voisins)
 			category = getMaxElemsCategory(listCategory, knn, category);
 			listeCategoryPossiblePoint.add(category);
 		}
-
+		
 		int sameCategory = getNbrElemSameCategory(pointCategory, listeCategoryPossiblePoint);		
 		return (double) sameCategory/(double)listeCategoryPossiblePoint.size();
 	}
@@ -149,7 +149,9 @@ public class Classification {
 		for(int i = 0; i < knn.size(); i ++) {
 			//on met chaque point du knn dans leur bonne catégorie
 			for(Category category : listCategory) {
-				category.addToCategory(knn.get(i));
+				if(!category.getCategoryName().equals("Undefined")) {
+					category.addToCategory(knn.get(i));
+				}
 			}		
 		}
 
