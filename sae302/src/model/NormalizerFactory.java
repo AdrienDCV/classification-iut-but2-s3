@@ -12,7 +12,7 @@ public class NormalizerFactory {
         if (getColumClassName(column).equals("BooleanColumn")) {
             return new NumberValueNormalizer(column);
         }
-        return new ValueNormalizerNull();
+        return new ValueNormalizerNull(column);
 
     }
 
