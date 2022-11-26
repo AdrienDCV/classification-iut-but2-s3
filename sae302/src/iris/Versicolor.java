@@ -17,7 +17,7 @@ public class Versicolor extends Category{
         IrisDataSet irisDataSet = (IrisDataSet) dataset;
 
 		for (IPoint iris : irisDataSet.getPointsList()) {
-			if (((Iris) iris).equals("Versicolor")) {
+			if (((Iris) iris).getVariety().equals("Versicolor")) {
 				this.categoryElements.add(iris);
 			}
 		}

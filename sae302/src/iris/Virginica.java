@@ -17,7 +17,7 @@ public class Virginica extends Category{
         IrisDataSet irisDataSet = (IrisDataSet) dataset;
 
 		for (IPoint iris : irisDataSet.getPointsList()) {
-			if (((Iris) iris).equals("Virginica")) {
+			if (((Iris) iris).getVariety().equals("Virginica")) {
 				this.categoryElements.add(iris);
 			}
 		}

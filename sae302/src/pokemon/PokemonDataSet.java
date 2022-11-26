@@ -50,6 +50,7 @@ public class PokemonDataSet extends DataSet {
         	Field[] field = p.getClass().getDeclaredFields();
         	
         	List<String> columnType = getFieldType(field);
+        	
         	//init des col
 			initColumns(columnName, columnType);
 			this.categoryInit();
