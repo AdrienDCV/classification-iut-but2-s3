@@ -64,7 +64,7 @@ public class TitanicDataSet extends DataSet{
 	protected void initColumns(String[] columnName, List<String> columnType) {
 		for(int j = 0; j < columnType.size(); j++) {
 			Column column = ColumnFactory.createColumn(this, this.pointsList, columnType.get(j), columnName[j]);
-			if(column != null) {
+			if(!column.getName().equals("null")) {
 				this.columnsList.add(column);
 			}
 		}
