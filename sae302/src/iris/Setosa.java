@@ -17,7 +17,7 @@ public class Setosa extends Category {
         IrisDataSet irisDataSet = (IrisDataSet) dataset;
 
 		for (IPoint iris : irisDataSet.getPointsList()) {
-			if (((Iris) iris).equals("Setosa")) {
+			if (((Iris) iris).getVariety().equals("Setosa")) {
 				this.categoryElements.add(iris);
 			}
 		}

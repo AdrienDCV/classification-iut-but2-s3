@@ -51,9 +51,9 @@ public class View extends Stage implements Observer{
 	static VBox vbox;
 	/*
 	 * A supprimer
-	 */
+	 
 	static Pokemon p;
-	
+	*/
 	
 	public View() {
 		initWidget();
@@ -160,13 +160,13 @@ public class View extends Stage implements Observer{
     					} else {
     						createScatter();
     					}
-    					classification = new Classification(model.getColumnsList(), criteria, typeDistance.getValue());
+    					/*classification = new Classification(model.getColumnsList(), criteria, typeDistance.getValue());
     					
     					p = new Pokemon("TestPokemon", 95, 16000, 250.0, 55, 600001, 50, 74, 75, "normal", "flying", 2, false);
     	    			model.getCategoriesList().get(2).addToCategory(p);
     	    			View.model.addLine(p);
         				
-        				/*
+        				
         				System.out.println(classification.knnCalcul(3, dataSet.getPointsList().get(12), dataSet.getPointsList()));
         				System.out.println("Robustnesss : ");
         				System.out.println(classification.calculRobustness(3, dataSet.getPointsList().get(12), dataSet.getCategoriesList().get(1)));*/
@@ -179,7 +179,7 @@ public class View extends Stage implements Observer{
     	});
     	
     	classifier.setOnMouseClicked(e -> {
-    		Category c = classification.classifyPoint(3, p, model.getPointsList());
+    		/*Category c = classification.classifyPoint(3, p, model.getPointsList());
 			
     			for(IPoint point : model.getCategoriesList().get(2).getCategoryElements()) {
     				p.setIsLegendary(c);
@@ -192,7 +192,7 @@ public class View extends Stage implements Observer{
     			model.getCategoriesList().get(2).getCategoryElements().clear();
     			
     			model.notifyObservers();
-   
+   */
     			});
     	vbox=new VBox();
     	vbox.setPadding(new Insets(80,10,100,10));
