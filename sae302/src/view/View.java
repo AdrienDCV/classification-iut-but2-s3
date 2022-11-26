@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.List;
 
 
-import intefarces.IPoint;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -16,26 +15,19 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import main.MenuBarClass;
 import main.ScatterChartObject;
-import model.Category;
 import model.Classification;
 import model.Column;
 import model.Criteria;
 import model.DataSet;
 import model.DataSetFactory;
-import model.DistanceEuclidienne;
-import model.DistanceManhattan;
-import model.DistanceStrategy;
-import model.DistanceStrategyFactory;
-import pokemon.Pokemon;
 import utils.Observer;
 import utils.Subject;
 
 public class View extends Stage implements Observer{
 	
 	// class attributes
-	static Button confirmer, parcourir, classifier;
+	static Button confirmer, parcourir, classifier, ajouter;
     static ComboBox<String> criteriaX, criteriaY, typeDataSet, typeDistance;
     //TextField entrerK=new TextField();
 
@@ -49,6 +41,8 @@ public class View extends Stage implements Observer{
 	//static VBox verticalPosition;
 	static HBox hbox;
 	static VBox vbox;
+	static File file;
+	static String newPoint;
 	/*
 	 * A supprimer
 	 
@@ -72,7 +66,7 @@ public class View extends Stage implements Observer{
     	
 //    	menuBarClass.loadFile();
     	menuBarClass.exitApplication();
-    	menuBarClass.saveScatterChart(this.scatterChart);
+    	menuBarClass.saveScatterChart();
     	
     	Scene scene=new Scene(verticalPosition,1000,500);
     	this.setTitle("test");
@@ -116,6 +110,7 @@ public class View extends Stage implements Observer{
 		confirmer=new Button("confirmer");
 	    parcourir=new Button("parcourir");
 	    classifier= new Button("Classifier Point");
+	    ajouter=new Button("Ajouter point");
 	}
 	
     protected VBox vBox() {
@@ -133,7 +128,7 @@ public class View extends Stage implements Observer{
                 dataSet.loadFromFile(file.toString());
                 comboBox();  
 =======*/
-                File file = fichierCsv.showOpenDialog(stage);
+                file = fichierCsv.showOpenDialog(stage);
                 System.out.println(file.toString());
                 if (file != null) {
                 	View.model = DataSetFactory.createDataSet(typeDataSet.getValue());
@@ -193,12 +188,24 @@ public class View extends Stage implements Observer{
     			
     			model.notifyObservers();
    */
-    			});
+    	});
+    	
+    	ajouter.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(final ActionEvent e) {
+            	CreateNewPoint cnp = new CreateNewPoint();
+            	try {
+					cnp.start(stage);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+            }
+    	});
+    	
     	vbox=new VBox();
     	vbox.setPadding(new Insets(80,10,100,10));
     	vbox.setSpacing(10);
     	vbox.setStyle("-fx-background-color: #101010;");
-    	vbox.getChildren().addAll(typeDataSet,typeDistance,parcourir,criteriaX,criteriaY,confirmer, classifier);
+    	vbox.getChildren().addAll(typeDataSet,typeDistance,parcourir,criteriaX,criteriaY,confirmer, classifier, ajouter);
     	return vbox;
     }
     
