@@ -8,6 +8,10 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import intefarces.IPoint;
+import model.Category;
+import model.Column;
+import pokemon.LegendaryCategory;
+import pokemon.NotLegendaryCategory;
 import pokemon.Pokemon;
 import pokemon.PokemonDataSet;
 
@@ -61,4 +65,27 @@ public class DataSetTest {
 		pokemons.addAllLine(list);;
 		assertEquals(list, pokemons.getPointsList());
 	}
+	
+	@Test
+	public void getColumnListTest() {
+		List<Column> list=new ArrayList<Column>();
+		PokemonDataSet pokemons=new PokemonDataSet();
+		assertEquals(list,pokemons.getColumnsList());
+	}
+	
+	@Test
+	public void getCategoryListTest() {
+		List<Category> list=new ArrayList<Category>();
+		PokemonDataSet pokemons=new PokemonDataSet();
+		list=pokemons.getCategoriesList();
+		assertEquals(list,pokemons.getCategoriesList());
+	}
+	
+	@Test
+	public void getNormalizableColumnListTest() {
+		List<Column> list=new ArrayList<Column>();
+		PokemonDataSet pokemons=new PokemonDataSet();
+		assertEquals(list,pokemons.getNormalizableColumns());
+	}
+	
 }
