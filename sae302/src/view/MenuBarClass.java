@@ -1,9 +1,13 @@
 package view;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 
 import javax.imageio.ImageIO;
+
+import com.opencsv.CSVWriter;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -23,10 +27,12 @@ public class MenuBarClass {
 //	MenuItem loadItem;
 	MenuItem saveItem;
 	MenuItem exitItem;
+	MenuItem saveAsCSV;
 	
 	public MenuBarClass() {
 		Menu fileMenu = new Menu("Fichier");
 //		loadItem = new MenuItem("Charger fichier");
+		saveAsCSV = new MenuItem("Sauvegarder fichier");
 		saveItem = new MenuItem("Sauvegarder graphique");
 		exitItem = new MenuItem("Quitter application");
 		
@@ -43,6 +49,26 @@ public class MenuBarClass {
 		this.exitItem.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				System.exit(0);
+			}
+		});
+	}
+	
+	public void saveAsCSVFile() {
+		this.saveAsCSV.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+			    try {
+			        FileWriter fileWriter = new FileWriter(View.file, true);
+			        CSVWriter writer = new CSVWriter(fileWriter, ',', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
+			        List<String[]> list = CreateNewPoint.lineSave;
+			        for(int i = 0; i < list.size(); i++) {
+			        	writer.writeNext(list.get(i));
+			        }
+			        writer.close();
+			    }
+			    catch (IOException e) {
+			    	System.out.println(e.getMessage());
+			        e.printStackTrace();
+			    }
 			}
 		});
 	}
