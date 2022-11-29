@@ -6,6 +6,7 @@ public class ColumnNull extends Column{
 
     public ColumnNull() {
         super("null", null, new ArrayList<>());
+        this.setNormalizer(new ValueNormalizerNull(this));
     }
 
     @Override

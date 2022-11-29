@@ -77,8 +77,6 @@ public class CreateNewPoint extends Application {
     	}
 	}
 	
-	
-	
 	protected boolean buttonPressedValeurNull() {
 		for(int i = 0; i < listTextField.size(); i++) {
 			if(listTextField.get(i).getText().equals("")) {
@@ -96,10 +94,10 @@ public class CreateNewPoint extends Application {
 					result += listTextField.get(i).getText() + ",";
 				}
 				result = result.substring(0, result.length() - 1);
+
 				error.setText(View.model.getTitle() + " ajouté à la liste");
 				View.newPoint = result;
 				lineSave.add(result.split(","));
-				System.out.println(View.newPoint);
 			} else {
 				verifAllTextFieldFulfilled();
 			}

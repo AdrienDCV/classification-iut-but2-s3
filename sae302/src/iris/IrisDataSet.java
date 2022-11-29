@@ -10,16 +10,22 @@ import java.nio.file.InvalidPathException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+
 import com.opencsv.bean.CsvToBeanBuilder;
 
 import model.Column;
 import model.ColumnFactory;
 import model.DataSet;
+import model.Undefined;
 
 public class IrisDataSet extends DataSet {
 
     public IrisDataSet(String title) {
 		super(title);
+		this.addCategory(new Setosa());
+		this.addCategory(new Versicolor());
+		this.addCategory(new Virginica());
+		this.addCategory(new Undefined());
 	}
 
 	public IrisDataSet() {
@@ -44,6 +50,7 @@ public class IrisDataSet extends DataSet {
         	Field[] field = iris.getClass().getDeclaredFields();
         	
         	List<String> columnType = getFieldType(field);
+
         	//init des col
 			initColumns(columnName, columnType);
 			this.categoryInit();
@@ -59,7 +66,10 @@ public class IrisDataSet extends DataSet {
 
 	protected void initColumns(String[] columnName, List<String> columnType) {
 		for(int j = 0; j < columnType.size(); j++) {
-		 	this.columnsList.add(ColumnFactory.createColumn(this, this.pointsList, columnType.get(j), columnName[j]));
+			Column column = ColumnFactory.createColumn(this, this.pointsList, columnType.get(j), columnName[j]);
+		 	if(!column.getName().equals("null")) {
+		 		this.columnsList.add(column);
+		 	}
 		}
 	}
 

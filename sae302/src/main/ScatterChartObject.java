@@ -41,16 +41,17 @@ public class ScatterChartObject {
 	
 	// voir pour rajouter les options "k, colonneCatégorieX, colonneCatégorieY 
 	public void initScatter() {
+		
 		scatterChart = new ScatterChart(x, y);
 		List<XYChart.Series<Number, Number>> listeCategory = new ArrayList<>();
 		for(Category c : this.dataSet.getCategoriesList()) {
 			listeCategory.add(new XYChart.Series<Number, Number>());
 			listeCategory.get(listeCategory.size()-1).setName(c.getCategoryName());
 		}
-		
 		for(int i = 0; i < listeCategory.size(); i ++) {
 			List<XYChart.Data<Number, Number>>listData = listeCategory.get(i).getData();
 			for(IPoint p : this.dataSet.getCategoriesList().get(i).getCategoryElements()) {
+				
 				listData.add(new XYChart.Data<Number,Number>(xCol.getNormalizedValue(p), yCol.getNormalizedValue(p)));
 			}
 			scatterChart.getData().add(listeCategory.get(i));

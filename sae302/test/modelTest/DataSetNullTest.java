@@ -17,12 +17,12 @@ public class DataSetNullTest {
 	@Test
 	public void defaultXColTest() {
 		DataSetNull dataset=new DataSetNull();
-		assertEquals("",dataset.defaultXCol().getName());
+		assertEquals("null",dataset.defaultXCol().getName());
 	}
 	
 	@Test
 	public void defaultYColTest() {
 		DataSetNull dataset=new DataSetNull();
-		assertEquals("",dataset.defaultYCol().getName());
+		assertEquals("null",dataset.defaultYCol().getName());
 	}
 }

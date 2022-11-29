@@ -7,12 +7,12 @@ public class NormalizerFactory {
             return new NumberValueNormalizer(column);
         }
         if (getColumClassName(column).equals("EnumColumn")) {
-            return new NumberValueNormalizer(column);
+            return new EnumValueNormalizer(column);
         }
         if (getColumClassName(column).equals("BooleanColumn")) {
-            return new NumberValueNormalizer(column);
+            return new BooleanValueNormalizer(column);
         }
-        return new ValueNormalizerNull();
+        return new ValueNormalizerNull(column);
 
     }
 

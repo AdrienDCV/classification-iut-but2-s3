@@ -14,6 +14,7 @@ import java.util.List;
 import model.Column;
 import model.ColumnFactory;
 import model.DataSet;
+import model.Undefined;
 
 import com.opencsv.bean.CsvToBeanBuilder;
 
@@ -23,6 +24,7 @@ public class PokemonDataSet extends DataSet {
 		super(title);
 		this.addCategory(new LegendaryCategory()); 
 		this.addCategory(new NotLegendaryCategory());
+		this.addCategory(new Undefined());
 	}
 
 	public PokemonDataSet() {
@@ -48,6 +50,7 @@ public class PokemonDataSet extends DataSet {
         	Field[] field = p.getClass().getDeclaredFields();
         	
         	List<String> columnType = getFieldType(field);
+        	
         	//init des col
 			initColumns(columnName, columnType);
 			this.categoryInit();
@@ -64,7 +67,7 @@ public class PokemonDataSet extends DataSet {
 	protected void initColumns(String[] columnName, List<String> columnType) {
 		for(int j = 0; j < columnType.size(); j++) {
 			Column column = ColumnFactory.createColumn(this, this.pointsList, columnType.get(j), columnName[j]);
-			if(column != null) {
+			if(!column.getName().equals("null")) {
 				this.columnsList.add(column);
 			}
 		 	
@@ -91,12 +94,12 @@ public class PokemonDataSet extends DataSet {
 
 	@Override
 	public Column defaultXCol() {
-		return this.getColumnsList().get(1);
+		return this.getColumnsList().get(0);
 	}
 
 	@Override
 	public Column defaultYCol() {
-		return this.getColumnsList().get(2);
+		return this.getColumnsList().get(1);
 	}
 
 	
