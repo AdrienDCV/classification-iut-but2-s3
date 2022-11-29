@@ -26,6 +26,7 @@ public class CreateNewPoint extends Application {
 	protected Label error = new Label("error");
 	protected List<String> labelList = new ArrayList<String>();
 	protected List<Column> columnList = new ArrayList<Column>();
+	protected Stage stage;
 	
 	@Override
 	public void start(Stage args) throws Exception {
@@ -35,7 +36,7 @@ public class CreateNewPoint extends Application {
 		vbox.getChildren().addAll(button, error);
 		buttonSubmit();
 		
-		Stage stage = new Stage();
+		stage = new Stage();
 		Scene scene = new Scene(this.vbox, 300, 400);
 		stage.setScene(scene);
 		stage.show();
@@ -95,7 +96,11 @@ public class CreateNewPoint extends Application {
 				result = result.substring(0, result.length() - 1);
 				this.error.setText(View.model.getTitle() + " ajouté à la liste");
 				View.newPoint = result;
-				System.out.println(View.newPoint);
+				System.out.println(View.model.getPointsList().size());
+				View.model.loadFromString(View.newPoint);
+				System.out.println(View.model.getPointsList().size());
+				stage.close();
+				View.model.notifyObservers();
 			} else {
 				verifAllTextFieldFulfilled();
 			}
@@ -109,12 +114,6 @@ public class CreateNewPoint extends Application {
 				error.setText(error.getText() + labelList.get(l) + "\n");
 			}
 		}
-	}
-	
-	
-	
-	public static void main(String[] args) {
-		launch(args);
 	}
 	
 }
