@@ -25,7 +25,7 @@ public class DistanceTest {
 		Pokemon poke2=new Pokemon("test2",1000,30720,3, 0, 0, 0, 0, 0, "", "", 0, true);
 		
 		DistanceEuclidienne distance=new DistanceEuclidienne();
-		assertEquals(0.16989449312079544,distance.calculDistance(poke1, poke2,dataset.getColumnsList().get(1),dataset.getColumnsList().get(2) ),0.001);
+		assertEquals(0.15510090796643466,distance.calculDistance(poke1, poke2,dataset.getColumnsList().get(1),dataset.getColumnsList().get(2) ),0.001);
 	
 	}
 	
@@ -37,6 +37,6 @@ public class DistanceTest {
 		Pokemon poke2=new Pokemon("test2",1000,30720,3, 0, 0, 0, 0, 0, "", "", 0, true);
 		
 		DistanceManhattan distance=new DistanceManhattan();
-		assertEquals(0.2063725490196078,distance.calculDistance(poke1, poke2,dataset.getColumnsList().get(1),dataset.getColumnsList().get(2) ),0.001);
+		assertEquals(0.19106606606606624,distance.calculDistance(poke1, poke2,dataset.getColumnsList().get(1),dataset.getColumnsList().get(2) ),0.001);
 	}
 }
