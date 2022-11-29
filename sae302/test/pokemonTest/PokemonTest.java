@@ -28,8 +28,8 @@ class PokemonTest {
 		assertEquals(60, pokemon1.getDefense());
 		assertEquals(600000,pokemon1.getExperienceGrowth());
 		assertEquals(45, pokemon1.getHp());
-		assertEquals(75, pokemon1.getSp_attack());
-		assertEquals(50, pokemon1.getSp_defense());
+		assertEquals(75, pokemon1.getSpAttack());
+		assertEquals(50, pokemon1.getSpDefense());
 		assertEquals("normal", pokemon1.getType1());
 		assertEquals("flying", pokemon1.getType2());
 		assertEquals(1.2, pokemon1.getSpeed());

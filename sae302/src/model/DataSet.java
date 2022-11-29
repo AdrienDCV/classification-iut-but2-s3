@@ -94,7 +94,9 @@ public abstract class DataSet extends Subject implements IMVCModel {
 	
 	public void categoryInit() {
 		for(int i = 0; i < this.getCategoriesList().size(); i++) {
-			this.getCategoriesList().get(i).addToCategory(this);
+			if(!this.getCategoriesList().get(i).getCategoryName().equals("Undefined")) {
+				this.getCategoriesList().get(i).addToCategory(this);
+			}
 		}
 	}
 

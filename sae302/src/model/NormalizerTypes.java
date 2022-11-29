@@ -17,7 +17,8 @@ public enum NormalizerTypes {
     // class attributes
     NUMBER_NORMALIZER("NN"),
     ENUM_NORMALIZER("EN"),
-    BOOLEAN_NORMALIZER("BN");
+    BOOLEAN_NORMALIZER("BN"),
+    NULL("NULL");
 
     private String label;
 
