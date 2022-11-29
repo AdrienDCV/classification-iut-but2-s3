@@ -1,4 +1,4 @@
-package main;
+package view;
 
 import java.io.File;
 import java.io.IOException;
@@ -80,7 +80,7 @@ public class MenuBarClass {
 //		});
 //	}
 	
-	public void saveScatterChart(ScatterChartObject scatterChart) {
+	public void saveScatterChart() {
 		this.saveItem.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				String path;
@@ -90,7 +90,7 @@ public class MenuBarClass {
 					path = System.getProperty("user.home") + "/Desktop/image.png";
 				}
 				File file = new File(path);
-				WritableImage image = scatterChart.getScatterChart().snapshot(new SnapshotParameters(), null);
+				WritableImage image = View.scatterChart.getScatterChart().snapshot(new SnapshotParameters(), null);
 				try {
 				  ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
 				} catch (IOException e) {
