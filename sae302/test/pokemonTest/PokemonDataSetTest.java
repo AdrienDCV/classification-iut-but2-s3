@@ -27,7 +27,7 @@ class PokemonDataSetTest {
 	
 	@Test
 	void chargementTest() {
-		dataset.loadFromFile("./res/pokemon_test.csv");
+		dataset.loadFromFile("./res/pokemon_train.csv");
 		assertEquals(13, dataset.getPointsList().size());
 	}
 

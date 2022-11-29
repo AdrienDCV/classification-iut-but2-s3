@@ -12,7 +12,7 @@ public class ColumnNullTest {
 	@Test
 	public void createColumnNullTest(){
 		ColumnNull column=new ColumnNull();
-		assertEquals("",column.getName());
+		assertEquals("null",column.getName());
 	}
 	
 	@Test

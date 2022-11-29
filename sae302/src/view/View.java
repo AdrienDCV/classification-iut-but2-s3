@@ -13,8 +13,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.beans.value.*;
 import main.ScatterChartObject;
 import model.Classification;
 import model.Column;
@@ -23,6 +25,7 @@ import model.DataSet;
 import model.DataSetFactory;
 import utils.Observer;
 import utils.Subject;
+import javafx.scene.control.*;
 
 public class View extends Stage implements Observer{
 	
@@ -38,11 +41,15 @@ public class View extends Stage implements Observer{
 	static Criteria criteria;
 	static Classification classification;
 	static ScatterChartObject scatterChart;
+	static Slider slider;
+	static VBox sliderVBox;
 	//static VBox verticalPosition;
 	static HBox hbox;
 	static VBox vbox;
 	static File file;
 	static String newPoint;
+	static Label labelK;
+	static int k;
 	/*
 	 * A supprimer
 	 
@@ -79,6 +86,7 @@ public class View extends Stage implements Observer{
 		initButton();
 	    //Button sauvegarde=new Button("sauvegarder");
 	    initComboBox();
+	    sliderVBox = initSlider();
 	    //TextField entrerK=new TextField();
 	    fichierCsv=new FileChooser();
 		hboxVariables=new HBox();
@@ -112,6 +120,31 @@ public class View extends Stage implements Observer{
 	    classifier= new Button("Classifier Point");
 	    ajouter=new Button("Ajouter point");
 	}
+	
+	private static VBox initSlider() {
+//		slider = new Slider(1, 10, 1);
+		slider = new Slider();
+		slider.setMin(1);
+		slider.setMax(10);
+		slider.setPrefWidth(150);
+        slider.setShowTickLabels(true);
+        slider.setBlockIncrement(1);
+        slider.valueProperty().addListener(new ChangeListener<Number>() {
+            public void changed(ObservableValue<? extends Number> arg0, Number oldValue, Number newValue) {
+            	View.k = newValue.intValue();
+            	System.out.println(View.k);
+            }
+        });
+        
+        Label labelK = new Label("Choisir valeur de k: " + View.k);
+		labelK.setTextFill(Color.WHITE);
+
+        VBox root = new VBox();
+        root.setPadding(new Insets(20));
+        root.setSpacing(10);
+        root.getChildren().addAll(labelK, slider);
+        return root;
+    }
 	
     protected VBox vBox() {
     	
@@ -205,7 +238,7 @@ public class View extends Stage implements Observer{
     	vbox.setPadding(new Insets(80,10,100,10));
     	vbox.setSpacing(10);
     	vbox.setStyle("-fx-background-color: #101010;");
-    	vbox.getChildren().addAll(typeDataSet,typeDistance,parcourir,criteriaX,criteriaY,confirmer, classifier, ajouter);
+    	vbox.getChildren().addAll(typeDataSet,typeDistance,parcourir,criteriaX,criteriaY,confirmer, classifier, ajouter, sliderVBox);
     	return vbox;
     }
     

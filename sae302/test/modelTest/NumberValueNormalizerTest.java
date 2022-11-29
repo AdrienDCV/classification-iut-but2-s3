@@ -51,7 +51,7 @@ public class NumberValueNormalizerTest {
 
     @Test
     public void test_number_value_normalizer_normalize() {
-        assertEquals(1.0, nvn.normalize(25.0));
+        assertEquals(0.6052631578947368, nvn.normalize(25.0));
     }
     
 //    @Test
