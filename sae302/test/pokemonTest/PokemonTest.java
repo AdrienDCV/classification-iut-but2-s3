@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import pokemon.Pokemon;
+import pokemon.PokemonDataSet;
 
 class PokemonTest {
 	
@@ -40,6 +41,13 @@ class PokemonTest {
 		assertEquals("Pokemon [name=Swablu, attack=40, baseEggSteps=5120, captureRate=255.0, defense=60, experienceGrowth=600000, hp=45, sp_attack=75, sp_defense=50, type1=normal, type2=flying, speed=1.2, isLegendary=false]", pokemon1.toString());
 		assertEquals("Pokemon [name=Budew, attack=30, baseEggSteps=5120, captureRate=255.0, defense=35, experienceGrowth=1059860, hp=40, sp_attack=70, sp_defense=55, type1=grass, type2=poison, speed=1.2, isLegendary=false]", pokemon2.toString());
 		assertEquals("Pokemon [name=Dialga, attack=120, baseEggSteps=30720, captureRate=3.0, defense=120, experienceGrowth=1250000, hp=100, sp_attack=100, sp_defense=90, type1=steel, type2=dragon, speed=683.0, isLegendary=true]", pokemon3.toString());
+	}
+	
+	@Test
+	public void getNormalizedValueTest() {
+		PokemonDataSet pokemons=new PokemonDataSet();
+		pokemons.loadFromFile("./res/pokemon_train.csv");
+		assertEquals(0.1891891891891892,pokemon1.getNormalizedValue(pokemons.defaultXCol()));
 	}
 
 }

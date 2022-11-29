@@ -7,8 +7,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import intefarces.IColumn;
 import intefarces.IPoint;
 import model.BooleanColumn;
 import model.Column;
