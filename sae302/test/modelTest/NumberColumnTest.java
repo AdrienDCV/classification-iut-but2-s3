@@ -28,9 +28,9 @@ public class NumberColumnTest {
         this.pointsList = new ArrayList<>();
         pointsList.add(pikachu); pointsList.add(charizard); pointsList.add(dialga); 
 
-        this.captureRate = new NumberColumn("captureRate", null, pointsList);
+        this.captureRate = new NumberColumn("capture_rate", null, pointsList);
         this.speed = new NumberColumn("speed", null, pointsList);
-        this.experienceGrowth = new NumberColumn("experienceGrowth", null, pointsList);
+        this.experienceGrowth = new NumberColumn("experience_growth", null, pointsList);
     }
 
     @Test
@@ -48,7 +48,7 @@ public class NumberColumnTest {
         assertEquals(6.0, speed.getMinimumValue());
         assertNotEquals(90.5, speed.getMinimumValue());
 
-        assertEquals(1000000.0, experienceGrowth.getMinimumValue());
+        assertEquals(0.0, experienceGrowth.getMinimumValue());
         assertNotEquals(1250000.0, experienceGrowth.getMinimumValue());
     }
 

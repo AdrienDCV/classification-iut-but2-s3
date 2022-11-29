@@ -85,15 +85,15 @@ public class Classification {
 		int max = -1;
 		Category category = null;
 		
-		for(String clé: numberColumnName.keySet()) {
-			if(numberColumnName.get(clé) > max) {
-				max = numberColumnName.get(clé);
+		for(String cle: numberColumnName.keySet()) {
+			if(numberColumnName.get(cle) > max) {
+				max = numberColumnName.get(cle);
 				for(Category c : this.dataset.getCategoriesList()) {
-					if(clé.equals(c.getCategoryName())) {
+					if(cle.equals(c.getCategoryName())) {
 						category = c;
 					}
 				}
-			} else if(numberColumnName.get(clé) == max) {
+			} else if(numberColumnName.get(cle) == max) {
 				max = Integer.MAX_VALUE;
 			}
 		}
@@ -108,6 +108,8 @@ public class Classification {
 		}
 		return category;
 	}
+
+	
 	public double calculRobustness(int k, IPoint point, Category pointCategory) {
 		double nombreElemParPaquet = this.dataset.getPointsList().size() / 10;
 		List<List<IPoint>> listPaquet = new ArrayList<>();
@@ -153,16 +155,6 @@ public class Classification {
 				}
 			}		
 		}
-
-// 		//prend les plus proches voisins du point dans chaque paquet
-// 		List<IPoint> knn = this.knnCalcul(k, point, listPaquet.get(z));
-// 		for(int i = 0; i < knn.size(); i ++) {
-// 		//on met chaque point du knn dans leur bonne catégorie
-// 			for(Category c : listCategory) {
-// 				c.addToCategory(knn.get(i));
-// 			}		
-// 		}
-
 	}
 
 	public int getNbrElemSameCategory(Category pointCategory, List<Category> listeCategoryPossiblePoint) {

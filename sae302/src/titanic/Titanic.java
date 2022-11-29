@@ -51,6 +51,22 @@ public class Titanic implements IPoint {
 		this.embarked = embarked;
 	}
 
+	public Titanic(int passengerID, int pClass, String name, Sex sex, double age, int sibSp,
+			int parch, String ticket, double fare, String cabin, Embarked embarked) {
+		super();
+		this.passengerID = passengerID;
+		this.pClass = pClass;
+		this.name = name;
+		this.sex = sex;
+		this.age = age;
+		this.sibSp = sibSp;
+		this.parch = parch;
+		this.ticket = ticket;
+		this.fare = fare;
+		this.cabin = cabin;
+		this.embarked = embarked;
+	}
+
 
 
 	@Override

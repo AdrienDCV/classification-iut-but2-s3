@@ -3,6 +3,11 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import intefarces.IPoint;
+import titanic.Embarked;
+import titanic.Sex;
+import titanic.Titanic;
+
 public class EnumValueNormalizer extends ValueNormalizer{
 
     private Class<Enum> enumType;
@@ -16,15 +21,14 @@ public class EnumValueNormalizer extends ValueNormalizer{
 
     @Override
     public double normalize(Object value) {
-        return (double) this.elemsTypes.indexOf(value) / (double) (this.elemsTypes.size()-1);
+        return (double) ((this.elemsTypes.indexOf(value)) / (double) (this.elemsTypes.size()-1));
     }
 
     @Override
     public Object denormalize(double value) {
         Object denormalizedValue = null;
         if (value >= 0 && value <= 1) {
-            if (value == 0)  denormalizedValue = this.elemsTypes.get(0);
-            denormalizedValue = this.elemsTypes.get((int) value * this.elemsTypes.size() / this.elemsTypes.size()+1);
+            denormalizedValue = this.elemsTypes.get((int) Math.round(value * (this.elemsTypes.size()-1)));
         }  	
         return denormalizedValue;
     }
