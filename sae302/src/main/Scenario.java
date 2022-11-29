@@ -14,7 +14,7 @@ public class Scenario {
 	public static void main(String[] args) {
 		PokemonDataSet dataSet = new PokemonDataSet();
 		dataSet.loadFromFile(".\\res\\pokemon_train.csv");
-		Pokemon pokemon = new Pokemon("Arceus", 120, 30720, 3.0, 120, 1250000, 120, 120, 120, "normal", null, 120, true);
+		Pokemon pokemon = new Pokemon("Arceus", 120, 30720, 3.0, 120, 1250000, 120, 120, 120, "normal", null, 120);
 		Criteria criteria = new Criteria(dataSet.getColumnsList().get(0).getName(), dataSet.getColumnsList().get(1).getName());
 		
 		Classification classification = new Classification(dataSet.getColumnsList(), criteria, "Euclidienne");
@@ -22,19 +22,26 @@ public class Scenario {
 		int k = 3;
 		List<IPoint> knn = classification.knnCalcul(k, pokemon, dataSet.getPointsList());
 		Category categoryPokemon = classification.classifyPoint(k, pokemon, dataSet.getPointsList());
+		pokemon.setIsLegendary(categoryPokemon);
+		categoryPokemon.addToCategory(pokemon);
 		
-		System.out.println("Colonne utilisÈe pour la classification : " + criteria.getCriteriaX() + "," + criteria.getCriteriaY());
-		System.out.println("PokÈmon ‡ classifier : " + pokemon);
+		System.out.println("Crit√®res utilis√©es pour la classification : " + criteria.getCriteriaX() + "," + criteria.getCriteriaY());
+		System.out.println();
+		System.out.println("Pok√©mon √† classifier : " + pokemon);
+		System.out.println();
 		System.out.println("Plus proche voisin du Pokemon : ");
 		System.out.println(knn);
+		System.out.println();
 		System.out.println("Categorie du Pokemon: " + categoryPokemon.getCategoryName());
-		System.out.println("Est ce que le pokemon ‡ ÈtÈ ajoutÈ ‡ la categorie : " + categoryPokemon.getCategoryElements().contains(pokemon));
+		System.out.println();
+		System.out.println("Est ce que le pokemon a √©t√© ajout√© √† la cat√©gorie : " + categoryPokemon.getCategoryElements().contains(pokemon));
 		Category legendary = null;
 		for(Category category : dataSet.getCategoriesList()) {
 			if(category.getCategoryName().equals("Legendary")) {
 				legendary = category;
 			}
 		}
+		System.out.println();
 		System.out.println("Robustesse : " + classification.calculRobustness(k, pokemon, legendary));
 	}
 }
