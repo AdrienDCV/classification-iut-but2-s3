@@ -54,6 +54,23 @@ public class Pokemon implements IPoint {
 		this.isLegendary = isLegendary;
 	}
 
+	public Pokemon(String name, int attack, int baseEggSteps, double captureRate, int defense, int experienceGrowth,
+			int hp, int sp_attack, int sp_defense, String type1, String type2, double speed) {
+
+		this.name = name;
+		this.attack = attack;
+		this.baseEggSteps = baseEggSteps;
+		this.captureRate = captureRate;
+		this.defense = defense;
+		this.experienceGrowth = experienceGrowth;
+		this.hp = hp;
+		this.spAttack = sp_attack;
+		this.spDefense = sp_defense;
+		this.type1 = type1;
+		this.type2 = type2;
+		this.speed = speed;
+	}
+
 	public Pokemon() {};
 
 	@Override
