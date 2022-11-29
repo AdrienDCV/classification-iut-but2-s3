@@ -205,8 +205,8 @@ public class View extends Stage implements Observer{
     		Category undefined = View.model.getCategoriesList().get(View.model.getCategoriesList().size() -1);
     		System.out.println(undefined.getCategoryElements());
     		for(IPoint point : undefined.getCategoryElements()) {
-    			classification.classifyPoint(k, point, model.getPointsList());
-    			
+    			Category category = classification.classifyPoint(k, point, model.getPointsList());
+    			category.addToCategory(point, category);
     		}
     		undefined.getCategoryElements().clear();
     		updateScatter();
