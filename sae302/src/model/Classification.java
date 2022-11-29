@@ -106,7 +106,6 @@ public class Classification {
 			}
 			
 		}
-		category.addToCategory(point);
 		return category;
 	}
 	public double calculRobustness(int k, IPoint point, Category pointCategory) {

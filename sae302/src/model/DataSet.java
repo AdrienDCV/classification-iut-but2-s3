@@ -56,7 +56,6 @@ public abstract class DataSet extends Subject implements IMVCModel {
 	@Override
 	public void addLine(IPoint element) {
 		this.pointsList.add(element);
-		
 		this.notifyObservers(this.pointsList);
 	}
 
