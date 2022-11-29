@@ -10,7 +10,7 @@ public class VNNullTest {
 
 	@Test
 	public void test() {
-		ValueNormalizerNull value=new ValueNormalizerNull();
-		assertEquals("",value.getValueNormalizer());
+		ValueNormalizerNull value=new ValueNormalizerNull(null);
+		assertEquals("NULL",value.getValueNormalizer());
 	}
 }

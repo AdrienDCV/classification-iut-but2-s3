@@ -31,24 +31,24 @@ public class IrisTest {
 	@Test
 	public void getValueSepalWidth() {
 		NumberColumn col=new NumberColumn("sepal.width", null, null);
-		assertEquals(0.0,iris1.getValue(col));
+		assertEquals(null,iris1.getValue(col));
 	}
 	
 	@Test
 	public void getValuePetalLengthTest() {
 		NumberColumn col=new NumberColumn("petal.length", null, null);
-		assertEquals(0.0,iris1.getValue(col));
+		assertEquals(null,iris1.getValue(col));
 	}
 	
 	@Test
 	public void getValuePetalWidth() {
 		NumberColumn col=new NumberColumn("petal.width", null, null);
-		assertEquals(0.0,iris1.getValue(col));
+		assertEquals(null,iris1.getValue(col));
 	}
 	
 	@Test
 	public void getValueVarietyTest() {
 		NumberColumn col=new NumberColumn("variety", null, null);
-		assertEquals("c",iris1.getValue(col));
+		assertEquals(null,iris1.getValue(col));
 	}
 }
