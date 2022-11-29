@@ -1,9 +1,14 @@
-package main;
+package view;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
+
+import com.opencsv.CSVWriter;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -21,16 +26,16 @@ public class MenuBarClass {
 	FileChooser fileChooser = new FileChooser();
 	DataSet data;
 //	MenuItem loadItem;
-	MenuItem saveItem;
-	MenuItem exitItem;
+	MenuItem saveAsCSV, saveItem, exitItem;
 	
 	public MenuBarClass() {
 		Menu fileMenu = new Menu("Fichier");
 //		loadItem = new MenuItem("Charger fichier");
+		saveAsCSV = new MenuItem("Sauvegarder CSV");
 		saveItem = new MenuItem("Sauvegarder graphique");
 		exitItem = new MenuItem("Quitter application");
 		
-		fileMenu.getItems().addAll(saveItem, exitItem);
+		fileMenu.getItems().addAll(saveAsCSV, saveItem, exitItem);
 		this.menuBar.getMenus().add(fileMenu);
 	}
 	
@@ -43,6 +48,24 @@ public class MenuBarClass {
 		this.exitItem.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				System.exit(0);
+			}
+		});
+	}
+	
+	public void saveAsCSVFile() {
+		this.saveAsCSV.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+			    try {
+			        FileWriter fileWriter = new FileWriter(View.file.toString());
+			        CSVWriter writer = new CSVWriter(fileWriter, ',', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
+			        List<String[]> list = CreateNewPoint.lineSave;
+			        writer.writeAll(list);
+			        writer.close();
+			    }
+			    catch (IOException e) {
+			    	System.out.println(e.getMessage());
+			        e.printStackTrace();
+			    }
 			}
 		});
 	}
@@ -80,7 +103,7 @@ public class MenuBarClass {
 //		});
 //	}
 	
-	public void saveScatterChart(ScatterChartObject scatterChart) {
+	public void saveScatterChart() {
 		this.saveItem.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				String path;
@@ -90,7 +113,7 @@ public class MenuBarClass {
 					path = System.getProperty("user.home") + "/Desktop/image.png";
 				}
 				File file = new File(path);
-				WritableImage image = scatterChart.getScatterChart().snapshot(new SnapshotParameters(), null);
+				WritableImage image = View.scatterChart.getScatterChart().snapshot(new SnapshotParameters(), null);
 				try {
 				  ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
 				} catch (IOException e) {

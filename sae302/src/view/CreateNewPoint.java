@@ -1,7 +1,11 @@
 package view;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+
+import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvValidationException;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -12,68 +16,68 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.Column;
-import model.DataSet;
+import java.io.FileReader;
+import java.io.IOException;
 
-public class CreateNewPoint extends Application{
-	DataSet dataSet;
-	List<TextField> listTextField = new ArrayList<>();
-	Button button = new Button("Submit");
-	VBox vbox = new VBox();
-	Label error = new Label("error");
-	List<String> labelList = new ArrayList<String>();
-	List<Column> columnList = new ArrayList<Column>();
-	List<String> listNewPoint = new ArrayList<String>();
-
-	
-	protected CreateNewPoint() {
-	}
+public class CreateNewPoint extends Application {
+	protected static List<TextField> listTextField = new ArrayList<>();
+	protected static Button button = new Button("Submit");
+	protected static VBox vbox = new VBox();
+	protected static Label error = new Label("error");
+	protected static List<String> labelList = new ArrayList<>();
+	protected static List<Column> columnList = new ArrayList<>();
+	protected static List<String[]> lineSave = new ArrayList<>();
 	
 	@Override
 	public void start(Stage args) throws Exception {
-		dataSetFile();
-		vbox.getChildren().add(new Label("Ajouter informations d'un " + dataSet.getTitle()));
+		vbox.getChildren().add(new Label("Ajouter informations d'un " + View.model.getTitle()));
+		columnList = View.model.getColumnsList();
 		textField();
 		vbox.getChildren().addAll(button, error);
 		buttonSubmit();
+		
 		Stage stage = new Stage();
-		Scene scene = new Scene(this.vbox, 300, 400);
+		Scene scene = new Scene(vbox, 300, 400);
 		stage.setScene(scene);
 		stage.show();
-		
 	}
 	
-	protected void dataSetFile() {
-		this.dataSet = View.dataSet;
-		this.columnList = dataSet.getColumnsList();
+	public List<String> getCSVFirstLine() {
+		FileReader fileReader;
+		try {
+			fileReader = new FileReader(View.file.getAbsolutePath());
+			CSVReader csvReader = new CSVReader(fileReader);
+			List<String> list = new ArrayList<String>();
+			String[] nextRecord;
+			nextRecord = csvReader.readNext();
+			for(int i = 0; i < nextRecord.length; i++) {
+				list.add(nextRecord[i]);
+			}
+			csvReader.close();
+			return list;
+		} catch(IOException | CsvValidationException e) {
+			System.out.println(e.getMessage());
+		}
+		return Collections.emptyList();
 	}
 	
 	protected void textField() {
-    	if(columnList != null) {
-    		for(int i = 0; i < columnList.size(); i++) {
-    			HBox hbox = new HBox();
-    			Label label = new Label(columnList.get(i).getName() + ":");
-    			labelList.add(columnList.get(i).getName());
-    			TextField categorieTextField = new TextField();
-    			this.listTextField.add(categorieTextField);
-    			hbox.getChildren().addAll(label, categorieTextField);
-    			this.vbox.getChildren().add(hbox);
+		List<String> list = getCSVFirstLine();
+
+    	if(list != null) {
+    		for(int i = 0; i < list.size(); i++) {
+	    		HBox hbox = new HBox();
+	    		Label label = new Label(list.get(i)+ ":");
+	    		labelList.add(list.get(i));
+	    		TextField categorieTextField = new TextField();
+	    		listTextField.add(categorieTextField);
+	    		hbox.getChildren().addAll(label, categorieTextField);
+	    		vbox.getChildren().add(hbox);
     		}
     	}
 	}
 	
-//	protected void buttonPressed() {
-//		button.setOnMouseClicked(e -> {
-//			error.setText("Valeurs ajoutés avec succés");
-//				for(int i = 0; i < listTextField.size(); i++) {
-//				if(!listTextField.get(i).getText().equals("")) {
-//					listRecup.add(listTextField.get(i).getText());
-//					System.out.println(listRecup.get(i));
-//				} else {
-//					protectionValeurs();
-//				}
-//		    }
-//		});
-//	}
+	
 	
 	protected boolean buttonPressedValeurNull() {
 		for(int i = 0; i < listTextField.size(); i++) {
@@ -89,29 +93,30 @@ public class CreateNewPoint extends Application{
 			String result = "";
 			if(buttonPressedValeurNull()) {
 				for(int i = 0; i < listTextField.size(); i++) {
-					result += listTextField.get(i).getText() + ", ";
+					result += listTextField.get(i).getText() + ",";
 				}
-				this.error.setText(dataSet.getTitle() + " ajouté à la liste");
-				result = result.substring(0, result.length() - 2);
-				listNewPoint.add(result);
-				
+				result = result.substring(0, result.length() - 1);
+				error.setText(View.model.getTitle() + " ajouté à la liste");
+				View.newPoint = result;
+				lineSave.add(result.split(","));
+				System.out.println(View.newPoint);
 			} else {
-				protectionValeurs();
+				verifAllTextFieldFulfilled();
 			}
 		});
 	}
 	
-	protected void protectionValeurs() {
-		this.error.setText("Erreur: remplir les informations des cases: \n");
+	protected void verifAllTextFieldFulfilled() {
+		error.setText("Erreur: remplir les informations des cases: \n");
 		for(int l  = 0; l < listTextField.size(); l++) {
 			if(listTextField.get(l).getText().equals("")) {
 				error.setText(error.getText() + labelList.get(l) + "\n");
 			}
 		}
 	}
-
-
-
+	
+	
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
