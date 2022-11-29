@@ -3,7 +3,6 @@ package view;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -26,12 +25,14 @@ public class MenuBarClass {
 	FileChooser fileChooser = new FileChooser();
 	DataSet data;
 //	MenuItem loadItem;
-	MenuItem saveAsCSV, saveItem, exitItem;
+	MenuItem saveItem;
+	MenuItem exitItem;
+	MenuItem saveAsCSV;
 	
 	public MenuBarClass() {
 		Menu fileMenu = new Menu("Fichier");
 //		loadItem = new MenuItem("Charger fichier");
-		saveAsCSV = new MenuItem("Sauvegarder CSV");
+		saveAsCSV = new MenuItem("Sauvegarder fichier");
 		saveItem = new MenuItem("Sauvegarder graphique");
 		exitItem = new MenuItem("Quitter application");
 		
@@ -56,10 +57,12 @@ public class MenuBarClass {
 		this.saveAsCSV.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 			    try {
-			        FileWriter fileWriter = new FileWriter(View.file.toString());
+			        FileWriter fileWriter = new FileWriter(View.file, true);
 			        CSVWriter writer = new CSVWriter(fileWriter, ',', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
 			        List<String[]> list = CreateNewPoint.lineSave;
-			        writer.writeAll(list);
+			        for(int i = 0; i < list.size(); i++) {
+			        	writer.writeNext(list.get(i));
+			        }
 			        writer.close();
 			    }
 			    catch (IOException e) {

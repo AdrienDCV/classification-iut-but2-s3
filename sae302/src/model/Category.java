@@ -18,6 +18,7 @@ public abstract class Category {
 
 	public abstract List<IPoint> addToCategory(IMVCModel dataset);
 	public abstract List<IPoint> addToCategory(IPoint point);
+	public abstract List<IPoint> addToCategory(IPoint point, Category category);
 	
 	public  String getCategoryName() {
 		return this.categoryName;
@@ -26,4 +27,6 @@ public abstract class Category {
 	public List<IPoint> getCategoryElements() {
 		return this.categoryElements;
 	}
+	
+	
 }

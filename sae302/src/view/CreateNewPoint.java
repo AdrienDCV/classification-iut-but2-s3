@@ -20,6 +20,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class CreateNewPoint extends Application {
+	protected static String result;
 	protected static List<TextField> listTextField = new ArrayList<>();
 	protected static Button button = new Button("Submit");
 	protected static VBox vbox = new VBox();
@@ -27,6 +28,7 @@ public class CreateNewPoint extends Application {
 	protected static List<String> labelList = new ArrayList<>();
 	protected static List<Column> columnList = new ArrayList<>();
 	protected static List<String[]> lineSave = new ArrayList<>();
+	protected static Stage stage;
 	
 	@Override
 	public void start(Stage args) throws Exception {
@@ -35,8 +37,7 @@ public class CreateNewPoint extends Application {
 		textField();
 		vbox.getChildren().addAll(button, error);
 		buttonSubmit();
-		
-		Stage stage = new Stage();
+		stage = new Stage();
 		Scene scene = new Scene(vbox, 300, 400);
 		stage.setScene(scene);
 		stage.show();
@@ -94,10 +95,14 @@ public class CreateNewPoint extends Application {
 					result += listTextField.get(i).getText() + ",";
 				}
 				result = result.substring(0, result.length() - 1);
-
 				error.setText(View.model.getTitle() + " ajouté à la liste");
 				View.newPoint = result;
+				System.out.println(View.model.getPointsList().size());
+				View.model.loadFromString(View.newPoint);
+				System.out.println(View.model.getPointsList().size());
 				lineSave.add(result.split(","));
+				stage.close();
+				View.model.notifyObservers();
 			} else {
 				verifAllTextFieldFulfilled();
 			}
@@ -111,12 +116,6 @@ public class CreateNewPoint extends Application {
 				error.setText(error.getText() + labelList.get(l) + "\n");
 			}
 		}
-	}
-	
-	
-	
-	public static void main(String[] args) {
-		launch(args);
 	}
 	
 }

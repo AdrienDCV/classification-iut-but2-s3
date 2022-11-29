@@ -5,6 +5,7 @@ import java.util.List;
 import intefarces.IMVCModel;
 import intefarces.IPoint;
 import model.Category;
+import pokemon.Pokemon;
 
 public class Survived extends Category {
 
@@ -30,4 +31,12 @@ public class Survived extends Category {
 		}
 		return this.categoryElements;
     }
+    
+    public List<IPoint> addToCategory(IPoint point, Category category) {
+		if(this.categoryName.equals(category.getCategoryName())) {
+			this.categoryElements.add(point);
+		}
+		((Titanic) point).setSurvived(this);
+		return this.categoryElements;
+	}
 }

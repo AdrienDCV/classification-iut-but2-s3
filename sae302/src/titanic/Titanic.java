@@ -2,6 +2,7 @@ package titanic;
 
 import com.opencsv.bean.CsvBindByName;
 import intefarces.IPoint;
+import model.Category;
 import model.Column;
 
 public class Titanic implements IPoint {
@@ -157,8 +158,18 @@ public class Titanic implements IPoint {
 	}
 
     public boolean hasSurvived() {
+    	
 		if (this.survived == 1 ) return true;
 		return false;
     }
+
+	public void setSurvived(Category category) {
+	    if(category.getCategoryName().equals("Survived")) {
+			this.survived = 1;
+		} else {
+			this.survived = 0;
+		}
+	}
+    
 	
 }

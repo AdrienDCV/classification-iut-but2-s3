@@ -32,4 +32,12 @@ public class Virginica extends Category{
 		return this.categoryElements;
     }
     
+    public List<IPoint> addToCategory(IPoint point, Category category) {
+		if(this.categoryName.equals(category.getCategoryName())) {
+			this.categoryElements.add(point);
+		}
+		((Iris) point).setVariety(this.getCategoryName());
+		return this.categoryElements;
+	}
+    
 }

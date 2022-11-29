@@ -3,7 +3,7 @@ package view;
 import java.io.File;
 import java.util.List;
 
-
+import intefarces.IPoint;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -18,6 +18,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.beans.value.*;
 import main.ScatterChartObject;
+import model.Category;
 import model.Classification;
 import model.Column;
 import model.Criteria;
@@ -49,6 +50,7 @@ public class View extends Stage implements Observer{
 	static File file;
 	static String newPoint;
 	static Label labelK;
+	static Label robustness = new Label("robustesse : 0");
 	static int k;
 	/*
 	 * A supprimer
@@ -130,14 +132,17 @@ public class View extends Stage implements Observer{
 		slider.setPrefWidth(150);
         slider.setShowTickLabels(true);
         slider.setBlockIncrement(1);
+        View.k = 1;
+        labelK = new Label("Choisir valeur de k: " + View.k);
+        
         slider.valueProperty().addListener(new ChangeListener<Number>() {
             public void changed(ObservableValue<? extends Number> arg0, Number oldValue, Number newValue) {
             	View.k = newValue.intValue();
-            	System.out.println(View.k);
+            	labelK.setText("Choisir valeur de k: " + k);
             }
         });
         
-        Label labelK = new Label("Choisir valeur de k: " + View.k);
+       
 		labelK.setTextFill(Color.WHITE);
 
         VBox root = new VBox();
@@ -189,16 +194,7 @@ public class View extends Stage implements Observer{
     					} else {
     						createScatter();
     					}
-    					/*classification = new Classification(model.getColumnsList(), criteria, typeDistance.getValue());
-    					
-    					p = new Pokemon("TestPokemon", 95, 16000, 250.0, 55, 600001, 50, 74, 75, "normal", "flying", 2, false);
-    	    			model.getCategoriesList().get(2).addToCategory(p);
-    	    			View.model.addLine(p);
-        				
-        				
-        				System.out.println(classification.knnCalcul(3, dataSet.getPointsList().get(12), dataSet.getPointsList()));
-        				System.out.println("Robustnesss : ");
-        				System.out.println(classification.calculRobustness(3, dataSet.getPointsList().get(12), dataSet.getCategoriesList().get(1)));*/
+    					View.classification = new Classification(model.getColumnsList(), criteria, typeDistance.getValue());
         			} else {
         				System.out.println("Selectionne des paramètres différents !");
         			}
@@ -208,20 +204,16 @@ public class View extends Stage implements Observer{
     	});
     	
     	classifier.setOnMouseClicked(e -> {
-    		/*Category c = classification.classifyPoint(3, p, model.getPointsList());
-			
-    			for(IPoint point : model.getCategoriesList().get(2).getCategoryElements()) {
-    				p.setIsLegendary(c);
-    				for(Category dataC : View.model.getCategoriesList()) {
-        				if(c.getCategoryName().equals(dataC.getCategoryName())) {
-        					dataC.addToCategory(p);
-        				}
-        			}
-    			}
-    			model.getCategoriesList().get(2).getCategoryElements().clear();
-    			
-    			model.notifyObservers();
-   */
+    		Category undefined = View.model.getCategoriesList().get(View.model.getCategoriesList().size() -1);
+    		System.out.println(undefined.getCategoryElements());
+    		for(IPoint point : undefined.getCategoryElements()) {
+    			Category category = classification.classifyPoint(k, point, model.getPointsList());
+    			this.robustness.setText("robustesse : " + classification.calculRobustness(k, point, category));
+    			this.robustness.setTextFill(Color.WHITE);
+    			category.addToCategory(point, category);
+    		}
+    		undefined.getCategoryElements().clear();
+    		updateScatter();
     	});
     	
     	ajouter.setOnAction(new EventHandler<ActionEvent>() {
@@ -239,7 +231,7 @@ public class View extends Stage implements Observer{
     	vbox.setPadding(new Insets(80,10,100,10));
     	vbox.setSpacing(10);
     	vbox.setStyle("-fx-background-color: #101010;");
-    	vbox.getChildren().addAll(typeDataSet,typeDistance,parcourir,criteriaX,criteriaY,confirmer, classifier, ajouter, sliderVBox);
+    	vbox.getChildren().addAll(typeDataSet,typeDistance,parcourir,criteriaX,criteriaY,confirmer, classifier, ajouter, sliderVBox, robustness);
     	return vbox;
     }
     

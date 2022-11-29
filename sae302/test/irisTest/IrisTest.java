@@ -25,7 +25,7 @@ public class IrisTest {
 	@Test
 	public void getValueSepalLengthTest() {
 		NumberColumn col=new NumberColumn("sepal.length", null, null);
-		assertEquals(0.0,iris1.getValue(col));
+		assertEquals(null,iris1.getValue(col));
 	}
 	
 	@Test
