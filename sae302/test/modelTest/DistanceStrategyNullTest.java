@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import model.DistanceStrategy;
 import model.DistanceStrategyNull;
-import model.pokemon.Pokemon;
-import model.pokemon.PokemonDataSet;
+import pokemon.Pokemon;
+import pokemon.PokemonDataSet;
 
 public class DistanceStrategyNullTest {
 

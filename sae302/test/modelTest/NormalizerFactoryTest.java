@@ -2,13 +2,19 @@ package modelTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
+import intefarces.IPoint;
 import model.BooleanColumn;
 import model.Column;
+import model.ColumnNull;
 import model.EnumColumn;
 import model.NormalizerFactory;
 import model.NumberColumn;
+import titanic.Titanic;
 
 public class NormalizerFactoryTest {
 
@@ -35,8 +41,17 @@ public class NormalizerFactoryTest {
 	
 	@Test
 	public void normalizerFactoryEnumTest() {
-		EnumColumn col=new EnumColumn("test", null, null);
+		List<IPoint> list=new ArrayList<IPoint>();
+		list.add(new Titanic());
+		EnumColumn col=new EnumColumn("Sex", null, list);
 		NormalizerFactory fact=new NormalizerFactory();
 		assertEquals("EN",fact.creatValueNormalizer(col).getValueNormalizer());
+	}
+	
+	@Test
+	public void normalizerFactoryNullTest() {
+		ColumnNull col=new ColumnNull();
+		NormalizerFactory fact=new NormalizerFactory();
+		assertEquals("NULL",fact.creatValueNormalizer(col).getValueNormalizer());
 	}
 }

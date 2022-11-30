@@ -54,12 +54,12 @@ public class NumberValueNormalizerTest {
         assertEquals(0.6052631578947368, nvn.normalize(25.0));
     }
     
-//    @Test
-//    public void test_number_value_normalizer_denormalize() {
-//    	NumberColumn nColumn = new NumberColumn("base_egg_steps", new PokemonDataSet(), new ArrayList<>());
-//        NumberValueNormalizer numberValueNormalizer = new NumberValueNormalizer(nColumn);
-//        assertEquals(25.0, numberValueNormalizer.denormalize(1.0));
-//    }
+    @Test
+    public void test_number_value_normalizer_denormalize() {
+    	NumberColumn nColumn = new NumberColumn("base_egg_steps", new PokemonDataSet(), new ArrayList<>());
+        NumberValueNormalizer numberValueNormalizer = new NumberValueNormalizer(nColumn);
+        assertEquals(1.0, numberValueNormalizer.denormalize(1.0));
+    }
     
 
 }
