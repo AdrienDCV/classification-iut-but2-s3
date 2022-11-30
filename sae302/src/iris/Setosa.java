@@ -5,6 +5,7 @@ import java.util.List;
 import intefarces.IMVCModel;
 import intefarces.IPoint;
 import model.Category;
+import pokemon.Pokemon;
 
 public class Setosa extends Category {
 
@@ -31,5 +32,13 @@ public class Setosa extends Category {
 		}
 		return this.categoryElements;
     }
+    
+    public List<IPoint> addToCategory(IPoint point, Category category) {
+		if(this.categoryName.equals(category.getCategoryName())) {
+			this.categoryElements.add(point);
+		}
+		((Iris) point).setVariety(this.getCategoryName());
+		return this.categoryElements;
+	}
     
 }
