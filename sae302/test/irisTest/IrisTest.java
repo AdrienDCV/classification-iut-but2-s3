@@ -5,8 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import iris.Iris;
-import model.Column;
+import model.iris.Iris;
 import model.NumberColumn;
 
 public class IrisTest {

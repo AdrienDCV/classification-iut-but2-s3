@@ -3,10 +3,6 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-import intefarces.IPoint;
-import titanic.Embarked;
-import titanic.Sex;
-import titanic.Titanic;
 
 public class EnumValueNormalizer extends ValueNormalizer{
 

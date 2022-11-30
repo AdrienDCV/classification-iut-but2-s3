@@ -2,22 +2,14 @@ package modelTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import intefarces.IPoint;
-import model.BooleanColumn;
-import model.Column;
 import model.EnumColumn;
-import model.EnumValueNormalizer;
-import pokemon.PokemonDataSet;
-import titanic.Embarked;
-import titanic.Sex;
-import titanic.Titanic;
-import titanic.TitanicDataSet;
+import model.titanic.TitanicDataSet;
 
 public class EnumColumnTest {
 	List<IPoint> pointsList;

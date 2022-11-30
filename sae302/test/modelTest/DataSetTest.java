@@ -10,10 +10,8 @@ import org.junit.jupiter.api.Test;
 import intefarces.IPoint;
 import model.Category;
 import model.Column;
-import pokemon.LegendaryCategory;
-import pokemon.NotLegendaryCategory;
-import pokemon.Pokemon;
-import pokemon.PokemonDataSet;
+import model.pokemon.Pokemon;
+import model.pokemon.PokemonDataSet;
 
 public class DataSetTest {
 

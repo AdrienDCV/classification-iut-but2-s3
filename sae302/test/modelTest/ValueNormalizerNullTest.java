@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import intefarces.IPoint;
 import model.NumberColumn;
 import model.ValueNormalizerNull;
-import pokemon.PokemonDataSet;
+import model.pokemon.PokemonDataSet;
 
 public class ValueNormalizerNullTest {
 

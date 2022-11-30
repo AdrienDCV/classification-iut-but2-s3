@@ -11,9 +11,9 @@ import org.junit.jupiter.api.Test;
 import model.Classification;
 import model.Column;
 import model.Criteria;
-import pokemon.LegendaryCategory;
-import pokemon.Pokemon;
-import pokemon.PokemonDataSet;
+import model.pokemon.LegendaryCategory;
+import model.pokemon.Pokemon;
+import model.pokemon.PokemonDataSet;
 
 public class ClassificationTest {
 	Criteria criteria;

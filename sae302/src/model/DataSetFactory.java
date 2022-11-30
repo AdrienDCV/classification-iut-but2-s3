@@ -1,11 +1,8 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import iris.IrisDataSet;
-import pokemon.PokemonDataSet;
-import titanic.TitanicDataSet;
+import model.iris.IrisDataSet;
+import model.pokemon.PokemonDataSet;
+import model.titanic.TitanicDataSet;
 
 public class DataSetFactory  {
     

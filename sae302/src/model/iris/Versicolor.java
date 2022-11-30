@@ -1,16 +1,15 @@
-package iris;
+package model.iris;
 
 import java.util.List;
 
 import intefarces.IMVCModel;
 import intefarces.IPoint;
 import model.Category;
-import pokemon.Pokemon;
 
-public class Setosa extends Category {
+public class Versicolor extends Category{
 
-    public Setosa() {
-        super("Setosa");
+    public Versicolor() {
+        super("Versicolor");
     }
 
     @Override
@@ -18,7 +17,7 @@ public class Setosa extends Category {
         IrisDataSet irisDataSet = (IrisDataSet) dataset;
 
 		for (IPoint iris : irisDataSet.getPointsList()) {
-			if (((Iris) iris).getVariety().equals("Setosa")) {
+			if (((Iris) iris).getVariety().equals("Versicolor")) {
 				this.categoryElements.add(iris);
 			}
 		}
@@ -27,7 +26,7 @@ public class Setosa extends Category {
 
     @Override
     public List<IPoint> addToCategory(IPoint point) {
-        if(((Iris)point).equals("Setosa")) {
+        if(((Iris)point).equals("Versicolor")) {
 			this.categoryElements.add(point);
 		}
 		return this.categoryElements;
@@ -40,5 +39,4 @@ public class Setosa extends Category {
 		((Iris) point).setVariety(this.getCategoryName());
 		return this.categoryElements;
 	}
-    
 }
