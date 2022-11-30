@@ -8,10 +8,10 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
@@ -36,8 +36,6 @@ public class View extends Stage implements Observer{
     //TextField entrerK=new TextField();
 
     static FileChooser fichierCsv;
-	static HBox hboxVariables;
-	static Canvas canvas;//changer en scaterChart
 	static DataSet model;
 	static Criteria criteria;
 	static Classification classification;
@@ -52,32 +50,27 @@ public class View extends Stage implements Observer{
 	static Label labelK;
 	static Label robustness = new Label("robustesse : 0");
 	static int k;
-	/*
-	 * A supprimer
-	 
-	static Pokemon p;
-	*/
+	static MenuBarClass menu = new MenuBarClass();
 	
 	public View() {
+		
 		initWidget();
 		
-		
-		
 		hbox=new HBox();
-    	hbox.getChildren().addAll(this.vBox(), canvas);
-    	MenuBarClass menuBarClass = new MenuBarClass();
-    	VBox verticalPosition = new VBox();
-        verticalPosition.getChildren().addAll(menuBarClass.getMenuBar(), hbox);
-       
-        
+		VBox vbox = this.vBox();
+    	hbox.getChildren().addAll(vbox);
+    	VBox.setVgrow(hbox, Priority.ALWAYS);
+    	VBox vboxfinal = new VBox();
+    	vboxfinal.getChildren().addAll(menu.getMenuBar(), hbox);
+    	
     	dataSetComboBox();
     	distanceComboBox();
     	
 //    	menuBarClass.loadFile();
-    	menuBarClass.exitApplication();
-    	menuBarClass.saveScatterChart();
+    	menu.exitApplication();
+    	menu.saveScatterChart();
     	
-    	Scene scene=new Scene(verticalPosition,1000,500);
+    	Scene scene=new Scene(vboxfinal,1000,720);
     	this.setTitle("test");
     	this.setScene(scene);
     	this.show();
@@ -85,15 +78,14 @@ public class View extends Stage implements Observer{
 	}
 
 	private static void initWidget() {
+		View.robustness.setTextFill(Color.WHITE);
 		initButton();
 	    //Button sauvegarde=new Button("sauvegarder");
 	    initComboBox();
 	    sliderVBox = initSlider();
-	    //TextField entrerK=new TextField();
+
 	    fichierCsv=new FileChooser();
-		hboxVariables=new HBox();
-		canvas=new Canvas();//changer en scaterChart
-//		dataSet = new PokemonDataSet("Ratio");
+
 	}
 
 	private static void initComboBox() {
@@ -156,17 +148,10 @@ public class View extends Stage implements Observer{
     	
     	//entrerK.setPromptText("entrer k");
     	//entrerK.setMaxWidth(100);
-    	Stage stage = this;
     	View view = this;
     	parcourir.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(final ActionEvent e) {
-/*<<<<<<< HEAD
-                File file = fichierCsv.showOpenDialog(stage);
-           
-                dataSet.loadFromFile(file.toString());
-                comboBox();  
-=======*/
-                file = fichierCsv.showOpenDialog(stage);
+                file = fichierCsv.showOpenDialog(view);
                 System.out.println(file.toString());
                 if (file != null) {
                 	View.model = DataSetFactory.createDataSet(typeDataSet.getValue());
@@ -207,8 +192,8 @@ public class View extends Stage implements Observer{
     		System.out.println(undefined.getCategoryElements());
     		for(IPoint point : undefined.getCategoryElements()) {
     			Category category = classification.classifyPoint(k, point, model.getPointsList());
-    			this.robustness.setText("robustesse : " + classification.calculRobustness(k, point, category));
-    			this.robustness.setTextFill(Color.WHITE);
+    			View.robustness.setText("robustesse : " + classification.calculRobustness(k, point, category));
+    			
     			category.addToCategory(point, category);
     		}
     		undefined.getCategoryElements().clear();
@@ -219,7 +204,7 @@ public class View extends Stage implements Observer{
             public void handle(final ActionEvent e) {
             	CreateNewPoint cnp = new CreateNewPoint();
             	try {
-					cnp.start(stage);
+					cnp.start(view);
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
@@ -229,7 +214,7 @@ public class View extends Stage implements Observer{
     	vbox=new VBox();
     	vbox.setPadding(new Insets(80,10,100,10));
     	vbox.setSpacing(10);
-    	vbox.setStyle("-fx-background-color: #101010;");
+    	vbox.setStyle("-fx-background-color: #bdbbbb;");
     	vbox.getChildren().addAll(typeDataSet,typeDistance,parcourir,criteriaX,criteriaY,confirmer, classifier, ajouter, sliderVBox, robustness);
     	return vbox;
     }
@@ -238,6 +223,7 @@ public class View extends Stage implements Observer{
     	View.criteria = new Criteria(criteriaX.getValue(), criteriaY.getValue());
 		View.scatterChart = new ScatterChartObject(criteria, View.model);
 		View.scatterChart.initScatter();
+		HBox.setHgrow(View.scatterChart.getScatterChart(), Priority.ALWAYS);
 		hbox.getChildren().addAll(scatterChart.getScatterChart());
     }
     
