@@ -10,17 +10,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import intefarces.IPoint;
-import model.Column;
-import model.DataSet;
-import model.EnumColumn;
-import model.EnumValueNormalizer;
 import model.NumberColumn;
 import model.NumberValueNormalizer;
-import pokemon.PokemonDataSet;
-import titanic.Embarked;
-import titanic.Sex;
-import titanic.Titanic;
-import titanic.TitanicDataSet;
+import model.pokemon.PokemonDataSet;
+import model.titanic.Embarked;
+import model.titanic.Sex;
+import model.titanic.Titanic;
 
 public class NumberValueNormalizerTest {
 	
@@ -54,12 +49,12 @@ public class NumberValueNormalizerTest {
         assertEquals(0.6052631578947368, nvn.normalize(25.0));
     }
     
-//    @Test
-//    public void test_number_value_normalizer_denormalize() {
-//    	NumberColumn nColumn = new NumberColumn("base_egg_steps", new PokemonDataSet(), new ArrayList<>());
-//        NumberValueNormalizer numberValueNormalizer = new NumberValueNormalizer(nColumn);
-//        assertEquals(25.0, numberValueNormalizer.denormalize(1.0));
-//    }
+    @Test
+    public void test_number_value_normalizer_denormalize() {
+    	NumberColumn nColumn = new NumberColumn("base_egg_steps", new PokemonDataSet(), new ArrayList<>());
+        NumberValueNormalizer numberValueNormalizer = new NumberValueNormalizer(nColumn);
+        assertEquals(1.0, numberValueNormalizer.denormalize(1.0));
+    }
     
 
 }

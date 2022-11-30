@@ -4,7 +4,7 @@ import model.iris.IrisDataSet;
 import model.pokemon.PokemonDataSet;
 import model.titanic.TitanicDataSet;
 
-public class DataSetFactory  {
+public class DataSetFactory {
     
     public static DataSet createDataSet(String dataSetName) {
         if (dataSetName.equals("Pokemon")) return new PokemonDataSet("PokemonDataSet");

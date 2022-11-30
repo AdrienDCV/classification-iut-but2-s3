@@ -26,5 +26,10 @@ public class EnumColumnTest {
     public void test_enum_column_constructor() {
        assertEquals("Embarked", new EnumColumn("Embarked", dataSet, pointsList).getName());
     }
+    
+    @Test
+    public void isNormalizableTest() {
+    	assert(new EnumColumn("Embarked", dataSet, pointsList).isNormalizable());
+    }
 
 }
