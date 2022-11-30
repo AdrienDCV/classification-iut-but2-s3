@@ -17,7 +17,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.beans.value.*;
-import main.ScatterChartObject;
 import model.Category;
 import model.Classification;
 import model.Column;
@@ -47,7 +46,7 @@ public class View extends Stage implements Observer{
 	static VBox vbox;
 	static File file;
 	static String newPoint;
-	static Label labelK;
+	static Label labelK, selectType, selectFichier, selectCriteriaX,selectCriteriaY,selectConfirmer,selectClassifier,selectAjouter;
 	static Label robustness = new Label("robustesse : 0");
 	static int k;
 	static MenuBarClass menu = new MenuBarClass();
@@ -189,11 +188,9 @@ public class View extends Stage implements Observer{
     	
     	classifier.setOnMouseClicked(e -> {
     		Category undefined = View.model.getCategoriesList().get(View.model.getCategoriesList().size() -1);
-    		System.out.println(undefined.getCategoryElements());
     		for(IPoint point : undefined.getCategoryElements()) {
     			Category category = classification.classifyPoint(k, point, model.getPointsList());
     			View.robustness.setText("robustesse : " + classification.calculRobustness(k, point, category));
-    			
     			category.addToCategory(point, category);
     		}
     		undefined.getCategoryElements().clear();
@@ -212,14 +209,15 @@ public class View extends Stage implements Observer{
     	});
     	
     	vbox=new VBox();
-    	vbox.setPadding(new Insets(80,10,100,10));
+    	vbox.setPadding(new Insets(10,10,100,10));
     	vbox.setSpacing(10);
     	vbox.setStyle("-fx-background-color: #bdbbbb;");
-    	vbox.getChildren().addAll(typeDataSet,typeDistance,parcourir,criteriaX,criteriaY,confirmer, classifier, ajouter, sliderVBox, robustness);
+    	vbox.getChildren().addAll(typeDataSet,parcourir,criteriaX,criteriaY,confirmer, ajouter, typeDistance,sliderVBox, classifier, robustness);
     	return vbox;
     }
     
     public void createScatter() {
+    	System.out.println(View.model.getPointsList().size());
     	View.criteria = new Criteria(criteriaX.getValue(), criteriaY.getValue());
 		View.scatterChart = new ScatterChartObject(criteria, View.model);
 		View.scatterChart.initScatter();

@@ -142,7 +142,10 @@ public class Classification {
 	public void clearCategories(List<Category> listCategory) {
 		for(Category category :  listCategory) {
 			//clear les category à chaque itération
-			category.getCategoryElements().clear();
+			if(!category.getCategoryName().equals("Undefined")) {
+				category.getCategoryElements().clear();
+			}
+		
 		}
 	}
 
