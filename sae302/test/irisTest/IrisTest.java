@@ -5,8 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import iris.Iris;
-import model.Column;
+import model.iris.Iris;
 import model.NumberColumn;
 
 public class IrisTest {
@@ -25,7 +24,7 @@ public class IrisTest {
 	@Test
 	public void getValueSepalLengthTest() {
 		NumberColumn col=new NumberColumn("sepal.length", null, null);
-		assertEquals(0.0,iris1.getValue(col));
+		assertEquals(null,iris1.getValue(col));
 	}
 	
 	@Test

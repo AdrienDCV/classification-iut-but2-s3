@@ -12,9 +12,9 @@ import intefarces.IPoint;
 import model.Column;
 import model.EnumColumn;
 import model.EnumValueNormalizer;
-import titanic.Embarked;
-import titanic.Sex;
-import titanic.Titanic;
+import model.titanic.Embarked;
+import model.titanic.Sex;
+import model.titanic.Titanic;
 
 public class EnumValueNormalizerTest {
   

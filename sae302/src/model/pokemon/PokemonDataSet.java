@@ -1,9 +1,8 @@
-package pokemon;
+package model.pokemon;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.StringReader;
 import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
@@ -85,13 +84,11 @@ public class PokemonDataSet extends DataSet {
 
 	@Override
 	public void loadFromString(String data) {
-		System.out.println(data);
 		String[] dataList = data.split(",");
 		Pokemon pokemon = new Pokemon(dataList[0],Integer.parseInt(dataList[1]),Integer.parseInt(dataList[2]),Double.parseDouble(dataList[3]),Integer.parseInt(dataList[4]),Integer.parseInt(dataList[5]),Integer.parseInt(dataList[6]),Integer.parseInt(dataList[7]),
 				Integer.parseInt(dataList[8]),dataList[9],dataList[10],Double.parseDouble(dataList[11]));
 		this.addLine(pokemon);
 		this.categoriesList.get(this.getCategoriesList().size()-1).addToCategory(pokemon);
-
 	}
 
 	@Override

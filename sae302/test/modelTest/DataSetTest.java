@@ -10,10 +10,8 @@ import org.junit.jupiter.api.Test;
 import intefarces.IPoint;
 import model.Category;
 import model.Column;
-import pokemon.LegendaryCategory;
-import pokemon.NotLegendaryCategory;
-import pokemon.Pokemon;
-import pokemon.PokemonDataSet;
+import model.pokemon.Pokemon;
+import model.pokemon.PokemonDataSet;
 
 public class DataSetTest {
 
@@ -83,9 +81,12 @@ public class DataSetTest {
 	
 	@Test
 	public void getNormalizableColumnListTest() {
-		List<Column> list=new ArrayList<Column>();
+		Pokemon pokemon1 = new Pokemon("Swablu", 40, 5120, 255.0, 60, 600000, 45, 75, 50, "normal", "flying", 1.2, false);
 		PokemonDataSet pokemons=new PokemonDataSet();
-		assertEquals(list,pokemons.getNormalizableColumns());
+		pokemons.loadFromFile("./res/pokemon_train.csv");
+		assertEquals("attack",pokemons.getNormalizableColumns().get(0).getName());
 	}
+	
+	
 	
 }

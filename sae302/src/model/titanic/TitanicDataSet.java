@@ -1,4 +1,4 @@
-package iris;
+package model.titanic;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -12,45 +12,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.opencsv.bean.CsvToBeanBuilder;
-
 import model.Column;
 import model.ColumnFactory;
 import model.DataSet;
 import model.Undefined;
 
-public class IrisDataSet extends DataSet {
-
-    public IrisDataSet(String title) {
+public class TitanicDataSet extends DataSet{
+    
+    public TitanicDataSet(String title) {
 		super(title);
-		this.addCategory(new Setosa());
-		this.addCategory(new Versicolor());
-		this.addCategory(new Virginica());
+		this.addCategory(new Survived());
+		this.addCategory(new Died());
 		this.addCategory(new Undefined());
 	}
 
-	public IrisDataSet() {
+	public TitanicDataSet() {
 		this("");
 	}
 	
 	@Override
 	public void loadFromFile(String datafile) {
 		try {
-        	List<Iris> irisList = new CsvToBeanBuilder<Iris>(Files.newBufferedReader(Paths.get(datafile)))
+        	List<Titanic> titanicPassengersList = new CsvToBeanBuilder<Titanic>(Files.newBufferedReader(Paths.get(datafile)))
                     .withSeparator(',')
-                    .withType(Iris.class)
+                    .withType(Titanic.class)
                     .build().parse();
-        	// Ajout des Iris dans IPoint
-        	this.pointsList.addAll(irisList);
+        	// Ajout des passagers dans IPoint
+        	this.pointsList.addAll(titanicPassengersList);
         	//nom des cols
         	BufferedReader columnReader = new BufferedReader(new FileReader(datafile));
         	String[] columnName = columnReader.readLine().split(",");
         	
-        	//type de la classe Iris
-        	Iris iris = irisList.get(0);
-        	Field[] field = iris.getClass().getDeclaredFields();
+        	//type de la classe Titanic
+        	Titanic titanicPassenger = titanicPassengersList.get(0);
+        	Field[] field = titanicPassenger.getClass().getDeclaredFields();
         	
         	List<String> columnType = getFieldType(field);
-
         	//init des col
 			initColumns(columnName, columnType);
 			this.categoryInit();
@@ -67,9 +64,9 @@ public class IrisDataSet extends DataSet {
 	protected void initColumns(String[] columnName, List<String> columnType) {
 		for(int j = 0; j < columnType.size(); j++) {
 			Column column = ColumnFactory.createColumn(this, this.pointsList, columnType.get(j), columnName[j]);
-		 	if(!column.getName().equals("null")) {
-		 		this.columnsList.add(column);
-		 	}
+			if(!column.getName().equals("null")) {
+				this.columnsList.add(column);
+			}
 		}
 	}
 
@@ -84,11 +81,11 @@ public class IrisDataSet extends DataSet {
 
 	@Override
 	public void loadFromString(String data) {
-		List<Iris> irisList = new CsvToBeanBuilder<Iris>(new StringReader(data))
-                .withSeparator(',')
-                .withType(Iris.class)
-                .build().parse();
-		this.pointsList.addAll(irisList);
+		String[] dataList = data.split(",");
+		Titanic passenger = new Titanic(Integer.parseInt(dataList[0]),Integer.parseInt(dataList[1]),Integer.parseInt(dataList[2]),dataList[3],Sex.valueOf(dataList[4]),Double.parseDouble(dataList[5]),Integer.parseInt(dataList[6]),Integer.parseInt(dataList[7]),
+				dataList[8],Double.parseDouble(dataList[9]),dataList[10],Embarked.valueOf(dataList[11]));
+		this.addLine(passenger);
+		this.categoriesList.get(this.getCategoriesList().size()-1).addToCategory(passenger);
 	}
 
 	@Override
@@ -100,5 +97,8 @@ public class IrisDataSet extends DataSet {
 	public Column defaultYCol() {
 		return this.getColumnsList().get(1);
 	}
-    
+	
+	
+
+	
 }

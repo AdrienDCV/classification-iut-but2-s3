@@ -1,4 +1,4 @@
-package titanic;
+package model.titanic;
 
 public enum Sex {
 	UNKNOWN("unknown"), MALE("male"), FEMALE("female");

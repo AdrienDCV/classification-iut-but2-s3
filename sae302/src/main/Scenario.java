@@ -6,9 +6,8 @@ import intefarces.IPoint;
 import model.Category;
 import model.Classification;
 import model.Criteria;
-import pokemon.LegendaryCategory;
-import pokemon.Pokemon;
-import pokemon.PokemonDataSet;
+import model.pokemon.Pokemon;
+import model.pokemon.PokemonDataSet;
 
 public class Scenario {
 	public static void main(String[] args) {

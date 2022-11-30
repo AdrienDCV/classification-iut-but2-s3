@@ -9,10 +9,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import intefarces.IPoint;
-import model.DataSet;
 import model.NumberColumn;
-import pokemon.Pokemon;
-import pokemon.PokemonDataSet;
+import model.pokemon.Pokemon;
+import model.pokemon.PokemonDataSet;
 
 public class NumberColumnTest {
     

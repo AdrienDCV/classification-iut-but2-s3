@@ -4,8 +4,6 @@ import java.util.List;
 
 import intefarces.IMVCModel;
 import intefarces.IPoint;
-import pokemon.Pokemon;
-import pokemon.PokemonDataSet;
 
 public class Undefined extends Category {
 

@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import titanic.Embarked;
-import titanic.Sex;
-import titanic.Titanic;
+import model.titanic.Embarked;
+import model.titanic.Sex;
+import model.titanic.Titanic;
 
 public class TitanicTest {
 	Titanic tita;

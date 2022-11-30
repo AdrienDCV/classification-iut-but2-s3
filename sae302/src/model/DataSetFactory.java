@@ -1,13 +1,10 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
+import model.iris.IrisDataSet;
+import model.pokemon.PokemonDataSet;
+import model.titanic.TitanicDataSet;
 
-import iris.IrisDataSet;
-import pokemon.PokemonDataSet;
-import titanic.TitanicDataSet;
-
-public class DataSetFactory  {
+public class DataSetFactory {
     
     public static DataSet createDataSet(String dataSetName) {
         if (dataSetName.equals("Pokemon")) return new PokemonDataSet("PokemonDataSet");

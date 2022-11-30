@@ -1,4 +1,4 @@
-package iris;
+package model.titanic;
 
 import java.util.List;
 
@@ -6,27 +6,26 @@ import intefarces.IMVCModel;
 import intefarces.IPoint;
 import model.Category;
 
-public class Versicolor extends Category{
+public class Survived extends Category {
 
-    public Versicolor() {
-        super("Versicolor");
+    public Survived() {
+        super("Survived");
     }
 
     @Override
     public List<IPoint> addToCategory(IMVCModel dataset) {
-        IrisDataSet irisDataSet = (IrisDataSet) dataset;
-
-		for (IPoint iris : irisDataSet.getPointsList()) {
-			if (((Iris) iris).getVariety().equals("Versicolor")) {
-				this.categoryElements.add(iris);
-			}
-		}
+        TitanicDataSet titanicDataSet = (TitanicDataSet) dataset;
+        for (IPoint passenger : titanicDataSet.getPointsList()) {
+            if (((Titanic) passenger).hasSurvived()) {
+                this.categoryElements.add(passenger);
+            }
+        }
 		return this.categoryElements;
     }
 
     @Override
     public List<IPoint> addToCategory(IPoint point) {
-        if(((Iris)point).equals("Versicolor")) {
+        if(((Titanic)point).hasSurvived()) {
 			this.categoryElements.add(point);
 		}
 		return this.categoryElements;
@@ -36,7 +35,7 @@ public class Versicolor extends Category{
 		if(this.categoryName.equals(category.getCategoryName())) {
 			this.categoryElements.add(point);
 		}
-		((Iris) point).setVariety(this.getCategoryName());
+		((Titanic) point).setSurvived(this);
 		return this.categoryElements;
 	}
 }

@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import pokemon.Pokemon;
-import pokemon.PokemonDataSet;
+import model.pokemon.Pokemon;
+import model.pokemon.PokemonDataSet;
 
 class PokemonTest {
 	

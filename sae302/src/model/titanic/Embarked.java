@@ -1,4 +1,4 @@
-package titanic;
+package model.titanic;
 
 public enum Embarked {
 	UNKNOWN("unknown"), S("S"), C("C"), Q("Q");
