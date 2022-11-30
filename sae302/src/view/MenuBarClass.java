@@ -56,19 +56,12 @@ public class MenuBarClass {
 	public void saveAsCSVFile() {
 		this.saveAsCSV.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-			    try {
-			        FileWriter fileWriter = new FileWriter(View.file, true);
-			        CSVWriter writer = new CSVWriter(fileWriter, ',', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
-			        List<String[]> list = CreateNewPoint.lineSave;
-			        for(int i = 0; i < list.size(); i++) {
-			        	writer.writeNext(list.get(i));
-			        }
-			        writer.close();
-			    }
-			    catch (IOException e) {
-			    	System.out.println(e.getMessage());
-			        e.printStackTrace();
-			    }
+				SaveAs saveAs = new SaveAs();
+            	try {
+					saveAs.start(saveAs.stage);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 	}

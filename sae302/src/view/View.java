@@ -17,7 +17,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.beans.value.*;
-import main.ScatterChartObject;
 import model.Category;
 import model.Classification;
 import model.Column;
@@ -208,8 +207,8 @@ public class View extends Stage implements Observer{
     		System.out.println(undefined.getCategoryElements());
     		for(IPoint point : undefined.getCategoryElements()) {
     			Category category = classification.classifyPoint(k, point, model.getPointsList());
-    			this.robustness.setText("robustesse : " + classification.calculRobustness(k, point, category));
-    			this.robustness.setTextFill(Color.WHITE);
+    			robustness.setText("robustesse : " + classification.calculRobustness(k, point, category));
+    			robustness.setTextFill(Color.WHITE);
     			category.addToCategory(point, category);
     		}
     		undefined.getCategoryElements().clear();
