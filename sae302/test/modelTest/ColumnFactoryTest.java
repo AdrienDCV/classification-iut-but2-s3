@@ -9,8 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import intefarces.IPoint;
 import model.ColumnFactory;
-import model.NumberColumn;
-import pokemon.PokemonDataSet;
+import model.pokemon.PokemonDataSet;
 
 public class ColumnFactoryTest {
 

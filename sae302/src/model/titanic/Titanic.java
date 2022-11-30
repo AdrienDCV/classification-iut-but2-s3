@@ -1,4 +1,4 @@
-package titanic;
+package model.titanic;
 
 import com.opencsv.bean.CsvBindByName;
 import intefarces.IPoint;

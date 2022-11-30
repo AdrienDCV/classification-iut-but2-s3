@@ -1,11 +1,10 @@
-package titanic;
+package model.titanic;
 
 import java.util.List;
 
 import intefarces.IMVCModel;
 import intefarces.IPoint;
 import model.Category;
-import pokemon.Pokemon;
 
 public class Died extends Category  {
 

@@ -9,12 +9,12 @@ import intefarces.IPoint;
 
 public class Classification {
 	
-	List<Column> column;
-	DataSet dataset;
-	Criteria criteria;
-	Column colX;
-	Column colY;
-	DistanceStrategy distance;
+	protected List<Column> column;
+	protected DataSet dataset;
+	protected Criteria criteria;
+	protected Column colX;
+	protected Column colY;
+	protected DistanceStrategy distance;
 	
 	public Classification(List<Column> column, Criteria criteria, String distanceStrategyName) {
 		this.column = column;

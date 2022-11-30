@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import model.DistanceStrategy;
 import model.DistanceStrategyNull;
 import model.pokemon.Pokemon;
 import model.pokemon.PokemonDataSet;

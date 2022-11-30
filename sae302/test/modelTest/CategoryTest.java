@@ -7,9 +7,8 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 import intefarces.IPoint;
-import model.Category;
-import pokemon.LegendaryCategory;
-import pokemon.Pokemon;
+import model.pokemon.LegendaryCategory;
+import model.pokemon.Pokemon;
 
 public class CategoryTest {
 

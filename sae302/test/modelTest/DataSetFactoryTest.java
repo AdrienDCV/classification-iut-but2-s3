@@ -4,11 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import iris.IrisDataSet;
+import model.iris.IrisDataSet;
 import model.DataSetFactory;
 import model.DataSetNull;
-import pokemon.PokemonDataSet;
-import titanic.TitanicDataSet;
+import model.pokemon.PokemonDataSet;
+import model.titanic.TitanicDataSet;
 
 public class DataSetFactoryTest {
 

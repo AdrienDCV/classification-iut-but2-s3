@@ -2,17 +2,12 @@ package modelTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 
-import intefarces.IPoint;
-import model.Criteria;
 import model.DistanceEuclidienne;
 import model.DistanceManhattan;
-import model.NumberColumn;
-import pokemon.Pokemon;
-import pokemon.PokemonDataSet;
+import model.pokemon.Pokemon;
+import model.pokemon.PokemonDataSet;
 
 public class DistanceTest {
 

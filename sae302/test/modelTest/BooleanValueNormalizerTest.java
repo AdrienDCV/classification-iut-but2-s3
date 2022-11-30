@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import model.BooleanColumn;
 import model.BooleanValueNormalizer;
-import pokemon.PokemonDataSet;
+import model.pokemon.PokemonDataSet;
 
 public class BooleanValueNormalizerTest {
 

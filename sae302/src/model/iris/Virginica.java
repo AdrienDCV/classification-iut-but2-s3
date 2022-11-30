@@ -1,4 +1,4 @@
-package iris;
+package model.iris;
 
 import java.util.List;
 
