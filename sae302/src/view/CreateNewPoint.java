@@ -37,7 +37,6 @@ public class CreateNewPoint extends Application {
 		textField();
 		vbox.getChildren().addAll(button, error);
 		buttonSubmit();
-		
 		stage = new Stage();
 		Scene scene = new Scene(vbox, 300, 400);
 		stage.setScene(scene);
@@ -90,7 +89,7 @@ public class CreateNewPoint extends Application {
 
 	protected void buttonSubmit() {
 		button.setOnMouseClicked(e -> {
-			result = "";
+			String result = "";
 			if(buttonPressedValeurNull()) {
 				for(int i = 0; i < listTextField.size(); i++) {
 					result += listTextField.get(i).getText() + ",";

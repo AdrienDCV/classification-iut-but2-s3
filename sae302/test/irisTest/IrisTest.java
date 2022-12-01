@@ -9,45 +9,46 @@ import model.iris.Iris;
 import model.NumberColumn;
 
 public class IrisTest {
-	Iris iris1;
+	Iris iris;
+	NumberColumn colSepalLength, colSepalWidth, colPetalLength, colPetalWidth, colVariety; 
 	
 	@BeforeEach
 	public void setup() {
-		iris1=new Iris(0,0,0,0,"c");
+		iris=new Iris(0,0,0,0,"irisVariety");
+		colSepalLength = new NumberColumn("sepal.length", null, null);
+		colSepalWidth =  new NumberColumn("sepal.width", null, null);
+		colPetalLength = new NumberColumn("petal.length", null, null);
+		colPetalWidth = new NumberColumn("petal.width", null, null);
+		colVariety = new NumberColumn("variety", null, null);
 	}
 	
 	@Test
 	public void toStringTest() {
-		assertEquals("Iris [sepalLength=0.0, sepalWidth=0.0, petalLength=0.0, petalWidth=0.0, variety=c]",iris1.toString());
+		assertEquals("Iris [sepalLength=0.0, sepalWidth=0.0, petalLength=0.0, petalWidth=0.0, variety=irisVariety]",iris.toString());
 	}
 	
 	@Test
 	public void getValueSepalLengthTest() {
-		NumberColumn col=new NumberColumn("sepal.length", null, null);
-		assertEquals(null,iris1.getValue(col));
+		assertEquals(null,iris.getValue(colSepalLength));
 	}
 	
 	@Test
 	public void getValueSepalWidth() {
-		NumberColumn col=new NumberColumn("sepal.width", null, null);
-		assertEquals(null,iris1.getValue(col));
+		assertEquals(null,iris.getValue(colSepalWidth));
 	}
 	
 	@Test
 	public void getValuePetalLengthTest() {
-		NumberColumn col=new NumberColumn("petal.length", null, null);
-		assertEquals(null,iris1.getValue(col));
+		assertEquals(null,iris.getValue(colPetalLength));
 	}
 	
 	@Test
 	public void getValuePetalWidth() {
-		NumberColumn col=new NumberColumn("petal.width", null, null);
-		assertEquals(null,iris1.getValue(col));
+		assertEquals(null,iris.getValue(colPetalWidth));
 	}
 	
 	@Test
 	public void getValueVarietyTest() {
-		NumberColumn col=new NumberColumn("variety", null, null);
-		assertEquals(null,iris1.getValue(col));
+		assertEquals(null,iris.getValue(colVariety));
 	}
 }

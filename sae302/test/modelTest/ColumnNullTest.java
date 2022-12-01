@@ -2,22 +2,28 @@ package modelTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import model.ColumnNull;
 
 public class ColumnNullTest {
 
+	ColumnNull columnNull;
+
+	@BeforeEach
+	public void setup() {
+		columnNull = new ColumnNull();
+	}
+
 	
 	@Test
 	public void createColumnNullTest(){
-		ColumnNull column=new ColumnNull();
-		assertEquals("null",column.getName());
+		assertEquals("null",columnNull.getName());
 	}
 	
 	@Test
 	public void isNormalizableTest() {
-		ColumnNull column=new ColumnNull();
-		assert(!column.isNormalizable());
+		assert(!columnNull.isNormalizable());
 	}
 }

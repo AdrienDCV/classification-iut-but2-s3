@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.util.ArrayList;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import model.BooleanColumn;
@@ -13,12 +14,18 @@ import model.pokemon.PokemonDataSet;
 
 public class BooleanValueNormalizerTest {
 
+	BooleanColumn bcolumn;
+	BooleanValueNormalizer booleanValueNormalizer;
+
+	@BeforeEach
+	public void setup() {
+		bcolumn=new BooleanColumn("nColumn", new PokemonDataSet(), new ArrayList<>());
+		booleanValueNormalizer=new BooleanValueNormalizer(bcolumn);
+	}
+
 	
 	@Test
-	public void testBooleanValueNormalizerConstructor() {
-		BooleanColumn bcolumn=new BooleanColumn("nColumn", new PokemonDataSet(), new ArrayList<>());
-		BooleanValueNormalizer booleanValueNormalizer=new BooleanValueNormalizer(bcolumn);
-		
+	public void testBooleanValueNormalizerConstructor() {			
 		assertEquals("BN",booleanValueNormalizer.getValueNormalizer());
 		assertNotEquals("NN",booleanValueNormalizer.getValueNormalizer());
 		assertNotEquals("EN",booleanValueNormalizer.getValueNormalizer());
@@ -27,18 +34,13 @@ public class BooleanValueNormalizerTest {
 	}
 	
 	@Test
-	public void testBooleanValueNormalizerNormalize() {
-		BooleanColumn bcolumn=new BooleanColumn("nColumn", new PokemonDataSet(), new ArrayList<>());
-		BooleanValueNormalizer booleanValueNormalizer=new BooleanValueNormalizer(bcolumn);
-		
+	public void testBooleanValueNormalizerNormalize() {		
 		assertEquals(1.0,booleanValueNormalizer.normalize(true));
 		assertEquals(0.0,booleanValueNormalizer.normalize(false));
 	}
 	
 	@Test
 	public void testBooleanValueNormalizerDenormalize() {
-		BooleanColumn bcolumn=new BooleanColumn("nColumn", new PokemonDataSet(), new ArrayList<>());
-		BooleanValueNormalizer booleanValueNormalizer=new BooleanValueNormalizer(bcolumn);
 		assertEquals(true,booleanValueNormalizer.denormalize(1));
 		assertEquals(false,booleanValueNormalizer.denormalize(0));
 	}

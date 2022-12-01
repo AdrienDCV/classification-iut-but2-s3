@@ -66,8 +66,10 @@ public class View extends Stage implements Observer{
     	distanceComboBox();
     	
 //    	menuBarClass.loadFile();
+
     	menu.exitApplication();
     	menu.saveScatterChart();
+
     	
     	Scene scene=new Scene(vboxfinal,1000,720);
     	this.setTitle("test");
@@ -190,7 +192,9 @@ public class View extends Stage implements Observer{
     		Category undefined = View.model.getCategoriesList().get(View.model.getCategoriesList().size() -1);
     		for(IPoint point : undefined.getCategoryElements()) {
     			Category category = classification.classifyPoint(k, point, model.getPointsList());
-    			View.robustness.setText("robustesse : " + classification.calculRobustness(k, point, category));
+    			robustness.setText("robustesse : " + classification.calculRobustness(k, point, category));
+    			robustness.setTextFill(Color.WHITE);
+
     			category.addToCategory(point, category);
     		}
     		undefined.getCategoryElements().clear();
