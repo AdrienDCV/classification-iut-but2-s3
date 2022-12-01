@@ -3,7 +3,6 @@ package model.titanic;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.StringReader;
 import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
@@ -51,6 +50,7 @@ public class TitanicDataSet extends DataSet{
         	//init des col
 			initColumns(columnName, columnType);
 			this.categoryInit();
+			columnReader.close();
 
         } catch (InvalidPathException e) {
         	System.out.println("Le fichier n'existe pas");

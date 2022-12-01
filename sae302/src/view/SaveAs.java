@@ -20,10 +20,9 @@ import javafx.stage.Stage;
 
 public class SaveAs extends Application {
 	protected static File filePath;
-	public Stage stage = new Stage();
 
 	@Override
-	public void start(Stage arg0) throws Exception {
+	public void start(Stage stage) throws Exception {
 		stage.setTitle("Save as");
 		DirectoryChooser directoryChooser = new DirectoryChooser();
 		directoryChooser.setTitle("Select a folder");
@@ -63,6 +62,7 @@ public class SaveAs extends Application {
 		    for(int i = 0; i < list.size(); i++) {
 		        writer.writeNext(list.get(i));
 		    }
+		    fileWriter.close();
 		    writer.close();
 		    
 		} catch (IOException e) {

@@ -1,6 +1,5 @@
 package model.iris;
 
-import com.opencsv.bean.CsvBindAndJoinByName;
 import com.opencsv.bean.CsvBindByName;
 
 import intefarces.IPoint;
