@@ -97,9 +97,7 @@ public class CreateNewPoint extends Application {
 				result = result.substring(0, result.length() - 1);
 				error.setText(View.model.getTitle() + " ajouté à la liste");
 				View.newPoint = result;
-				System.out.println(View.model.getPointsList().size());
 				View.model.loadFromString(View.newPoint);
-				System.out.println(View.model.getPointsList().size());
 				lineSave.add(result.split(","));
 				stage.close();
 				View.model.notifyObservers();

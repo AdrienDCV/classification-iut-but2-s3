@@ -221,7 +221,6 @@ public class View extends Stage implements Observer{
     }
     
     public void createScatter() {
-    	System.out.println(View.model.getPointsList().size());
     	View.criteria = new Criteria(criteriaX.getValue(), criteriaY.getValue());
 		View.scatterChart = new ScatterChartObject(criteria, View.model);
 		View.scatterChart.initScatter();
