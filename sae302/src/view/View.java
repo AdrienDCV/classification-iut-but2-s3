@@ -46,7 +46,7 @@ public class View extends Stage implements Observer{
 	static VBox vbox;
 	static File file;
 	static String newPoint;
-	static Label labelK, selectType, selectFichier, selectCriteriaX,selectCriteriaY,selectConfirmer,selectClassifier,selectAjouter;
+	static Label labelK, selectType, selectFichier, selectCriteriaX,selectCriteriaY,selectConfirmer,selectClassifier,selectAjouter, selectDistance;
 	static Label robustness = new Label("robustesse : 0");
 	static int k;
 	static MenuBarClass menu = new MenuBarClass();
@@ -72,14 +72,22 @@ public class View extends Stage implements Observer{
 
     	
     	Scene scene=new Scene(vboxfinal,1000,720);
-    	this.setTitle("test");
+    	this.setTitle("SAE 3.02 Dev application");
     	this.setScene(scene);
     	this.show();
 
 	}
 
 	private static void initWidget() {
-		View.robustness.setTextFill(Color.WHITE);
+		selectType = new Label("Selectionner le type de DataSet:");
+		selectFichier = new Label("Selectionner le fichier CSV:");
+		selectCriteriaX = new Label("Selectionner la colonne des X:");
+		selectCriteriaY = new Label("Selectionner la colonne des Y:");
+		selectConfirmer = new Label("Afficher les points:");
+		selectClassifier = new Label("Classifier les points:");
+		selectAjouter = new Label("Ajouter un point dans le DataSet:");
+		selectDistance = new Label("Distance pour la classification:");
+		
 		initButton();
 	    //Button sauvegarde=new Button("sauvegarder");
 	    initComboBox();
@@ -135,7 +143,6 @@ public class View extends Stage implements Observer{
         });
         
        
-		labelK.setTextFill(Color.WHITE);
 
         VBox root = new VBox();
         root.setPadding(new Insets(20));
@@ -193,7 +200,6 @@ public class View extends Stage implements Observer{
     		for(IPoint point : undefined.getCategoryElements()) {
     			Category category = classification.classifyPoint(k, point, model.getPointsList());
     			robustness.setText("robustesse : " + classification.calculRobustness(k, point, category));
-    			robustness.setTextFill(Color.WHITE);
 
     			category.addToCategory(point, category);
     		}
@@ -216,7 +222,7 @@ public class View extends Stage implements Observer{
     	vbox.setPadding(new Insets(10,10,100,10));
     	vbox.setSpacing(10);
     	vbox.setStyle("-fx-background-color: #bdbbbb;");
-    	vbox.getChildren().addAll(typeDataSet,parcourir,criteriaX,criteriaY,confirmer, ajouter, typeDistance,sliderVBox, classifier, robustness);
+    	vbox.getChildren().addAll(selectType, typeDataSet,selectFichier, parcourir,selectCriteriaX,criteriaX,selectCriteriaY,criteriaY,selectConfirmer,confirmer,selectAjouter, ajouter, selectDistance,typeDistance,sliderVBox, selectClassifier, classifier, robustness);
     	return vbox;
     }
     
