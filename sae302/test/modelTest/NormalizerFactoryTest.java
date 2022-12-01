@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import intefarces.IPoint;
@@ -17,41 +18,43 @@ import model.NumberColumn;
 import model.titanic.Titanic;
 
 public class NormalizerFactoryTest {
-
-	 private static String getColumClassName(Column column) {
-	        String[] columnClassName = column.getClass().getName().split("\\.");
-	        int idxClassName = (columnClassName.length)-1;
-	        return columnClassName[idxClassName];
-	    }
+	
+	NumberColumn numberColumn;
+	NormalizerFactory normFact;
+	BooleanColumn booleanColumn;
+	EnumColumn enumColumn;
+	ColumnNull nullColumn;
+	List<IPoint> list;
+	
+		
+	@BeforeEach
+	public void setup() {
+		normFact=new NormalizerFactory();
+		numberColumn=new NumberColumn("test", null, null);
+		booleanColumn=new BooleanColumn("test", null, null);
+		list=new ArrayList<IPoint>();
+		list.add(new Titanic());
+		enumColumn=new EnumColumn("Sex", null, list);
+		nullColumn=new ColumnNull();
+	}
 	
 	@Test
 	public void normalizerFactoryNumberTest() {
-		NumberColumn col=new NumberColumn("test", null, null);
-		NormalizerFactory fact=new NormalizerFactory();
-		assertEquals("NN",fact.creatValueNormalizer(col).getValueNormalizer());
+		assertEquals("NN",normFact.creatValueNormalizer(numberColumn).getValueNormalizer());
 	}
 	
 	@Test
 	public void normalizerFactoryBooleanTest() {
-		BooleanColumn col1=new BooleanColumn("test", null, null);
-		NormalizerFactory fact=new NormalizerFactory();
-		System.out.println(getColumClassName(col1));
-		assertEquals("BN",fact.creatValueNormalizer(col1).getValueNormalizer());
+		assertEquals("BN",normFact.creatValueNormalizer(booleanColumn).getValueNormalizer());
 	}
 	
 	@Test
 	public void normalizerFactoryEnumTest() {
-		List<IPoint> list=new ArrayList<IPoint>();
-		list.add(new Titanic());
-		EnumColumn col=new EnumColumn("Sex", null, list);
-		NormalizerFactory fact=new NormalizerFactory();
-		assertEquals("EN",fact.creatValueNormalizer(col).getValueNormalizer());
+		assertEquals("EN",normFact.creatValueNormalizer(enumColumn).getValueNormalizer());
 	}
 	
 	@Test
 	public void normalizerFactoryNullTest() {
-		ColumnNull col=new ColumnNull();
-		NormalizerFactory fact=new NormalizerFactory();
-		assertEquals("NULL",fact.creatValueNormalizer(col).getValueNormalizer());
+		assertEquals("NULL",normFact.creatValueNormalizer(nullColumn).getValueNormalizer());
 	}
 }

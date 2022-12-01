@@ -13,27 +13,31 @@ import model.DistanceStrategyNull;
 public class DistanceFactoryTest {
 	
 	DistanceStrategyFactory fact;
+	DistanceEuclidienne distEuclidienne;
+	DistanceManhattan distManhattan;
+	DistanceStrategyNull distNull;
+	
 	
 	@BeforeEach
 	public void setup() {
 		fact=new DistanceStrategyFactory();
+		distEuclidienne=new DistanceEuclidienne();
+		distManhattan =new DistanceManhattan();
+		distNull=new DistanceStrategyNull();
 	}
 	
 	@Test
 	public void createDistanceStrategyEuclidienneTest() {
-		DistanceEuclidienne dist=new DistanceEuclidienne();
-		assertEquals(dist.getClass(),fact.createDistanceStrategy("Euclidienne").getClass());
+		assertEquals(distEuclidienne.getClass(),fact.createDistanceStrategy("Euclidienne").getClass());
 	}
 	
 	@Test
 	public void createDistanceStrategyManhattanTest() {
-		DistanceManhattan dist=new DistanceManhattan();
-		assertEquals(dist.getClass(),fact.createDistanceStrategy("Manhattan").getClass());
+		assertEquals(distManhattan.getClass(),fact.createDistanceStrategy("Manhattan").getClass());
 	}
 	
 	@Test
 	public void createDistanceStrategyNullTest() {
-		DistanceStrategyNull dist=new DistanceStrategyNull();
-		assertEquals(dist.getClass(),fact.createDistanceStrategy("nnn").getClass());
+		assertEquals(distNull.getClass(),fact.createDistanceStrategy("nnn").getClass());
 	}
 }

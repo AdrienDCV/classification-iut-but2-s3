@@ -10,10 +10,13 @@ import model.pokemon.PokemonDataSet;
 
 class PokemonTest {
 	
+	PokemonDataSet pokemons;
 	Pokemon pokemon1, pokemon2, pokemon3;
 	
 	@BeforeEach
 	void setup() {
+		pokemons=new PokemonDataSet();
+		pokemons.loadFromFile("./res/pokemon_train.csv");
 		pokemon1 = new Pokemon("Swablu", 40, 5120, 255.0, 60, 600000, 45, 75, 50, "normal", "flying", 1.2, false);
 		pokemon2 = new Pokemon("Budew", 30, 5120, 255.0, 35, 1059860, 40, 70, 55, "grass", "poison", 1.2, false);
 		pokemon3 = new Pokemon("Dialga", 120, 30720, 3.0, 120, 1250000, 100, 100, 90, "steel", "dragon", 683.0, true);
@@ -45,9 +48,7 @@ class PokemonTest {
 	
 	@Test
 	public void getNormalizedValueTest() {
-		PokemonDataSet pokemons=new PokemonDataSet();
-		pokemons.loadFromFile("./res/pokemon_train.csv");
-		assertEquals(0.1891891891891892,pokemon1.getNormalizedValue(pokemons.defaultXCol()));
+		assertEquals(0.125,pokemon1.getNormalizedValue(pokemons.defaultXCol()));
 	}
 
 }

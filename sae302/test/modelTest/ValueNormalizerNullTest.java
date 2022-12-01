@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import intefarces.IPoint;
@@ -14,28 +15,29 @@ import model.pokemon.PokemonDataSet;
 
 public class ValueNormalizerNullTest {
 
+	List<IPoint> list;
+	NumberColumn colone;
+	ValueNormalizerNull vnn;
+	
+	@BeforeEach
+	public void setup() {
+		list=new ArrayList<IPoint>();
+		colone=new NumberColumn("test",new PokemonDataSet(),list);
+		vnn=new ValueNormalizerNull(colone);
+	}
 	
 	@Test
 	public void valueNormalizerNullConstructorTest() {
-		List<IPoint> list=new ArrayList<IPoint>();
-		NumberColumn colone=new NumberColumn("test",new PokemonDataSet(),list);
-		ValueNormalizerNull vnn=new ValueNormalizerNull(colone);
 		assertEquals("NULL",vnn.getValueNormalizer());
 	}
 	
 	@Test
 	public void valueNormalizerNullNormalizeTest() {
-		List<IPoint> list=new ArrayList<IPoint>();
-		NumberColumn colone=new NumberColumn("test",new PokemonDataSet(),list);
-		ValueNormalizerNull vnn=new ValueNormalizerNull(colone);
 		assertEquals(0,vnn.normalize(0));
 	}
 	
 	@Test
 	public void valueNormalizerNullDenormalizeTest() {
-		List<IPoint> list=new ArrayList<IPoint>();
-		NumberColumn colone=new NumberColumn("test",new PokemonDataSet(),list);
-		ValueNormalizerNull vnn=new ValueNormalizerNull(colone);
 		assertEquals("",vnn.denormalize(0));
 	}
 }

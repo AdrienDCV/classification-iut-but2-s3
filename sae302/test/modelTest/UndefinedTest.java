@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import intefarces.IPoint;
@@ -14,31 +15,33 @@ import model.pokemon.PokemonDataSet;
 
 public class UndefinedTest {
 
+	Undefined undefined;
+	PokemonDataSet pokemonDataset;
+	List<IPoint> list, pokeList;
+	Pokemon poke1;
+	
+	@BeforeEach
+	public void setup() {
+		undefined=new Undefined();
+		pokemonDataset=new PokemonDataSet();
+		list=new ArrayList<IPoint>();
+		pokeList=new ArrayList<IPoint>();
+		poke1=new Pokemon();
+		pokeList.add(poke1);
+	}
+	
 	@Test
 	public void addToCategoryDataSetTest() {
-		Undefined unde=new Undefined();
-		PokemonDataSet dataset=new PokemonDataSet();
-		List<IPoint> list=new ArrayList<IPoint>();
-		assertEquals(list, unde.addToCategory(dataset));
+		assertEquals(list, undefined.addToCategory(pokemonDataset));
 	}
 	
 	@Test
 	public void addToCategoryIPointTest() {
-		Undefined unde=new Undefined();
-		PokemonDataSet dataset=new PokemonDataSet();
-		List<IPoint> list=new ArrayList<IPoint>();
-		Pokemon poke1=new Pokemon();
-		list.add(poke1);
-		assertEquals(list, unde.addToCategory(poke1));
+		assertEquals(pokeList, undefined.addToCategory(poke1));
 	}
 	
 	@Test
 	public void addToCategoryIPointCategoryTest() {
-		Undefined unde=new Undefined();
-		PokemonDataSet dataset=new PokemonDataSet();
-		List<IPoint> list=new ArrayList<IPoint>();
-		Pokemon poke1=new Pokemon();
-		list.add(poke1);
-		assertEquals(list, unde.addToCategory(poke1,new Undefined()));
+		assertEquals(pokeList, undefined.addToCategory(poke1,new Undefined()));
 	}
 }
