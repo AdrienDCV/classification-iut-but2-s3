@@ -158,7 +158,7 @@ public class View extends Stage implements Observer{
                 	View.model.attach(view);
                 	if(criteriaX != null && criteriaY != null && criteriaX.getItems().size() == 0) {
                 		comboBox();
-                	}else {
+                	} else {
                 		criteriaX.getItems().clear();
                 		criteriaY.getItems().clear();
                 		comboBox();

@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -119,19 +120,19 @@ public class Classification {
 		initDataPackages(nombreElemParPaquet, listPaquet);
 	
 		//création d'une copie des catégories du dataset
-		List<Category> listCategory = new ArrayList<>(dataset.getCategoriesList());
+		List<List<IPoint>> listPokemonCategory = initListPokemonCategory(dataset.getCategoriesList());
 		
 		for(List<IPoint> paquet : listPaquet) {
-			clearCategories(listCategory);
+			clearCategories(listPokemonCategory);
 			
 			//prend les plus proches voisins du point dans chaque paquet
 			List<IPoint> knn = this.knnCalcul(k, point, paquet);
 	
-			addPointsToRightCategory(listCategory, knn);
+			addPointsToRightCategory(dataset.getCategoriesList(), knn, listPokemonCategory);
 			
 			Category category = null;
 			//on cherche la category contenant le plus d'élément (= classification par les voisins)
-			category = getMaxElemsCategory(listCategory, knn, category);
+			category = getMaxElemsCategory(listPokemonCategory, knn, category);
 			listeCategoryPossiblePoint.add(category);
 		}
 		
@@ -139,24 +140,31 @@ public class Classification {
 		return (double) sameCategory/(double)listeCategoryPossiblePoint.size();
 	}
 
-	public void clearCategories(List<Category> listCategory) {
-		for(Category category :  listCategory) {
-			//clear les category à chaque itération
-			if(!category.getCategoryName().equals("Undefined")) {
-				category.getCategoryElements().clear();
-			}
-		
+	public void clearCategories(List<List<IPoint>> listCategory) {
+		for(List<IPoint> list :  listCategory) {
+			list.clear();
 		}
 	}
+	
+	public List<List<IPoint>> initListPokemonCategory(List<Category> list) {
+		List<List<IPoint>> listPokemonCategory = new ArrayList<>();
+		for(Category category : list) {
+			if(!category.getCategoryName().equals("Undefined")) {
+				List<IPoint> listPokemon = new ArrayList<>(category.getCategoryElements());
+				listPokemonCategory.add(listPokemon);
+			}
+		}
+		return listPokemonCategory;
+	}
 
-	public void addPointsToRightCategory(List<Category> listCategory, List<IPoint> knn) {
+	public void addPointsToRightCategory(List<Category> listCategory, List<IPoint> knn, List<List<IPoint>> list) {
 		for(int i = 0; i < knn.size(); i ++) {
 			//on met chaque point du knn dans leur bonne catégorie
-			for(Category category : listCategory) {
-				if(!category.getCategoryName().equals("Undefined")) {
-					category.addToCategory(knn.get(i));
+			for(int j = 0; j < listCategory.size(); j++) {
+				if(!listCategory.get(j).getCategoryName().equals("Undefined")) {
+					list.get(j).add(knn.get(i));
 				}
-			}		
+			}	
 		}
 	}
 
@@ -171,23 +179,23 @@ public class Classification {
 		return sameCategory;
 	}
 	
-	public Category getMaxElemsCategory(List<Category> listCategory, List<IPoint> knn, Category category) {
+	public Category getMaxElemsCategory(List<List<IPoint>> listeIPoint, List<IPoint> knn, Category category) {
 		int max = -1;
-		for(Category categoryElem : listCategory) {
+		for(int i = 0; i < listeIPoint.size(); i ++) {
 
-			if(max < categoryElem.getCategoryElements().size()) {
-				max = categoryElem.getCategoryElements().size();
-				category = categoryElem;
+			if(max < listeIPoint.get(i).size()) {
+				max = listeIPoint.get(i).size();
+				category = this.dataset.getCategoriesList().get(i);
 				
 			//cas où deux category ont la même taille -> renvoie catégory du plus proche voisin
-			} else if (max == categoryElem.getCategoryElements().size()) {
+			} else if (max == listeIPoint.get(i).size()) {
 				max = Integer.MAX_VALUE;
 			}
 		}
 		if(max == Integer.MAX_VALUE) {
-			for(Category c2 : listCategory) {
-				if(c2.getCategoryElements().contains(knn.get(0))) {
-					category = c2;
+			for(int j = 0; j < listeIPoint.size(); j ++) {
+				if(listeIPoint.get(j).contains(knn.get(0))) {
+					category = this.dataset.getCategoriesList().get(j);
 				}
 			}
 		}
