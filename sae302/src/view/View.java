@@ -48,7 +48,7 @@ public class View extends Stage implements Observer{
 	static String newPoint;
 	static Label labelK, selectType, selectFichier, selectCriteriaX,selectCriteriaY,selectConfirmer,selectClassifier,selectAjouter, selectDistance;
 	static Label robustness = new Label("robustesse : 0");
-	static ListView<IPoint> pointSelectionner;
+	static ListView<String> pointInformations;
 	static int k;
 	static MenuBarClass menu = new MenuBarClass();
 	
@@ -233,14 +233,14 @@ public class View extends Stage implements Observer{
     	View.criteria = new Criteria(criteriaX.getValue(), criteriaY.getValue());
 		View.scatterChart = new ScatterChartObject(criteria, View.model);
 		View.scatterChart.initScatter();
-		View.pointSelectionner = new ListView<>();
+		View.pointInformations = new ListView<>();
+		
 		HBox.setHgrow(View.scatterChart.getScatterChart(), Priority.ALWAYS);
-		View.pointSelectionner.setMaxSize(1000, 100);
-		hbox.getChildren().addAll(scatterChart.getScatterChart(), View.pointSelectionner);
+		hbox.getChildren().addAll(scatterChart.getScatterChart(), View.pointInformations);
     }
     
     public void updateScatter() {
-    	hbox.getChildren().removeAll(scatterChart.getScatterChart(),View.pointSelectionner);
+    	hbox.getChildren().removeAll(scatterChart.getScatterChart(),View.pointInformations);
     	createScatter();
     }
 

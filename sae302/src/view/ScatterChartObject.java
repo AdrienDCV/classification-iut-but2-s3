@@ -61,13 +61,20 @@ public class ScatterChartObject {
 		for(int i = 0; i < listeCategory.size() - 1; i++) {
 			for(XYChart.Data<Number,Number> data : listeCategory.get(i).getData()) {
 				data.getNode().setOnMouseClicked(e -> {
-					View.pointSelectionner.getItems().clear();
+					View.pointInformations.getItems().clear();
 					for(Series<Number, Number> data2 : listeCategory) {
 						for(XYChart.Data<Number,Number> data3 : data2.getData()) {
 							if(data3.equals(data)) {
 								for(IPoint point: dataSet.getPointsList()) {
 									if(data3.getXValue().doubleValue() == xCol.getNormalizedValue(point) && data3.getYValue().doubleValue() == yCol.getNormalizedValue(point)) {
-										View.pointSelectionner.getItems().add(point);
+										String string = point.toString();
+										string = " " + string.substring(string.indexOf("[") + 1);
+										string = string.substring(0, string.indexOf("]"));
+										String[] list = string.split(",");
+										for(int l = 0; l < list.length; l++) {
+											View.pointInformations.getItems().add(list[l]);
+										}
+										View.pointInformations.getItems().add("");
 									}
 								}
 								
