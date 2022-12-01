@@ -8,9 +8,12 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.beans.value.*;
@@ -45,6 +48,7 @@ public class View extends Stage implements Observer{
 	static String newPoint;
 	static Label labelK, selectType, selectFichier, selectCriteriaX,selectCriteriaY,selectConfirmer,selectClassifier,selectAjouter, selectDistance;
 	static Label robustness = new Label("robustesse : 0");
+	static ListView<IPoint> pointSelectionner;
 	static int k;
 	static MenuBarClass menu = new MenuBarClass();
 	
@@ -192,6 +196,8 @@ public class View extends Stage implements Observer{
     		}
     	});
     	
+    	
+    	
     	classifier.setOnMouseClicked(e -> {
     		Category undefined = View.model.getCategoriesList().get(View.model.getCategoriesList().size() -1);
     		for(IPoint point : undefined.getCategoryElements()) {
@@ -227,12 +233,14 @@ public class View extends Stage implements Observer{
     	View.criteria = new Criteria(criteriaX.getValue(), criteriaY.getValue());
 		View.scatterChart = new ScatterChartObject(criteria, View.model);
 		View.scatterChart.initScatter();
+		View.pointSelectionner = new ListView<>();
 		HBox.setHgrow(View.scatterChart.getScatterChart(), Priority.ALWAYS);
-		hbox.getChildren().addAll(scatterChart.getScatterChart());
+		View.pointSelectionner.setMaxSize(1000, 100);
+		hbox.getChildren().addAll(scatterChart.getScatterChart(), View.pointSelectionner);
     }
     
     public void updateScatter() {
-    	hbox.getChildren().remove(scatterChart.getScatterChart());
+    	hbox.getChildren().removeAll(scatterChart.getScatterChart(),View.pointSelectionner);
     	createScatter();
     }
 
