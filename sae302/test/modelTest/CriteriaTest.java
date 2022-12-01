@@ -9,15 +9,12 @@ import model.Criteria;
 
 class CriteriaTest {
 	
-	Criteria criteria;
-	String criteriaX; String criteriaY;
+	Criteria criteria;;
+
 	@BeforeEach
 	void setup() {
-		criteriaX = "colonneX";
-		criteriaY = "colonneY";
-		criteria = new Criteria(criteriaX,criteriaY);
+		criteria = new Criteria("colonneX","colonneY");
 	}
-	
 	
 	@Test
 	void getterTest() {

@@ -2,6 +2,7 @@ package modelTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import model.iris.IrisDataSet;
@@ -12,10 +13,15 @@ import model.titanic.TitanicDataSet;
 
 public class DataSetFactoryTest {
 
+	PokemonDataSet pokemons;
+
+	@BeforeEach
+	public void setup() {
+		pokemons=(PokemonDataSet) DataSetFactory.createDataSet("Pokemon");
+	}
+
 	@Test
 	public void createDataSetPokemonTest(){
-		
-		PokemonDataSet pokemons=(PokemonDataSet) DataSetFactory.createDataSet("Pokemon");
 		assertEquals("PokemonDataSet",pokemons.getTitle());
 	}
 	
