@@ -7,7 +7,6 @@ import intefarces.IPoint;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
 import model.Category;
 import model.Column;
@@ -16,7 +15,6 @@ import model.DataSet;
 
 
 public class ScatterChartObject {
-//	ScatterChart<Double, Double> scatterChart = new ScatterChart<Double, Double>(new NumberAxis(), new NumberAxis());
 	ScatterChart<Number, Number> scatterChart = new ScatterChart<>(new NumberAxis(), new NumberAxis());
 	Column xCol; 
 	Column yCol;
@@ -25,7 +23,6 @@ public class ScatterChartObject {
 	DataSet dataSet;
 
 	
-//	Column xCol, Column yCol
 	public ScatterChartObject(Criteria criteria, DataSet dataset) {
 		
 		x.setLabel(criteria.getCriteriaX());
@@ -40,7 +37,6 @@ public class ScatterChartObject {
 		}
 	}
 	
-	// voir pour rajouter les options "k, colonneCatégorieX, colonneCatégorieY 
 	public void initScatter() {
 		
 		scatterChart = new ScatterChart(x, y);
@@ -58,6 +54,12 @@ public class ScatterChartObject {
 			scatterChart.getData().add(listeCategory.get(i));
 		}
 		
+		getInformationOnMouseClicked(listeCategory);
+
+	}
+	
+
+	protected void getInformationOnMouseClicked(List<XYChart.Series<Number, Number>> listeCategory) {
 		for(int i = 0; i < listeCategory.size() - 1; i++) {
 			for(XYChart.Data<Number,Number> data : listeCategory.get(i).getData()) {
 				data.getNode().setOnMouseClicked(e -> {
@@ -83,10 +85,7 @@ public class ScatterChartObject {
 					}
 				});
 			}
-					
-		
 		}
-
 	}
 
 	public ScatterChart<Number, Number> getScatterChart() {
