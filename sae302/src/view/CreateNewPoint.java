@@ -9,7 +9,6 @@ import com.opencsv.exceptions.CsvValidationException;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -59,6 +58,7 @@ public class CreateNewPoint extends Application {
 			for(int i = 0; i < nextRecord.length; i++) {
 				list.add(nextRecord[i]);
 			}
+			fileReader.close();
 			csvReader.close();
 			return list;
 		} catch(IOException | CsvValidationException e) {

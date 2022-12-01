@@ -1,13 +1,10 @@
 package view;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
 
 import javax.imageio.ImageIO;
 
-import com.opencsv.CSVWriter;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;

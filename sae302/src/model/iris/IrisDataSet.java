@@ -3,7 +3,6 @@ package model.iris;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.StringReader;
 import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
@@ -54,13 +53,14 @@ public class IrisDataSet extends DataSet {
         	//init des col
 			initColumns(columnName, columnType);
 			this.categoryInit();
+			columnReader.close();
 
         } catch (InvalidPathException e) {
-        	System.out.println("Le fichier n'existe pas");
+        	System.err.println("Le fichier n'existe pas");
         } catch(IllegalStateException e) {
-        	System.out.println("Java n'a pas pu executer la requête");
+        	System.err.println("Java n'a pas pu executer la requête");
         } catch(IOException e) {
-        	System.out.println("Ioexception");
+        	System.err.println("Ioexception");
         }
 	}
 

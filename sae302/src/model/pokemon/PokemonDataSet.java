@@ -53,6 +53,7 @@ public class PokemonDataSet extends DataSet {
         	//init des col
 			initColumns(columnName, columnType);
 			this.categoryInit();
+			columnReader.close();
 
         } catch (InvalidPathException e) {
         	System.out.println("Le fichier n'existe pas");

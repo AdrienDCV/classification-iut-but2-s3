@@ -63,6 +63,7 @@ public class SaveAs extends Application {
 		    for(int i = 0; i < list.size(); i++) {
 		        writer.writeNext(list.get(i));
 		    }
+		    fileWriter.close();
 		    writer.close();
 		    
 		} catch (IOException e) {
