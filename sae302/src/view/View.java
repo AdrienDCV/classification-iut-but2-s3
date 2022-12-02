@@ -45,7 +45,6 @@ public class View extends Stage implements Observer{
 	static HBox hbox;
 	static VBox vbox;
 	static File file;
-	static String newPoint;
 	static Label labelK, selectType, selectFichier, selectCriteriaX,selectCriteriaY,selectConfirmer,selectClassifier,selectAjouter, selectDistance;
 	static Label robustness = new Label("robustesse : 0");
 	static ListView<String> pointInformations;
@@ -214,6 +213,7 @@ public class View extends Stage implements Observer{
     	ajouter.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(final ActionEvent e) {
             	CreateNewPoint cnp = new CreateNewPoint();
+            	
             	try {
 					cnp.start(view);
 				} catch (Exception e1) {

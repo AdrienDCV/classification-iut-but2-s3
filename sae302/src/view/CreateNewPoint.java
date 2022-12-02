@@ -9,6 +9,7 @@ import com.opencsv.exceptions.CsvValidationException;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -21,28 +22,30 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class CreateNewPoint extends Application {
-	protected static String result;
-	protected static List<TextField> listTextField = new ArrayList<>();
-	protected static Button button = new Button("Submit");
-	protected static VBox vbox = new VBox();
-	protected static Label error = new Label("");
-	protected static List<String> labelList = new ArrayList<>();
-	protected static List<Column> columnList = new ArrayList<>();
+	protected String result;
+	protected List<TextField> listTextField = new ArrayList<>();
+	protected Button button = new Button("Ajouter");
+	protected VBox vbox = new VBox();
+	protected Label label = new Label("");
+	protected List<String> labelList = new ArrayList<>();
+	protected List<Column> columnList = new ArrayList<>();
 	protected static List<String[]> lineSave = new ArrayList<>();
-	protected static Stage stage;
-	protected static Scene scene;
+	protected Stage stage;
+	protected Scene scene;
 	
 	
 	@Override
 	public void start(Stage args) throws Exception {
 		columnList = View.model.getColumnsList();
 		textField();
-		vbox.getChildren().addAll(button, error);
+		vbox.getChildren().addAll(button, label);
+		vbox.setAlignment(Pos.CENTER);
 		buttonSubmit();
 		stage = new Stage();
 		scene = new Scene(vbox);
-		button.setMinWidth(scene.getWidth());
-		button.setMinHeight(50);
+		button.setMinWidth(20);
+		button.setMinHeight(10);
+		vbox.setSpacing(0);
 		stage.setTitle(View.model.getTitle());
 		stage.setScene(scene);
 		stage.show();
@@ -68,9 +71,10 @@ public class CreateNewPoint extends Application {
 		return Collections.emptyList();
 	}
 	
-	protected void textField() {
+	protected int textField() {
 		List<String> list = getCSVFirstLine();
-
+		vbox.getChildren().clear();
+		int res = 0;
     	if(list != null) {
     		for(int i = 0; i < list.size(); i++) {
 	    		HBox hbox = new HBox();
@@ -81,8 +85,10 @@ public class CreateNewPoint extends Application {
 	    		listTextField.add(categorieTextField);
 	    		hbox.getChildren().addAll(label, categorieTextField);
 	    		vbox.getChildren().add(hbox);
+	    		res = i;
     		}
     	}
+    	return res;
 	}
 	
 	protected boolean buttonPressedValeurNull() {
@@ -102,11 +108,8 @@ public class CreateNewPoint extends Application {
 					result += listTextField.get(i).getText() + ",";
 				}
 				result = result.substring(0, result.length() - 1);
-				error.setText(View.model.getTitle() + " ajouté à la liste");
-				View.newPoint = result;
-				System.out.println(View.model.getPointsList().size());
-				View.model.loadFromString(View.newPoint);
-				System.out.println(View.model.getPointsList().size());
+				label.setText(View.model.getTitle() + " ajouté à la liste");
+				View.model.loadFromString(result);
 				lineSave.add(result.split(","));
 				stage.close();
 				View.model.notifyObservers();
@@ -117,12 +120,8 @@ public class CreateNewPoint extends Application {
 	}
 	
 	protected void verifAllTextFieldFulfilled() {
-		error.setText("Erreur: remplir toutes les cases: \n");
-		for(int l  = 0; l < listTextField.size(); l++) {
-			if(listTextField.get(l).getText().equals("")) {
-				error.setText(error.getText() + labelList.get(l) + "\n");
-			}
-		}
+		label.setText("Erreur: remplir toutes les cases \n");
+		
 	}
 	
 }
