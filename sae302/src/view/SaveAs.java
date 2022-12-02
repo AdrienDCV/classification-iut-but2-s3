@@ -20,9 +20,11 @@ import javafx.stage.Stage;
 
 public class SaveAs extends Application {
 	protected static File filePath;
+	protected Stage stage;
 
 	@Override
-	public void start(Stage stage) throws Exception {
+	public void start(Stage arg0) throws Exception {
+		stage = new Stage();
 		stage.setTitle("Save as");
 		DirectoryChooser directoryChooser = new DirectoryChooser();
 		directoryChooser.setTitle("Select a folder");
@@ -38,7 +40,7 @@ public class SaveAs extends Application {
 		    try {
 				if(filePath.createNewFile()) {
 					System.out.println("Fichier enregistré: " + filePath.getName());
-					copyFileUsingChannel(View.file, SaveAs.filePath);
+					copyFileChannel(View.file, SaveAs.filePath);
 					saveFile();
 				} else {
 					System.out.println("Fichier existe déjà");
@@ -50,8 +52,8 @@ public class SaveAs extends Application {
 		});
 		
 		Scene scene = new Scene(vbox);
-	    stage.setScene(scene);
-	    stage.show();
+		stage.setScene(scene);
+		stage.show();
 	}
 		
 	public void saveFile() {
@@ -63,15 +65,15 @@ public class SaveAs extends Application {
 		        writer.writeNext(list.get(i));
 		    }
 		    fileWriter.close();
-		    writer.close();
 		    
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		    e.printStackTrace();
 		}
+		
 	}
 		
-	private static void copyFileUsingChannel(File source, File dest) throws IOException {
+	private static void copyFileChannel(File source, File dest) throws IOException {
 		FileChannel sourceChannel = null;
 		FileChannel destinationChannel = null;
 		try {

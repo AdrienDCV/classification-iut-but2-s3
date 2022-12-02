@@ -70,6 +70,7 @@ public class View extends Stage implements Observer{
 
     	menu.exitApplication();
     	menu.saveScatterChart();
+    	menu.saveAsCSVFile();
 
     	
     	Scene scene=new Scene(vboxfinal,1000,720);

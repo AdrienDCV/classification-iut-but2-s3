@@ -8,6 +8,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
+import javafx.scene.control.Tooltip;
 import model.Category;
 import model.Column;
 import model.Criteria;
@@ -87,6 +88,16 @@ public class ScatterChartObject {
 			}
 		}
 	}
+	
+//	protected void getInformationOnMouseHover(List<XYChart.Series<Number, Number>> listeCategory) {
+//		Tooltip tooltip = new Tooltip();
+//		for(int i = 0; i < listeCategory.size() - 1; i++) {
+//			for(XYChart.Data<Number,Number> data : listeCategory.get(i).getData()) {
+//				tooltip.setText(arg0);
+//				Tooltip.install(arg0, arg1);
+//			}
+//		}
+//	}
 
 	public ScatterChart<Number, Number> getScatterChart() {
 		return scatterChart;

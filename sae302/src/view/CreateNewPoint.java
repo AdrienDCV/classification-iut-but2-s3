@@ -32,6 +32,7 @@ public class CreateNewPoint extends Application {
 	protected static Stage stage;
 	protected static Scene scene;
 	
+	
 	@Override
 	public void start(Stage args) throws Exception {
 		columnList = View.model.getColumnsList();

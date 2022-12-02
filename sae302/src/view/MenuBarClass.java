@@ -1,10 +1,12 @@
 package view;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-
+import javax.imageio.stream.ImageOutputStream;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -16,6 +18,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.image.WritableImage;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import model.DataSet;
 
 public class MenuBarClass {
@@ -54,7 +57,7 @@ public class MenuBarClass {
 			public void handle(ActionEvent event) {
 				SaveAs saveAs = new SaveAs();
             	try {
-					saveAs.start(new View());
+					saveAs.start(saveAs.stage);
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
@@ -67,14 +70,13 @@ public class MenuBarClass {
 			public void handle(ActionEvent event) {
 				DirectoryChooser directoryChooser = new DirectoryChooser();
 				directoryChooser.setTitle("Select a folder");
-				String path = directoryChooser.showDialog(new View()).getAbsolutePath();
+				String path = directoryChooser.showDialog(new Stage()).getAbsolutePath() + "/" + View.model.getTitle();
 				File file = new File(path);
 				WritableImage image = View.scatterChart.getScatterChart().snapshot(new SnapshotParameters(), null);
 				try {
 				  ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
 				} catch (IOException e) {
 					System.err.println(e.getMessage());
-					e.getStackTrace();
 				}
 			}
 		});
