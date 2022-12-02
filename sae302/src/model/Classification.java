@@ -160,6 +160,7 @@ public class Classification {
 		for(int i = 0; i < knn.size(); i ++) {
 			//on met chaque point du knn dans leur bonne catégorie
 			for(int j = 0; j < listCategory.size(); j++) {
+				
 				if(!listCategory.get(j).getCategoryName().equals("Undefined")) {
 					list.get(j).add(knn.get(i));
 				}

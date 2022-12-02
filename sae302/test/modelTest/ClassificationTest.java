@@ -29,7 +29,7 @@ public class ClassificationTest {
 		dataset=new PokemonDataSet("test");
 		dataset.loadFromFile("./res/pokemon_train.csv");
 		criteria=new Criteria("base_egg_steps", "capture_rate");
-		column.add(dataset.defaultYCol());
+		column.add(dataset.defaultXCol());
 		column.add(dataset.getColumnsList().get(2));
 		classiEucli=new Classification(column, criteria, "Euclidienne");
 		classiMan=new Classification(column, criteria, "Manhattan");
@@ -44,6 +44,8 @@ public class ClassificationTest {
 	
 	@Test
 	public void calculRobustnessTest() {
+		//Nous avons changé calcul robustness au dernier moment à cause de problèmes mais la modification du test n'a pas été faite en conscéquence.
+		//Nous conaissons le problème, il s'agit d'une vérification de la liste qui n'est pas correcte dans la fonction addPointsToRightCategory mais nous n'avons pas pu le régler par manque de temps
 		assertEquals(0.5,classiEucli.calculRobustness(3, poke1, new LegendaryCategory()));
 		assertEquals(0.5,classiMan.calculRobustness(3, poke1, new LegendaryCategory()));
 	}
